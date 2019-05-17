@@ -31,7 +31,7 @@ namespace ImasaraAlert.Prop
         public static string NicoGetStreamInfo = "http://live.nicovideo.jp/api/getstreaminfo/";
         public static string NicoGetAlertInfo = "http://live.nicovideo.jp/api/getalertinfo";
         public static string NicoUserInfo = "http://seiga.nicovideo.jp/api/user/info?id=";
-        public static string NicoCasApi = "https://api.cas.nicovideo.jp/v1/services/live/programs/";
+        //public static string NicoCasApi = "https://api.cas.nicovideo.jp/v1/services/live/programs/";
 
         public static string NicoLiveUrl = "https://live.nicovideo.jp/watch/";
         public static string NicoCommUrl = "https://com.nicovideo.jp/community/";

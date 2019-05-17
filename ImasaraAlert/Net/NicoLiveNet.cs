@@ -238,19 +238,13 @@ namespace ImasaraAlert.Net
                     wc.Encoding = Encoding.UTF8;
                     wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
                     //ニコキャスかどうかの判定
-                    var html = await wc.DownloadStringTaskAsync(Props.NicoCasApi + liveid);
-                    var providertype = Regex.Match(html, "\"programType\":\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                    var providertype = "unama";
                     gsi.Provider_Type = providertype;
 
-                    html = await wc.DownloadStringTaskAsync(Props.NicoLiveUrl + liveid);
+                    var html = await wc.DownloadStringTaskAsync(Props.NicoLiveUrl + liveid);
                     if (html.IndexOf("window.NicoGoogleTagManagerDataLayer = [];") > 0)
                     {
                         //コミュ限定・有料放送
-                        if (providertype != "cas")
-                        {
-                            providertype = Regex.Match(html, "content.content_type *= *'([^']*)';", RegexOptions.Compiled).Groups[1].Value;
-                            gsi.Provider_Type = providertype;
-                        }
                         var ttt = Regex.Match(html, "<title>([^<]*)</title>", RegexOptions.Compiled).Groups[1].Value;
                         ttt = Regex.Replace(ttt, "(.*) - (ニコニコ生放送|実験放送)$", "$1");
                         gsi.Title = WebUtility.HtmlDecode(ttt);
@@ -290,11 +284,6 @@ namespace ImasaraAlert.Net
                     }
                     else
                     {
-                        if (providertype != "cas")
-                        {
-                            providertype = Regex.Match(html, "\"content_type\":\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
-                            gsi.Provider_Type = providertype;
-                        }
                         var ttt = WebUtility.HtmlDecode(Regex.Match(html, "<script +id=\"embedded-data\" +data-props=\"([^\"]*)\"></script>", RegexOptions.Compiled).Groups[1].Value);
                         //Clipboard.SetText(ttt);
                         var dprops = JObject.Parse(ttt);
@@ -308,22 +297,13 @@ namespace ImasaraAlert.Net
                         gsi.Description = dprogram["description"].ToString();
                         gsi.Provider_Id = providertype;
                         gsi.Provider_Name = "公式生放送";
-                        if (providertype == "cas")
+                        gsi.Community_Thumbnail = dprogram["thumbnail"]["small"].ToString();
+                        JToken aaa;
+                        if (dprogram.TryGetValue("supplier", out aaa))
                         {
-                            gsi.Community_Thumbnail = dprogram["thumbnail"]["imageUrl"].ToString();
-                            gsi.Provider_Name = dprops["broadcaster"]["nickname"].ToString();
-                            gsi.Provider_Id = dprops["broadcaster"]["id"].ToString();
-                        }
-                        else
-                        {
-                            gsi.Community_Thumbnail = dprogram["thumbnail"]["small"].ToString();
-                            JToken aaa;
-                            if (dprogram.TryGetValue("supplier", out aaa))
-                            {
-                                gsi.Provider_Name = dprogram["supplier"]["name"].ToString();
-                                if (providertype == "user")
-                                    gsi.Provider_Id = GetStreamInfo.GetChNo(dprogram["supplier"]["pageUrl"].ToString());
-                            }
+                            gsi.Provider_Name = dprogram["supplier"]["name"].ToString();
+                            if (providertype == "user")
+                                gsi.Provider_Id = GetStreamInfo.GetChNo(dprogram["supplier"]["pageUrl"].ToString());
                         }
                         gsi.Community_Only = dprogram["isFollowerOnly"].ToString();
                         gsi.Community_Id = providertype;

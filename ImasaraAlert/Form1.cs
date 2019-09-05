@@ -197,7 +197,7 @@ namespace ImasaraAlert
                             DispStreamInfo(gsi);
 
                             //if (ii == 5) gsi.Community_Id = "co45454";
-                            var f_idx = lists_c.ToList().FindIndex(x => x.Id == gsi.Community_Id);
+                            var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
                             if (f_idx > -1)
                                 this.Invoke(new Action(() => work2(gsi, f_idx)));
                             //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
@@ -452,37 +452,37 @@ namespace ImasaraAlert
                         if (line == "namarokuEndLine") break;
                         var comm = new Comm();
                         comm.Ng = line;
-                        comm.Id = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        comm.Name = sr.ReadLine(); //5
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
+                        comm.ComId = sr.ReadLine();
+                        comm.UserId = sr.ReadLine();
+                        comm.Col04 = sr.ReadLine();
+                        comm.ComName = sr.ReadLine(); //5
+                        comm.UserName = sr.ReadLine();
+                        comm.Group = sr.ReadLine();
                         line = sr.ReadLine();
                         if (!string.IsNullOrEmpty(line))
                             comm.Last_Date = DateTime.Parse(line);
-                        line = sr.ReadLine();
-                        line = sr.ReadLine(); //10
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
-                        line = sr.ReadLine();
+                        comm.Col09 = sr.ReadLine();
+                        comm.Col10 = sr.ReadLine(); //10
+                        comm.Col11 = sr.ReadLine();
+                        comm.Col12 = sr.ReadLine();
+                        comm.Col13 = sr.ReadLine();
+                        comm.Col14 = sr.ReadLine();
+                        comm.Col15 = sr.ReadLine();
                         line = sr.ReadLine(); //16
                         if (!string.IsNullOrEmpty(line))
                             comm.Regist_Date = DateTime.Parse(line);
-                        line = sr.ReadLine();
+                        comm.Col17 = sr.ReadLine();
                         comm.Pop = sr.ReadLine().Equals("true");
-                        line = sr.ReadLine(); //バルーン
+                        comm.Ballon = sr.ReadLine().Equals("true"); //バルーン
                         comm.Web = sr.ReadLine().Equals("true");
-                        line = sr.ReadLine(); //メール
+                        comm.Mail = sr.ReadLine().Equals("true"); //メール
                         comm.Sound = sr.ReadLine().Equals("true"); //22
-                        line = sr.ReadLine(); //23
+                        comm.Col23 = sr.ReadLine().Equals("true"); //23
+                        comm.App = sr.ReadLine().Equals("true");
                         comm.App_a = sr.ReadLine().Equals("true");
                         comm.App_b = sr.ReadLine().Equals("true");
                         comm.App_c = sr.ReadLine().Equals("true");
                         comm.App_d = sr.ReadLine().Equals("true");
-                        line = sr.ReadLine(); //予備
                         comm.Memo = sr.ReadLine(); //メモ
                         lists.Add(comm);
                     }
@@ -501,16 +501,16 @@ namespace ImasaraAlert
         {
 
             var comm = new Comm();
-            comm.Id = "co10000";
-            comm.Name = "ちくわちゃん";
+            comm.ComId = "co10000";
+            comm.ComName = "ちくわちゃん";
             comm.Regist_Date = DateTime.Now;
             comm.Pop = true;
             comm.App_a = true;
             lists_c.Add(comm);
 
             comm = new Comm();
-            comm.Id = "co3313757";
-            comm.Name = "七原くんは死にました。";
+            comm.ComId = "co3313757";
+            comm.ComName = "七原くんは死にました。";
             comm.Regist_Date = DateTime.Now;
             comm.Pop = true;
             comm.Sound = true;
@@ -561,7 +561,7 @@ namespace ImasaraAlert
                 AddLog("正しいコミュを登録してください。", 3);
                 return; ;
             }
-            if (lists_c.Count(x => x.Id == ttt) > 0)
+            if (lists_c.Count(x => x.ComId == ttt) > 0)
             {
                 AddLog("そのコミュは登録済です。", 3);
                 return; ;
@@ -570,7 +570,7 @@ namespace ImasaraAlert
 
             //コミュを登録
             var comm = new Comm();
-            comm.Id = ttt;
+            comm.ComId = ttt;
             comm.Regist_Date = DateTime.Now;
             lists_c.Add(comm);
 
@@ -701,7 +701,7 @@ namespace ImasaraAlert
             try
             {
                 var ttt = (string)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[1].Value;
-                var ttt2 = lists_c.FirstOrDefault(x => x.Id == ttt);
+                var ttt2 = lists_c.FirstOrDefault(x => x.ComId == ttt);
                 lists_c.Remove(ttt2);
             }
             catch (Exception Ex)

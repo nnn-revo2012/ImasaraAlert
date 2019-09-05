@@ -12,7 +12,7 @@ using System.IO;
 namespace ImasaraAlert.Data
 {
 
-    public class Comm : INotifyPropertyChanged, IAlertData
+    public class Comm : INotifyPropertyChanged
     {
         public Comm()
         { }
@@ -20,10 +20,13 @@ namespace ImasaraAlert.Data
 
         public event PropertyChangedEventHandler PropertyChanged;
         private static readonly PropertyChangedEventArgs Last_DatePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Last_Date));
-
         public string Ng { set; get; }
-        public string Id { set; get; }
-        public string Name { set; get; }
+        public string ComId { set; get; }
+        public string UserId { set; get; }   //ユーザーID
+        public string Col04 { set; get; }
+        public string ComName { set; get; }
+        public string UserName { set; get; } //ユーザー名
+        public string Group { set; get; }    //グループ
         public DateTime Last_Date
         {
             get { return this.last_date; }
@@ -35,15 +38,27 @@ namespace ImasaraAlert.Data
             }
 
         }
+        public string Col09 { set; get; }
+        public string Col10 { set; get; }
+        public string Col11 { set; get; } //windowtext
+        public string Col12 { set; get; } //LightCyan
+        public string Col13 { set; get; }
+        public string Col14 { set; get; } //321653347
+        public string Col15 { set; get; }
         public DateTime Regist_Date { set; get; }
-        public bool Pop { set; get; }
-        public bool Web { set; get; }
-        public bool Sound { set; get; }
-        public bool App_a { set; get; }
-        public bool App_b { set; get; }
-        public bool App_c { set; get; }
-        public bool App_d { set; get; }
-        public string Memo { set; get; }
+        public string Col17 { set; get; }
+        public bool Pop { set; get; }     //*
+        public bool Ballon { set; get; }  //*
+        public bool Web { set; get; }     //*
+        public bool Mail { set; get; }    //*
+        public bool Sound { set; get; }   //*
+        public bool Col23 { set; get; }   // ??
+        public bool App { set; get; }     //namarokuRecorder *
+        public bool App_a { set; get; }   //
+        public bool App_b { set; get; }   //
+        public bool App_c { set; get; }   //
+        public bool App_d { set; get; }   //
+        public string Memo { set; get; }  //
 
         private static Regex RgxChNo = new Regex("/?((co|ch)[\\d]+)", RegexOptions.Compiled);
 

@@ -23,7 +23,7 @@ namespace ImasaraAlert.Data
         public string Ng { set; get; }
         public string ComId { set; get; }
         public string UserId { set; get; }   //ユーザーID
-        public string Col04 { set; get; }
+        public string Col04 { set; get; } //放送URL 
         public string ComName { set; get; }
         public string UserName { set; get; } //ユーザー名
         public string Group { set; get; }    //グループ
@@ -38,21 +38,21 @@ namespace ImasaraAlert.Data
             }
 
         }
-        public string Col09 { set; get; }
-        public string Col10 { set; get; }
-        public string Col11 { set; get; } //windowtext
-        public string Col12 { set; get; } //LightCyan
-        public string Col13 { set; get; }
-        public string Col14 { set; get; } //321653347
-        public string Col15 { set; get; }
+        public DateTime Col09 { set; get; } //最近のDateTime
+        public string Col10 { set; get; } //最近の放送タイトル
+        public string Col11 { set; get; } //文字色
+        public string Col12 { set; get; } //背景色
+        public string Col13 { set; get; } //最近の放送者
+        public string Col14 { set; get; } //最近の放送URL
+        public string Col15 { set; get; } //サムネURL
         public DateTime Regist_Date { set; get; }
-        public string Col17 { set; get; }
+        public string Col17 { set; get; } //録画状態
         public bool Pop { set; get; }     //*
         public bool Ballon { set; get; }  //*
         public bool Web { set; get; }     //*
         public bool Mail { set; get; }    //*
         public bool Sound { set; get; }   //*
-        public bool Col23 { set; get; }   // ??
+        public bool Col23 { set; get; }   //席取り
         public bool App { set; get; }     //namarokuRecorder *
         public bool App_a { set; get; }   //
         public bool App_b { set; get; }   //

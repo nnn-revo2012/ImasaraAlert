@@ -461,7 +461,9 @@ namespace ImasaraAlert
                         line = sr.ReadLine();
                         if (!string.IsNullOrEmpty(line))
                             comm.Last_Date = DateTime.Parse(line);
-                        comm.Col09 = sr.ReadLine();
+                        line = sr.ReadLine();
+                        if (!string.IsNullOrEmpty(line))
+                            comm.Col09 = DateTime.Parse(line);
                         comm.Col10 = sr.ReadLine(); //10
                         comm.Col11 = sr.ReadLine();
                         comm.Col12 = sr.ReadLine();
@@ -772,6 +774,12 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
+        }
+
+        private void namarokuのファイルを読み込むToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
+            dataGridView2.DataSource = lists_c;
         }
     }
 

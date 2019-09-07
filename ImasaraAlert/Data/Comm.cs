@@ -14,8 +14,6 @@ namespace ImasaraAlert.Data
 
     public class Comm : INotifyPropertyChanged
     {
-        public Comm()
-        { }
         private DateTime last_date = DateTime.MinValue; 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,6 +59,9 @@ namespace ImasaraAlert.Data
         public string Memo { set; get; }  //
 
         private static Regex RgxChNo = new Regex("/?((co|ch)[\\d]+)", RegexOptions.Compiled);
+
+        public Comm()
+        {}
 
         //Urlの最後のスラッシュ以降の文字列を取得
         public static string GetChNo(string url)

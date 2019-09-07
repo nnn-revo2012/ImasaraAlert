@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using ImasaraAlert.Net;
 using ImasaraAlert.Prop;
 using ImasaraAlert.Proc;
+using ImasaraAlert.Data;
 
 namespace ImasaraAlert
 {

@@ -23,20 +23,21 @@ namespace ImasaraAlert.Prop
     public class Props
     {
         //定数設定
-        public static string Version = "0.1.0.0";
-        public static string UserAgent = "Mozilla/5.0 (ImasaraAlert; " + Props.Version + ")";
-        //public static string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
-        public static string NicoDomain = "https://nicovideo.jp/";
+        public static readonly string Version = "0.1.0.0";
+        public static readonly string UserAgent = "Mozilla/5.0 (ImasaraAlert; " + Props.Version + ")";
+        //public static readonly string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
+        public static readonly string NicoDomain = "https://nicovideo.jp/";
 
-        public static string NicoGetStreamInfo = "http://live.nicovideo.jp/api/getstreaminfo/";
-        public static string NicoGetAlertInfo = "http://live.nicovideo.jp/api/getalertinfo";
-        public static string NicoUserInfo = "http://seiga.nicovideo.jp/api/user/info?id=";
-        //public static string NicoCasApi = "https://api.cas.nicovideo.jp/v1/services/live/programs/";
+        //public static string NicoGetStreamInfo = "http://live.nicovideo.jp/api/getstreaminfo/";
+        //public static string NicoGetAlertInfo = "http://live.nicovideo.jp/api/getalertinfo";
+        public static readonly string NicoRssUrl = "http://live.nicovideo.jp/recent/rss";
+        public static readonly string NicoUserInfo = "https://seiga.nicovideo.jp/api/user/info?id=";
+        public static readonly string NicoCasApi = "https://api.cas.nicovideo.jp/v1/services/live/programs/";
 
-        public static string NicoLiveUrl = "https://live.nicovideo.jp/watch/";
-        public static string NicoCommUrl = "https://com.nicovideo.jp/community/";
-        public static string NicoChannelUrl = "https://ch.nicovideo.jp/";
-        public static string NicoUserUrl = "https://www.nicovideo.jp/user/";
+        public static readonly string NicoLiveUrl = "https://live.nicovideo.jp/watch/";
+        public static readonly string NicoCommUrl = "https://com.nicovideo.jp/community/";
+        public static readonly string NicoChannelUrl = "https://ch.nicovideo.jp/";
+        public static readonly string NicoUserUrl = "https://www.nicovideo.jp/user/";
 
 
         public bool IsDebug { get; set; }

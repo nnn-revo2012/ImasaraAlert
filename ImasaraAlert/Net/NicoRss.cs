@@ -44,22 +44,6 @@ namespace ImasaraAlert.Net
             this.Dispose();
         }
 
-        public async Task<List<GetStreamInfo>> ReadRssAsync()
-        {
-            var gsi = new List<GetStreamInfo>();
-            Debug.WriteLine("ReadRss");
-            //RSSを読み込む
-            try
-            {
-
-            }
-            catch (Exception Ex)
-            {
-
-            }
-            return gsi;
-        }
-
 
         protected virtual void Dispose(bool disposing)
         {

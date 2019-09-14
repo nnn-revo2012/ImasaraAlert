@@ -38,7 +38,7 @@ namespace ImasaraAlert.Data
         public string Community_Id { set; get; }
         public string Col10 { set; get; } //*コミュURL
         public DateTime Start_Time { set; get; }
-        public DateTime Col12 { set; get; } //*pubDate
+        public string Col12 { set; get; } //*pubDate
         public string Col13 { set; get; } //*コメント数
         public string Col14 { set; get; } //*来場者数
         public string Col15 { set; get; } //カテゴリー

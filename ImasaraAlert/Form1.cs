@@ -142,6 +142,7 @@ namespace ImasaraAlert
             //タイマーセット
             //タイマー開始
             //タイマー中に時間になれば ReadAlert() を呼ぶ
+            ReadAlert();
         }
 
         private async void ReadAlert()
@@ -150,11 +151,10 @@ namespace ImasaraAlert
             {
                 AddLog("RSS読み込み開始", 1);
 
-                //int ii = 1; //DEBUG
                 _rss_status = 2;
                 while (_rss_status == 2)
                 {
-                    var lgsi = await _nRss.ReadRssAsync();
+                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl);
                     if (_rss_status != 2) break;
 
                     foreach (var gsi in lgsi)
@@ -162,17 +162,18 @@ namespace ImasaraAlert
                         DispStreamInfo(gsi);
                         var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
                         if (f_idx > -1)
+                        {
                             this.Invoke(new Action(() => work2(gsi, f_idx)));
+                        }
                         //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
                         //if (f_idx > -1) work2(gsi, f_idx);
                         //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
                         //if (f_idx > -1) work2(gsi, f_idx);
                         //DEBUG
-                        //var gsi2 = await nnn.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
-                        //gsi2.Start_Time = DateTime.Now;
-                        //lists_si.Add(gsi2);
+                        //this.Invoke(new Action(() => lists_si.Add(gsi)));
                         //DEBUG
                     }
+                    _rss_status = 4;
                 }
                 _rss_status = 4;
                 _nRss?.Dispose();
@@ -226,14 +227,11 @@ namespace ImasaraAlert
         {
             try
             {
-                //今の時間をGetする
-                var ntime = DateTime.Now;
-                var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
-                lists_c[f_idx].Last_Date = ntime;
-                gsi2.Start_Time = ntime;
-                lists_si.Add(gsi2);
+                //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
+                lists_c[f_idx].Last_Date = gsi.Start_Time;
+                lists_si.Add(gsi);
                 var liveid = Props.GetLiveUrl(gsi.LiveId);
-                if (lists_c[f_idx].Pop) PopupProc(gsi2);
+                if (lists_c[f_idx].Pop) PopupProc(gsi);
                 if (lists_c[f_idx].Web) OpenProcess.OpenWeb(liveid, props.BrowserPath, props.IsDefaultBrowser);
                 if (lists_c[f_idx].Sound) SoundProc();
                 if (lists_c[f_idx].App_a) OpenProcess.OpenProgram(liveid, props.AppA_Path);
@@ -295,8 +293,8 @@ namespace ImasaraAlert
 
         private void DispStreamInfo(GetStreamInfo gsi)
         {
-            var ttt = string.Format(DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]") + "  放送ID：{0}  コミュニティID：{1}  ユーザーID：{2}",
-                gsi.LiveId, gsi.Community_Id, gsi.Provider_Id);
+            var ttt = string.Format(DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]") + "  放送ID：{0}  コミュニティID：{1}  ユーザー：{2}",
+                gsi.LiveId, gsi.Community_Id, gsi.Provider_Name);
             AddLog(ttt, 1);
         }
 

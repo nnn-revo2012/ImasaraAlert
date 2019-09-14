@@ -31,8 +31,9 @@ namespace ImasaraAlert
         //private SortableBindingList<User> lists_u = new SortableBindingList<User>();
         //private SortableBindingList<Prog> lists_u = new SortableBindingList<Prog>();
 
-        private NicoTcpClient _tcpclient = null;
-        private volatile int _tcpclient_status = 0;
+        private NicoLiveNet _nLiveNet = null;         //WebClient
+        private NicoRss _nRss = null;                 //RSS
+        private volatile int _rss_status = 0;
         private SoundPlayer _player = null;
 
         private readonly object lockObject = new object();  //情報表示用
@@ -41,7 +42,7 @@ namespace ImasaraAlert
         private string LogFile2;
 
         private string dbfile = "comm.json";
-        private string convfile = @"D:\home\tmp\favoritecom.ini";
+        private string convfile = @"D:\home\bin\namaroku\favoritecom.ini";
 
         public Form1()
         {
@@ -72,6 +73,8 @@ namespace ImasaraAlert
 
                 //データー読み込み
                 ReadAllData();
+
+                _nLiveNet = new NicoLiveNet(null);
 
                 //アラートに接続
                 Task.Run(() => StartAlert());
@@ -116,7 +119,6 @@ namespace ImasaraAlert
             {
                 //データーをファイルから読み込み
                 //DebugDataRead();
-                //lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
                 lists_c = new SortableBindingList<Comm>(ReadCommData<Comm>(dbfile));
                 //ists_u = new SortableBindingList<Comm>(ReadCommData<User>(dbfile));
 
@@ -134,101 +136,58 @@ namespace ImasaraAlert
 
         }
 
-        private async void StartAlert()
+        private void StartAlert()
         {
-            using (var nnn = new NicoLiveNet())
+            _nRss = new NicoRss(this, _nLiveNet);
+            //タイマーセット
+            //タイマー開始
+            //タイマー中に時間になれば ReadAlert() を呼ぶ
+        }
+
+        private async void ReadAlert()
+        {
+            try
             {
-                try
+                AddLog("RSS読み込み開始", 1);
+
+                //int ii = 1; //DEBUG
+                _rss_status = 2;
+                while (_rss_status == 2)
                 {
-                    //アラートサーバー情報をGet
-                    var gai = await nnn.GetAlertInfoAsync();
-                    AddLog("GetAlertInfo() Status: " + gai.Status + " " + gai.Addr + " " + gai.Port + " " + gai.Thread, 9);
-                    if (gai.Status != "ok")
+                    var lgsi = await _nRss.ReadRssAsync();
+                    if (_rss_status != 2) break;
+
+                    foreach (var gsi in lgsi)
                     {
-                        AddLog("アラートサーバーに接続できません。", 2);
-                        return;
+                        DispStreamInfo(gsi);
+                        var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
+                        if (f_idx > -1)
+                            this.Invoke(new Action(() => work2(gsi, f_idx)));
+                        //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
+                        //if (f_idx > -1) work2(gsi, f_idx);
+                        //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
+                        //if (f_idx > -1) work2(gsi, f_idx);
+                        //DEBUG
+                        //var gsi2 = await nnn.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
+                        //gsi2.Start_Time = DateTime.Now;
+                        //lists_si.Add(gsi2);
+                        //DEBUG
                     }
-
-                    //アラートサーバーに接続
-                    _tcpclient = new NicoTcpClient();
-                    await _tcpclient.ConnectAsync(gai.Addr, int.Parse(gai.Port));
-
-                    //TcpSocket通信開始
-                    var mes = "<thread thread=\"" + gai.Thread + "\" version=\"20061206\" res_from=\"-100\"/>\0";
-                    await _tcpclient.SendAsync(mes);
-                    AddLog("Send :" + mes, 9);
-
-                    //最初のレスポンス
-                    var res = await _tcpclient.ReadAsync();
-                    AddLog("Recv :" + res, 9);
-
-                    var xmlDocument = new XmlDocument();
-                    xmlDocument.LoadXml(res);
-                    if (!xmlDocument.SelectSingleNode("/thread/@resultcode").InnerText.Equals("0"))
-                    {
-                        AddLog("通信失敗", 2);
-                        _tcpclient?.Close();
-                        _tcpclient?.Dispose();
-                        _tcpclient = null;
-                        _tcpclient_status = 4;
-                        return;
-                    }
-
-                    _tcpclient_status = 2;
-                    AddLog("通信開始", 1);
-                    var sb = new StringBuilder();
-                    sb.Clear();
-
-                    //int ii = 1; //DEBUG
-                    while (_tcpclient_status == 2)
-                    {
-                        if (_tcpclient_status != 2) break;
-                        res = await _tcpclient.ReadAsync();
-                        Debug.WriteLine("*ReadAsync END");
-                        if (_tcpclient_status != 2) break;
-                        AddLog("Recv :" + res, 9);
-                        sb.Append(res);
-                        var idx = sb.ToString().IndexOf('\0');
-
-                        while (idx > -1)
-                        {
-                            xmlDocument.LoadXml(sb.ToString());
-                            var gsi = GetStreamData(xmlDocument.SelectSingleNode("/chat").InnerText);
-                            DispStreamInfo(gsi);
-
-                            //if (ii == 5) gsi.Community_Id = "co45454";
-                            var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
-                            if (f_idx > -1)
-                                this.Invoke(new Action(() => work2(gsi, f_idx)));
-                            //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
-                            //if (f_idx > -1) work2(gsi, f_idx);
-                            //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
-                            //if (f_idx > -1) work2(gsi, f_idx);
-                            //DEBUG
-                            //var gsi2 = await nnn.GetStreamInfoAsync(gsi.LiveId, gsi.Provider_Id);
-                            //gsi2.Start_Time = DateTime.Now;
-                            //lists_si.Add(gsi2);
-                            //DEBUG
-                            sb.Remove(0, idx + 1);
-                            idx = sb.ToString().IndexOf('\0');
-                            //ii++; //DEBUG
-                        }
-                    }
-                    _tcpclient_status = 4;
-                    Debug.WriteLine("StartAlert END");
                 }
-                catch (OperationCanceledException Ex)
-                {
-                    Debug.WriteLine("CANCELED");
-                }
-                catch (Exception Ex)
-                {
-                    AddLog("アラートサーバーの接続エラー\r\n" + Ex.Message, 2);
-                    _tcpclient?.Close();
-                    _tcpclient?.Dispose();
-                    _tcpclient_status = 4;
-                    _tcpclient = null;
-                }
+                _rss_status = 4;
+                _nRss?.Dispose();
+                Debug.WriteLine("StartAlert END");
+            }
+            catch (OperationCanceledException Ex)
+            {
+                Debug.WriteLine("CANCELED");
+            }
+            catch (Exception Ex)
+            {
+                AddLog("RSS読み込みエラー\r\n" + Ex.Message, 2);
+                _rss_status = 4;
+                _nRss?.Dispose();
+                _nRss = null;
             }
         }
 
@@ -236,16 +195,12 @@ namespace ImasaraAlert
         {
             try
             {
-                if (_tcpclient_status == 2)
+                if (_rss_status == 2)
                 {
-                    _tcpclient?.Cancel();
-                    _tcpclient_status = 3;
+                    _rss_status = 4;
+                    _nRss?.Dispose();
+                    _nRss = null;
                 }
-                Debug.WriteLine("CancelAlert status: " + _tcpclient_status.ToString());
-                while (_tcpclient_status == 3) Task.Delay(10);
-                Debug.WriteLine("CancelAlert status: " + _tcpclient_status.ToString());
-                Debug.WriteLine("CancelAlert END");
-
             }
             catch (Exception Ex)
             {
@@ -257,18 +212,8 @@ namespace ImasaraAlert
         {
             try
             {
-                if (_tcpclient_status == 2)
-                {
-                    CancelAlert();
-                }
-
-                _tcpclient?.Close();
-                _tcpclient?.Dispose();
-                _tcpclient = null;
-
-                Debug.WriteLine("EndAlert status: " + _tcpclient_status.ToString());
-                Debug.WriteLine("EndAlert END");
-
+                _nRss?.Dispose();
+                _nRss = null;
             }
             catch (Exception Ex)
             {
@@ -279,29 +224,26 @@ namespace ImasaraAlert
 
         private async void work2(GetStreamInfo gsi, int f_idx)
         {
-            using (var nnn = new NicoLiveNet())
+            try
             {
-                try
-                {
-                    //今の時間をGetする
-                    var ntime = DateTime.Now;
-                    var gsi2 = await nnn.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
-                    lists_c[f_idx].Last_Date = ntime;
-                    gsi2.Start_Time = ntime;
-                    lists_si.Add(gsi2);
-                    var liveid = Props.GetLiveUrl(gsi.LiveId);
-                    if (lists_c[f_idx].Pop) PopupProc(gsi2);
-                    if (lists_c[f_idx].Web) OpenProcess.OpenWeb(liveid, props.BrowserPath, props.IsDefaultBrowser);
-                    if (lists_c[f_idx].Sound) SoundProc();
-                    if (lists_c[f_idx].App_a) OpenProcess.OpenProgram(liveid, props.AppA_Path);
-                    if (lists_c[f_idx].App_b) OpenProcess.OpenProgram(liveid, props.AppB_Path);
-                    if (lists_c[f_idx].App_c) OpenProcess.OpenProgram(liveid, props.AppC_Path);
-                    if (lists_c[f_idx].App_d) OpenProcess.OpenProgram(liveid, props.AppD_Path);
-                }
-                catch (Exception Ex)
-                {
-                    AddLog("work2: "+Ex.Message, 2);
-                }
+                //今の時間をGetする
+                var ntime = DateTime.Now;
+                var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
+                lists_c[f_idx].Last_Date = ntime;
+                gsi2.Start_Time = ntime;
+                lists_si.Add(gsi2);
+                var liveid = Props.GetLiveUrl(gsi.LiveId);
+                if (lists_c[f_idx].Pop) PopupProc(gsi2);
+                if (lists_c[f_idx].Web) OpenProcess.OpenWeb(liveid, props.BrowserPath, props.IsDefaultBrowser);
+                if (lists_c[f_idx].Sound) SoundProc();
+                if (lists_c[f_idx].App_a) OpenProcess.OpenProgram(liveid, props.AppA_Path);
+                if (lists_c[f_idx].App_b) OpenProcess.OpenProgram(liveid, props.AppB_Path);
+                if (lists_c[f_idx].App_c) OpenProcess.OpenProgram(liveid, props.AppC_Path);
+                if (lists_c[f_idx].App_d) OpenProcess.OpenProgram(liveid, props.AppD_Path);
+            }
+            catch (Exception Ex)
+            {
+                AddLog("work2: " + Ex.Message, 2);
             }
         }
 
@@ -524,17 +466,11 @@ namespace ImasaraAlert
         {
             try
             {
-                Debug.WriteLine("closing start");
-                Debug.WriteLine("closong status: " + _tcpclient_status.ToString());
-                if (_tcpclient_status == 2)
+                if (_rss_status == 2)
                 {
-                    e.Cancel = true;
                     CancelAlert();
-                    e.Cancel = false;
                 }
-
-                Debug.WriteLine("closing next");
-                Debug.WriteLine("next status: " + _tcpclient_status.ToString());
+                EndAlert();
 
                 //MessageBox.Show("データーを保存します。");
                 if (lists_c.Count > 0)
@@ -542,13 +478,11 @@ namespace ImasaraAlert
                 //if (lists_u.Count > 0)
                 //    SaveCommData(dbfile, (IList<User>)lists_u);
 
-                EndAlert();
-
+                _nLiveNet?.Dispose();
             }
             catch (Exception Ex)
             {
                 AddLog("終了時エラー\r\n" + Ex.Message, 2);
-                e.Cancel = false;
             }
         }
 

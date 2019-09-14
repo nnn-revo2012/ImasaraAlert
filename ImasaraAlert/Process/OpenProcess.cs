@@ -42,6 +42,7 @@ namespace ImasaraAlert.Proc
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(OpenProgram), Ex);
             }
         }
 
@@ -80,6 +81,7 @@ namespace ImasaraAlert.Proc
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(OpenWeb), Ex);
             }
         }
 

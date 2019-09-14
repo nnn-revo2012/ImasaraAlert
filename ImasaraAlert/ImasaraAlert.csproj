@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Data\Comm.cs" />
     <Compile Include="Data\GetStreamInfo.cs" />
+    <Compile Include="DebugWrite.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +90,7 @@
     </Compile>
     <Compile Include="Data\IAlertData.cs" />
     <Compile Include="Net\NicoLiveNet.cs" />
+    <Compile Include="Net\NicoRss.cs" />
     <Compile Include="Process\OpenProcess.cs" />
     <Compile Include="Popup.cs">
       <SubType>Form</SubType>
@@ -99,7 +101,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prop\Props.cs" />
-    <Compile Include="Net\NicoTcpClient.cs" />
     <Compile Include="List\SortableBindingList.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

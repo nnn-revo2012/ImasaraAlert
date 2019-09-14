@@ -102,7 +102,7 @@ namespace ImasaraAlert.Net
             this.Dispose();
         }
 
-        public async Task<List<GetStreamInfo>> ReadRssAsync(string url)
+        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, DateTime datetime)
         {
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;
@@ -110,37 +110,41 @@ namespace ImasaraAlert.Net
             try
             {
                 var doc = new XmlDocument();
+                var tab = "common";
                 var i = 1;
-                while (i < 9)
+                var end_flg = false;
+                while (i < 5 && end_flg == false)
                 {
-                    var xhtml = await _wc.DownloadStringTaskAsync(url + "?p=" + i.ToString());
-                    if (!string.IsNullOrEmpty(xhtml))
+                    var rssurl = string.Format(url, tab, i.ToString());
+                    var xhtml = await _wc.DownloadStringTaskAsync(rssurl);
+                    if (string.IsNullOrEmpty(xhtml)) break;
+                    doc.LoadXml(xhtml);
+                    var nt = doc.NameTable;
+                    var nsmgr = new XmlNamespaceManager(nt);
+                    var root = doc.SelectSingleNode("rss");
+                    nsmgr.AddNamespace("media", root.GetNamespaceOfPrefix("media"));
+                    nsmgr.AddNamespace("nicolive", root.GetNamespaceOfPrefix("nicolive"));
+                    nsmgr.AddNamespace("dc", root.GetNamespaceOfPrefix("dc"));
+                    var items = doc.SelectNodes("rss/channel/item", nsmgr);
+                    foreach (XmlNode item in items)
                     {
-                        doc.LoadXml(xhtml);
-                        var nt = doc.NameTable;
-                        var nsmgr = new XmlNamespaceManager(nt);
-                        var root = doc.SelectSingleNode("rss");
-                        nsmgr.AddNamespace("media", root.GetNamespaceOfPrefix("media"));
-                        nsmgr.AddNamespace("nicolive", root.GetNamespaceOfPrefix("nicolive"));
-                        nsmgr.AddNamespace("dc", root.GetNamespaceOfPrefix("dc"));
-                        var items = doc.SelectNodes("rss/channel/item", nsmgr);
-                        foreach (XmlNode item in items)
-                        {
-                            var gsi = new GetStreamInfo();
-                            gsi.Title = item.SelectSingleNode("title", nsmgr).InnerText;
-                            gsi.LiveId = item.SelectSingleNode("guid", nsmgr).InnerText;
-                            gsi.Col12 = item.SelectSingleNode("pubDate", nsmgr).InnerText;
-                            if (!string.IsNullOrEmpty(gsi.Col12))
-                                gsi.Start_Time = DateTime.Parse(gsi.Col12);
-                            gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
-                            gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
-                            gsi.Community_Title = item.SelectSingleNode("nicolive:community_name", nsmgr).InnerText;
-                            gsi.Community_Id = item.SelectSingleNode("nicolive:community_id", nsmgr).InnerText;
-                            gsi.Community_Only = item.SelectSingleNode("nicolive:member_only", nsmgr).InnerText;
-                            gsi.Provider_Type = item.SelectSingleNode("nicolive:type", nsmgr).InnerText;
-                            gsi.Provider_Name = item.SelectSingleNode("nicolive:owner_name", nsmgr).InnerText;
+                        var gsi = new GetStreamInfo();
+                        gsi.Title = item.SelectSingleNode("title", nsmgr).InnerText;
+                        gsi.LiveId = item.SelectSingleNode("guid", nsmgr).InnerText;
+                        gsi.Col12 = item.SelectSingleNode("pubDate", nsmgr).InnerText;
+                        if (!string.IsNullOrEmpty(gsi.Col12))
+                            gsi.Start_Time = DateTime.Parse(gsi.Col12);
+                        gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
+                        gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
+                        gsi.Community_Title = item.SelectSingleNode("nicolive:community_name", nsmgr).InnerText;
+                        gsi.Community_Id = item.SelectSingleNode("nicolive:community_id", nsmgr).InnerText;
+                        gsi.Community_Only = item.SelectSingleNode("nicolive:member_only", nsmgr).InnerText;
+                        gsi.Provider_Type = item.SelectSingleNode("nicolive:type", nsmgr).InnerText;
+                        gsi.Provider_Name = item.SelectSingleNode("nicolive:owner_name", nsmgr).InnerText;
+                        if (gsi.Start_Time <= datetime)
+                            end_flg = true;
+                        else
                             lgsi.Add(gsi);
-                        }
                     }
                     i++;
                 }

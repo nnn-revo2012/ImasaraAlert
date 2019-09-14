@@ -36,6 +36,10 @@ namespace ImasaraAlert
         private volatile int _rss_status = 0;
         private SoundPlayer _player = null;
 
+        private System.Windows.Forms.Timer _rssTimer = null;
+        private DateTime _rssTimer_dt = DateTime.MinValue;
+        private DateTime _rssTimer_lastdt = DateTime.MinValue;
+
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用
         private string LogFile;
@@ -75,9 +79,6 @@ namespace ImasaraAlert
                 ReadAllData();
 
                 _nLiveNet = new NicoLiveNet(null);
-
-                //アラートに接続
-                Task.Run(() => StartAlert());
 
                 Debug.WriteLine("Form1 END");
 
@@ -138,57 +139,67 @@ namespace ImasaraAlert
 
         private void StartAlert()
         {
+            AddLog("RSS読み込み開始", 1);
             _nRss = new NicoRss(this, _nLiveNet);
             //タイマーセット
-            //タイマー開始
-            //タイマー中に時間になれば ReadAlert() を呼ぶ
-            ReadAlert();
+            _rssTimer = new Timer();
+            _rssTimer.Tick += new EventHandler(rssTimer_Tick);
+            _rssTimer.Interval = 1000;
+            _rssTimer_dt = DateTime.Now;
+            _rssTimer_lastdt = DateTime.Now.AddMinutes(-10);
+            _rssTimer.Enabled = true;
+            Debug.WriteLine("_rssTimer Start");
         }
 
-        private async void ReadAlert()
+        private async void rssTimer_Tick(object sender, EventArgs e)
+        {
+            _rssTimer.Enabled = false;
+            var now = DateTime.Now;
+            if (now >= _rssTimer_dt)
+            {
+                _rssTimer_dt = now.AddSeconds(30);
+                Debug.WriteLine("RSS NextDate: " + _rssTimer_dt.ToString());
+                await ReadAlert();
+            }
+            _rssTimer.Enabled = true;
+        }
+
+        private async Task ReadAlert()
         {
             try
             {
-                AddLog("RSS読み込み開始", 1);
+                Debug.WriteLine("LastDate: " + _rssTimer_lastdt.ToString());
+                var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, _rssTimer_lastdt);
+                if (lgsi.Count() > 0)
+                    _rssTimer_lastdt = lgsi.FirstOrDefault().Start_Time;
+                Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
 
-                _rss_status = 2;
-                while (_rss_status == 2)
+                foreach (var gsi in lgsi)
                 {
-                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl);
-                    if (_rss_status != 2) break;
-
-                    foreach (var gsi in lgsi)
+                    DispStreamInfo(gsi);
+                    var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
+                    if (f_idx > -1)
                     {
-                        DispStreamInfo(gsi);
-                        var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
-                        if (f_idx > -1)
-                        {
-                            this.Invoke(new Action(() => work2(gsi, f_idx)));
-                        }
-                        //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
-                        //if (f_idx > -1) work2(gsi, f_idx);
-                        //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
-                        //if (f_idx > -1) work2(gsi, f_idx);
-                        //DEBUG
-                        //this.Invoke(new Action(() => lists_si.Add(gsi)));
-                        //DEBUG
+                        this.Invoke(new Action(() => work2(gsi, f_idx)));
                     }
-                    _rss_status = 4;
+                    //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
+                    //if (f_idx > -1) work2(gsi, f_idx);
+                    //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
+                    //if (f_idx > -1) work2(gsi, f_idx);
+                    //DEBUG
+                    //this.Invoke(new Action(() => lists_si.Add(gsi)));
+                    //DEBUG
                 }
-                _rss_status = 4;
-                _nRss?.Dispose();
-                Debug.WriteLine("StartAlert END");
             }
             catch (OperationCanceledException Ex)
             {
                 Debug.WriteLine("CANCELED");
+                return;
             }
             catch (Exception Ex)
             {
                 AddLog("RSS読み込みエラー\r\n" + Ex.Message, 2);
-                _rss_status = 4;
-                _nRss?.Dispose();
-                _nRss = null;
+                return;
             }
         }
 
@@ -205,7 +216,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
-                Debug.WriteLine(Ex.Message);
+                DebugWrite.Writeln(nameof(CancelAlert), Ex);
             }
         }
 
@@ -213,17 +224,18 @@ namespace ImasaraAlert
         {
             try
             {
-                _nRss?.Dispose();
-                _nRss = null;
+                _rssTimer?.Dispose();
+                _rssTimer = null;
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(EndAlert), Ex);
                 Debug.WriteLine(Ex.Message);
             }
         }
 
 
-        private async void work2(GetStreamInfo gsi, int f_idx)
+        private void work2(GetStreamInfo gsi, int f_idx)
         {
             try
             {
@@ -256,7 +268,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
-                Debug.WriteLine(Ex.Message);
+                DebugWrite.Writeln(nameof(GetStreamInfo), Ex);
             }
         }
 
@@ -271,6 +283,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(SoundProc), Ex);
             }
         }
 
@@ -288,6 +301,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(StopSound), Ex);
             }
         }
 
@@ -343,6 +357,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(ReadCommData), Ex);
             }
 
             return lists;
@@ -369,6 +384,7 @@ namespace ImasaraAlert
             }
             catch (Exception Ex)
             {
+                DebugWrite.Writeln(nameof(SaveCommData), Ex);
             }
 
             return result;
@@ -464,10 +480,6 @@ namespace ImasaraAlert
         {
             try
             {
-                if (_rss_status == 2)
-                {
-                    CancelAlert();
-                }
                 EndAlert();
 
                 //MessageBox.Show("データーを保存します。");
@@ -712,6 +724,12 @@ namespace ImasaraAlert
         {
             lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
             dataGridView2.DataSource = lists_c;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            //アラートに接続
+            StartAlert();
         }
     }
 

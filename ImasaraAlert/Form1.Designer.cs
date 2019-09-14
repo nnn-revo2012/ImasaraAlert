@@ -34,6 +34,8 @@
             this.設定フォルダーを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定フォルダーを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.namarokuのファイルを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ツールTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +65,6 @@
             this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.namarokuのファイルを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -110,6 +110,18 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            // 
+            // namarokuのファイルを読み込むToolStripMenuItem
+            // 
+            this.namarokuのファイルを読み込むToolStripMenuItem.Name = "namarokuのファイルを読み込むToolStripMenuItem";
+            this.namarokuのファイルを読み込むToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.namarokuのファイルを読み込むToolStripMenuItem.Text = "namarokuのファイルを読み込む";
+            this.namarokuのファイルを読み込むToolStripMenuItem.Click += new System.EventHandler(this.namarokuのファイルを読み込むToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(252, 6);
             // 
             // 終了XToolStripMenuItem
             // 
@@ -364,18 +376,6 @@
             this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
             this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
-            // namarokuのファイルを読み込むToolStripMenuItem
-            // 
-            this.namarokuのファイルを読み込むToolStripMenuItem.Name = "namarokuのファイルを読み込むToolStripMenuItem";
-            this.namarokuのファイルを読み込むToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.namarokuのファイルを読み込むToolStripMenuItem.Text = "namarokuのファイルを読み込む";
-            this.namarokuのファイルを読み込むToolStripMenuItem.Click += new System.EventHandler(this.namarokuのファイルを読み込むToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(252, 6);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -389,6 +389,7 @@
             this.Name = "Form1";
             this.Text = "ImasaraAlert";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

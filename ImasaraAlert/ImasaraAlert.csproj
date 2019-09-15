@@ -90,7 +90,6 @@
     </Compile>
     <Compile Include="Data\IAlertData.cs" />
     <Compile Include="Net\NicoLiveNet.cs" />
-    <Compile Include="Net\NicoRss.cs" />
     <Compile Include="Process\OpenProcess.cs" />
     <Compile Include="Popup.cs">
       <SubType>Form</SubType>

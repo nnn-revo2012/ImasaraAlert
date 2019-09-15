@@ -32,8 +32,7 @@ namespace ImasaraAlert
         //private SortableBindingList<Prog> lists_u = new SortableBindingList<Prog>();
 
         private NicoLiveNet _nLiveNet = null;         //WebClient
-        private NicoRss _nRss = null;                 //RSS
-        private volatile int _rss_status = 0;
+        //private volatile int _rss_status = 0;
         private SoundPlayer _player = null;
 
         private System.Windows.Forms.Timer _rssTimer = null;
@@ -140,7 +139,6 @@ namespace ImasaraAlert
         private void StartAlert()
         {
             AddLog("RSS読み込み開始", 1);
-            _nRss = new NicoRss(this, _nLiveNet);
             //タイマーセット
             _rssTimer = new Timer();
             _rssTimer.Tick += new EventHandler(rssTimer_Tick);
@@ -207,12 +205,6 @@ namespace ImasaraAlert
         {
             try
             {
-                if (_rss_status == 2)
-                {
-                    _rss_status = 4;
-                    _nRss?.Dispose();
-                    _nRss = null;
-                }
             }
             catch (Exception Ex)
             {

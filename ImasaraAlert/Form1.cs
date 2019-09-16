@@ -178,14 +178,17 @@ namespace ImasaraAlert
                     var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
                     if (f_idx > -1)
                     {
-                        this.Invoke(new Action(() => work2(gsi, f_idx)));
+                        this.Invoke(new Action(async () => await work2(gsi, f_idx)));
                     }
                     //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
                     //if (f_idx > -1) work2(gsi, f_idx);
                     //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
                     //if (f_idx > -1) work2(gsi, f_idx);
                     //DEBUG
+                    //Debug.WriteLine(gsi.Community_Thumbnail);
+                    //gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
                     //this.Invoke(new Action(() => lists_si.Add(gsi)));
+                    //await Task.Delay(1000);
                     //DEBUG
                 }
             }
@@ -227,12 +230,13 @@ namespace ImasaraAlert
         }
 
 
-        private void work2(GetStreamInfo gsi, int f_idx)
+        private async Task work2(GetStreamInfo gsi, int f_idx)
         {
             try
             {
                 //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
                 lists_c[f_idx].Last_Date = gsi.Start_Time;
+                gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
                 lists_si.Add(gsi);
                 var liveid = Props.GetLiveUrl(gsi.LiveId);
                 if (lists_c[f_idx].Pop) PopupProc(gsi);

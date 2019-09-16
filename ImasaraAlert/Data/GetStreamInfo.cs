@@ -28,7 +28,7 @@ namespace ImasaraAlert.Data
 
         //view1 comm view2 user view3 program view4 live
         public string Col01 { set; get; } //新
-        public string Community_Thumbnail { set; get; }
+        public System.Drawing.Image Col02 { set; get; } 
         public string Title { set; get; }
         public string Provider_Name { set; get; }
         public string Community_Title { set; get; }
@@ -56,8 +56,8 @@ namespace ImasaraAlert.Data
             get { return Props.GetProviderType(provider_type); }
         }
         public string Col21 { set; get; } //グループ
-        public string Col22 { set; get; } //*予備)
-        public string Col23 { set; get; } //*予備
+        public string Col22 { set; get; } //*予備
+        public string Community_Thumbnail { set; get; }
         public string Col24 { set; get; } //お気に入り
         public string Col25 { set; get; } //メモ
         public string Ng { set; get; } //*Ng

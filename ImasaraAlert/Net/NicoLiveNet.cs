@@ -3,6 +3,7 @@ using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -81,7 +82,7 @@ namespace ImasaraAlert.Net
         {
             IsDebug = false;
 
-            var wc = new WebClientEx(60);
+            var wc = new WebClientEx(60000);
             _wc = wc;
 
             _wc.Encoding = Encoding.UTF8;
@@ -160,6 +161,32 @@ namespace ImasaraAlert.Net
                 return lgsi;
             }
             return lgsi;
+        }
+
+        public async Task<System.Drawing.Image> CreateImageAsync(string url)
+        {
+            System.Drawing.Image img = null;
+            try
+            {
+                using (var wc = new WebClientEx(60000))
+                {
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                    using (var fs = await _wc.OpenReadTaskAsync(url))
+                        img = System.Drawing.Image.FromStream(fs);
+                }
+            }
+            catch (WebException Ex)
+            {
+                DebugWrite.WriteWebln(nameof(CreateImageAsync), Ex);
+                return img;
+            }
+            catch (Exception Ex) //その他のエラー
+            {
+                DebugWrite.Writeln(nameof(CreateImageAsync), Ex);
+                return img;
+            }
+
+            return img;
         }
 
         public async Task<GetStreamInfo> GetStreamInfo2Async(string liveid, string userid)

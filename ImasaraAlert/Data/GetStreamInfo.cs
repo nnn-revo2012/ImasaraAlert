@@ -56,11 +56,12 @@ namespace ImasaraAlert.Data
             get { return Props.GetProviderType(provider_type); }
         }
         public string Col21 { set; get; } //グループ
-        public string Provider_Id { set; get; } //*予備 (ユーザーID)
+        public string Col22 { set; get; } //*予備)
         public string Col23 { set; get; } //*予備
         public string Col24 { set; get; } //お気に入り
         public string Col25 { set; get; } //メモ
         public string Ng { set; get; } //*Ng
+        public string Provider_Id { set; get; } //ユーザーID *追加
 
         private static Regex RgxChNo = new Regex("/([^/]+)$", RegexOptions.Compiled);
 

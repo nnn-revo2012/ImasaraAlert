@@ -18,13 +18,13 @@ namespace ImasaraAlert.Data
 
         public event PropertyChangedEventHandler PropertyChanged;
         private static readonly PropertyChangedEventArgs Last_DatePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Last_Date));
-        public string Ng { set; get; }
+        public string Ng { set; get; }      //00
         public string ComId { set; get; }
         public string UserId { set; get; }   //ユーザーID
         public string Col04 { set; get; } //放送URL 
         public string ComName { set; get; }
         public string UserName { set; get; } //ユーザー名
-        public string Group { set; get; }    //グループ
+        public string Group { set; get; }    //06グループ
         public DateTime Last_Date
         {
             get { return this.last_date; }

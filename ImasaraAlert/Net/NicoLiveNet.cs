@@ -38,6 +38,24 @@ namespace ImasaraAlert.Net
         }
     }
 
+    static class TimeoutExtention
+    {
+        public static async Task Timeout(this Task task, int timeout)
+        {
+            var delay = Task.Delay(timeout);
+            if (await Task.WhenAny(task, delay) == delay)
+            {
+                throw new TimeoutException();
+            }
+        }
+
+        public static async Task<T> Timeout<T>(this Task<T> task, int timeout)
+        {
+            await ((Task)task).Timeout(timeout);
+            return await task;
+        }
+    }
+
     public class NicoLiveNet : IDisposable
     {
 
@@ -53,7 +71,7 @@ namespace ImasaraAlert.Net
         private class WebClientEx : WebClient
         {
             public CookieContainer cookieContainer = new CookieContainer();
-            private int timeout;
+            public int timeout;
 
             public WebClientEx(int timeout) : base()
             {
@@ -117,7 +135,7 @@ namespace ImasaraAlert.Net
                 while (i < 5 && end_flg == false)
                 {
                     var rssurl = string.Format(url, tab, i.ToString());
-                    var xhtml = await _wc.DownloadStringTaskAsync(rssurl);
+                    var xhtml = await _wc.DownloadStringTaskAsync(rssurl).Timeout(_wc.timeout);
                     if (string.IsNullOrEmpty(xhtml)) break;
                     doc.LoadXml(xhtml);
                     var nt = doc.NameTable;
@@ -171,7 +189,7 @@ namespace ImasaraAlert.Net
                 using (var wc = new WebClientEx(60000))
                 {
                     wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-                    using (var fs = await _wc.OpenReadTaskAsync(url))
+                    using (var fs = await _wc.OpenReadTaskAsync(url).Timeout(wc.timeout))
                         img = System.Drawing.Image.FromStream(fs);
                 }
             }
@@ -205,7 +223,7 @@ namespace ImasaraAlert.Net
                 var providertype = "unama";
                 gsi.Provider_Type = providertype;
 
-                var html = await _wc.DownloadStringTaskAsync(Props.NicoLiveUrl + liveid);
+                var html = await _wc.DownloadStringTaskAsync(Props.NicoLiveUrl + liveid).Timeout(_wc.timeout);
                 if (html.IndexOf("window.NicoGoogleTagManagerDataLayer = [];") > 0)
                 {
                     //コミュ限定・有料放送

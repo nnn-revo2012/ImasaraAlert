@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.設定フォルダーを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,33 +50,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.col01DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col02DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.providerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.communityTitleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.liveIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col08DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.communityIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col10DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col12DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col13DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col14DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col15DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col16DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col17DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col18DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.communityOnlyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.providerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col21DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col22DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Community_Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col24DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col25DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ngDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.providerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.getStreamInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
@@ -123,6 +102,33 @@
             this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.col01DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col02DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.providerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.communityTitleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.liveIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col08DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.communityIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col10DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col12DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col13DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col14DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col15DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col16DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col17DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col18DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.communityOnlyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.providerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col21DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col22DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Community_Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col24DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col25DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ngDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.providerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -248,11 +254,21 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.ColumnHeadersHeight = 40;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col01DataGridViewTextBoxColumn,
             this.col02DataGridViewTextBoxColumn,
@@ -284,231 +300,22 @@
             this.dataGridView1.DataSource = this.getStreamInfoBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(0, 3);
             this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 21;
+            this.dataGridView1.RowHeadersWidth = 40;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.RowTemplate.Height = 40;
+            this.dataGridView1.RowTemplate.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(873, 367);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView1_RowContextMenuStripNeeded);
-            // 
-            // col01DataGridViewTextBoxColumn
-            // 
-            this.col01DataGridViewTextBoxColumn.DataPropertyName = "Col01";
-            this.col01DataGridViewTextBoxColumn.FillWeight = 21F;
-            this.col01DataGridViewTextBoxColumn.HeaderText = "新";
-            this.col01DataGridViewTextBoxColumn.Name = "col01DataGridViewTextBoxColumn";
-            this.col01DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col01DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.col01DataGridViewTextBoxColumn.Width = 21;
-            // 
-            // col02DataGridViewTextBoxColumn
-            // 
-            this.col02DataGridViewTextBoxColumn.DataPropertyName = "Col02";
-            this.col02DataGridViewTextBoxColumn.FillWeight = 20F;
-            this.col02DataGridViewTextBoxColumn.HeaderText = "ｻﾑﾈ";
-            this.col02DataGridViewTextBoxColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.col02DataGridViewTextBoxColumn.Name = "col02DataGridViewTextBoxColumn";
-            this.col02DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col02DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col02DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.col02DataGridViewTextBoxColumn.Width = 20;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "放送タイトル";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 210;
-            // 
-            // providerNameDataGridViewTextBoxColumn
-            // 
-            this.providerNameDataGridViewTextBoxColumn.DataPropertyName = "Provider_Name";
-            this.providerNameDataGridViewTextBoxColumn.HeaderText = "放送者";
-            this.providerNameDataGridViewTextBoxColumn.Name = "providerNameDataGridViewTextBoxColumn";
-            this.providerNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.providerNameDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // communityTitleDataGridViewTextBoxColumn
-            // 
-            this.communityTitleDataGridViewTextBoxColumn.DataPropertyName = "Community_Title";
-            this.communityTitleDataGridViewTextBoxColumn.HeaderText = "コミュニティ名";
-            this.communityTitleDataGridViewTextBoxColumn.Name = "communityTitleDataGridViewTextBoxColumn";
-            this.communityTitleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.communityTitleDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "説明";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // liveIdDataGridViewTextBoxColumn
-            // 
-            this.liveIdDataGridViewTextBoxColumn.DataPropertyName = "LiveId";
-            this.liveIdDataGridViewTextBoxColumn.HeaderText = "放送ID";
-            this.liveIdDataGridViewTextBoxColumn.Name = "liveIdDataGridViewTextBoxColumn";
-            this.liveIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.liveIdDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // col08DataGridViewTextBoxColumn
-            // 
-            this.col08DataGridViewTextBoxColumn.DataPropertyName = "Col08";
-            this.col08DataGridViewTextBoxColumn.HeaderText = "放送URL";
-            this.col08DataGridViewTextBoxColumn.Name = "col08DataGridViewTextBoxColumn";
-            this.col08DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col08DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // communityIdDataGridViewTextBoxColumn
-            // 
-            this.communityIdDataGridViewTextBoxColumn.DataPropertyName = "Community_Id";
-            this.communityIdDataGridViewTextBoxColumn.HeaderText = "コミュニティID";
-            this.communityIdDataGridViewTextBoxColumn.Name = "communityIdDataGridViewTextBoxColumn";
-            this.communityIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.communityIdDataGridViewTextBoxColumn.Width = 66;
-            // 
-            // col10DataGridViewTextBoxColumn1
-            // 
-            this.col10DataGridViewTextBoxColumn1.DataPropertyName = "Col10";
-            this.col10DataGridViewTextBoxColumn1.HeaderText = "コミュニティURL";
-            this.col10DataGridViewTextBoxColumn1.Name = "col10DataGridViewTextBoxColumn1";
-            this.col10DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col10DataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // startTimeDataGridViewTextBoxColumn
-            // 
-            this.startTimeDataGridViewTextBoxColumn.DataPropertyName = "Start_Time";
-            this.startTimeDataGridViewTextBoxColumn.HeaderText = "放送時間";
-            this.startTimeDataGridViewTextBoxColumn.Name = "startTimeDataGridViewTextBoxColumn";
-            this.startTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startTimeDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // col12DataGridViewTextBoxColumn1
-            // 
-            this.col12DataGridViewTextBoxColumn1.DataPropertyName = "Col12";
-            this.col12DataGridViewTextBoxColumn1.HeaderText = "pubDate";
-            this.col12DataGridViewTextBoxColumn1.Name = "col12DataGridViewTextBoxColumn1";
-            this.col12DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col12DataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // col13DataGridViewTextBoxColumn1
-            // 
-            this.col13DataGridViewTextBoxColumn1.DataPropertyName = "Col13";
-            this.col13DataGridViewTextBoxColumn1.HeaderText = "コメント数";
-            this.col13DataGridViewTextBoxColumn1.Name = "col13DataGridViewTextBoxColumn1";
-            this.col13DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col13DataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // col14DataGridViewTextBoxColumn1
-            // 
-            this.col14DataGridViewTextBoxColumn1.DataPropertyName = "Col14";
-            this.col14DataGridViewTextBoxColumn1.HeaderText = "来場者数";
-            this.col14DataGridViewTextBoxColumn1.Name = "col14DataGridViewTextBoxColumn1";
-            this.col14DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col14DataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // col15DataGridViewTextBoxColumn1
-            // 
-            this.col15DataGridViewTextBoxColumn1.DataPropertyName = "Col15";
-            this.col15DataGridViewTextBoxColumn1.HeaderText = "カテゴリー";
-            this.col15DataGridViewTextBoxColumn1.Name = "col15DataGridViewTextBoxColumn1";
-            this.col15DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col15DataGridViewTextBoxColumn1.Width = 60;
-            // 
-            // col16DataGridViewTextBoxColumn
-            // 
-            this.col16DataGridViewTextBoxColumn.DataPropertyName = "Col16";
-            this.col16DataGridViewTextBoxColumn.HeaderText = "顔";
-            this.col16DataGridViewTextBoxColumn.Name = "col16DataGridViewTextBoxColumn";
-            this.col16DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col16DataGridViewTextBoxColumn.Width = 20;
-            // 
-            // col17DataGridViewTextBoxColumn1
-            // 
-            this.col17DataGridViewTextBoxColumn1.DataPropertyName = "Col17";
-            this.col17DataGridViewTextBoxColumn1.HeaderText = "凸";
-            this.col17DataGridViewTextBoxColumn1.Name = "col17DataGridViewTextBoxColumn1";
-            this.col17DataGridViewTextBoxColumn1.ReadOnly = true;
-            this.col17DataGridViewTextBoxColumn1.Width = 20;
-            // 
-            // col18DataGridViewTextBoxColumn
-            // 
-            this.col18DataGridViewTextBoxColumn.DataPropertyName = "Col18";
-            this.col18DataGridViewTextBoxColumn.HeaderText = "ｸﾙｰｽﾞ";
-            this.col18DataGridViewTextBoxColumn.Name = "col18DataGridViewTextBoxColumn";
-            this.col18DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col18DataGridViewTextBoxColumn.Width = 45;
-            // 
-            // communityOnlyDataGridViewTextBoxColumn
-            // 
-            this.communityOnlyDataGridViewTextBoxColumn.DataPropertyName = "Community_Only";
-            this.communityOnlyDataGridViewTextBoxColumn.HeaderText = "限定";
-            this.communityOnlyDataGridViewTextBoxColumn.Name = "communityOnlyDataGridViewTextBoxColumn";
-            this.communityOnlyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.communityOnlyDataGridViewTextBoxColumn.Width = 45;
-            // 
-            // providerTypeDataGridViewTextBoxColumn
-            // 
-            this.providerTypeDataGridViewTextBoxColumn.DataPropertyName = "Provider_Type";
-            this.providerTypeDataGridViewTextBoxColumn.HeaderText = "種類";
-            this.providerTypeDataGridViewTextBoxColumn.Name = "providerTypeDataGridViewTextBoxColumn";
-            this.providerTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.providerTypeDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // col21DataGridViewTextBoxColumn
-            // 
-            this.col21DataGridViewTextBoxColumn.DataPropertyName = "Col21";
-            this.col21DataGridViewTextBoxColumn.HeaderText = "ｸﾞﾙｰﾌﾟ";
-            this.col21DataGridViewTextBoxColumn.Name = "col21DataGridViewTextBoxColumn";
-            this.col21DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col21DataGridViewTextBoxColumn.Width = 55;
-            // 
-            // col22DataGridViewTextBoxColumn
-            // 
-            this.col22DataGridViewTextBoxColumn.DataPropertyName = "Col22";
-            this.col22DataGridViewTextBoxColumn.HeaderText = "予備";
-            this.col22DataGridViewTextBoxColumn.Name = "col22DataGridViewTextBoxColumn";
-            this.col22DataGridViewTextBoxColumn.ReadOnly = true;
-            this.col22DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // Community_Thumbnail
-            // 
-            this.Community_Thumbnail.DataPropertyName = "Community_Thumbnail";
-            this.Community_Thumbnail.HeaderText = "Community_Thumbnail";
-            this.Community_Thumbnail.Name = "Community_Thumbnail";
-            this.Community_Thumbnail.ReadOnly = true;
-            this.Community_Thumbnail.Visible = false;
-            // 
-            // col24DataGridViewTextBoxColumn
-            // 
-            this.col24DataGridViewTextBoxColumn.DataPropertyName = "Col24";
-            this.col24DataGridViewTextBoxColumn.HeaderText = "お気に入り";
-            this.col24DataGridViewTextBoxColumn.Name = "col24DataGridViewTextBoxColumn";
-            this.col24DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // col25DataGridViewTextBoxColumn
-            // 
-            this.col25DataGridViewTextBoxColumn.DataPropertyName = "Col25";
-            this.col25DataGridViewTextBoxColumn.HeaderText = "メモ";
-            this.col25DataGridViewTextBoxColumn.Name = "col25DataGridViewTextBoxColumn";
-            this.col25DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ngDataGridViewTextBoxColumn1
-            // 
-            this.ngDataGridViewTextBoxColumn1.DataPropertyName = "Ng";
-            this.ngDataGridViewTextBoxColumn1.HeaderText = "Ng";
-            this.ngDataGridViewTextBoxColumn1.Name = "ngDataGridViewTextBoxColumn1";
-            this.ngDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.ngDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // providerIdDataGridViewTextBoxColumn
-            // 
-            this.providerIdDataGridViewTextBoxColumn.DataPropertyName = "Provider_Id";
-            this.providerIdDataGridViewTextBoxColumn.HeaderText = "Provider_Id";
-            this.providerIdDataGridViewTextBoxColumn.Name = "providerIdDataGridViewTextBoxColumn";
-            this.providerIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.providerIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // getStreamInfoBindingSource
             // 
@@ -553,11 +360,21 @@
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView2.ColumnHeadersHeight = 30;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ngDataGridViewTextBoxColumn,
             this.comIdDataGridViewTextBoxColumn,
@@ -591,8 +408,18 @@
             this.dataGridView2.DataSource = this.commBindingSource;
             this.dataGridView2.Location = new System.Drawing.Point(0, 32);
             this.dataGridView2.Name = "dataGridView2";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 21;
+            this.dataGridView2.RowHeadersWidth = 25;
+            this.dataGridView2.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.RowTemplate.Height = 25;
             this.dataGridView2.Size = new System.Drawing.Size(870, 338);
             this.dataGridView2.TabIndex = 6;
             this.dataGridView2.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView2_RowContextMenuStripNeeded);
@@ -952,6 +779,226 @@
             this.この行を削除ToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
             this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
             this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
+            // 
+            // col01DataGridViewTextBoxColumn
+            // 
+            this.col01DataGridViewTextBoxColumn.DataPropertyName = "Col01";
+            this.col01DataGridViewTextBoxColumn.FillWeight = 21F;
+            this.col01DataGridViewTextBoxColumn.HeaderText = "新";
+            this.col01DataGridViewTextBoxColumn.Name = "col01DataGridViewTextBoxColumn";
+            this.col01DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col01DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.col01DataGridViewTextBoxColumn.Width = 21;
+            // 
+            // col02DataGridViewTextBoxColumn
+            // 
+            this.col02DataGridViewTextBoxColumn.DataPropertyName = "Col02";
+            this.col02DataGridViewTextBoxColumn.FillWeight = 40F;
+            this.col02DataGridViewTextBoxColumn.HeaderText = "ｻﾑﾈ";
+            this.col02DataGridViewTextBoxColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.col02DataGridViewTextBoxColumn.Name = "col02DataGridViewTextBoxColumn";
+            this.col02DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col02DataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col02DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.col02DataGridViewTextBoxColumn.Width = 40;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "放送タイトル";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Width = 210;
+            // 
+            // providerNameDataGridViewTextBoxColumn
+            // 
+            this.providerNameDataGridViewTextBoxColumn.DataPropertyName = "Provider_Name";
+            this.providerNameDataGridViewTextBoxColumn.HeaderText = "放送者";
+            this.providerNameDataGridViewTextBoxColumn.Name = "providerNameDataGridViewTextBoxColumn";
+            this.providerNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.providerNameDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // communityTitleDataGridViewTextBoxColumn
+            // 
+            this.communityTitleDataGridViewTextBoxColumn.DataPropertyName = "Community_Title";
+            this.communityTitleDataGridViewTextBoxColumn.HeaderText = "コミュニティ名";
+            this.communityTitleDataGridViewTextBoxColumn.Name = "communityTitleDataGridViewTextBoxColumn";
+            this.communityTitleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.communityTitleDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "説明";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // liveIdDataGridViewTextBoxColumn
+            // 
+            this.liveIdDataGridViewTextBoxColumn.DataPropertyName = "LiveId";
+            this.liveIdDataGridViewTextBoxColumn.HeaderText = "放送ID";
+            this.liveIdDataGridViewTextBoxColumn.Name = "liveIdDataGridViewTextBoxColumn";
+            this.liveIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.liveIdDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // col08DataGridViewTextBoxColumn
+            // 
+            this.col08DataGridViewTextBoxColumn.DataPropertyName = "Col08";
+            this.col08DataGridViewTextBoxColumn.HeaderText = "放送URL";
+            this.col08DataGridViewTextBoxColumn.Name = "col08DataGridViewTextBoxColumn";
+            this.col08DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col08DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // communityIdDataGridViewTextBoxColumn
+            // 
+            this.communityIdDataGridViewTextBoxColumn.DataPropertyName = "Community_Id";
+            this.communityIdDataGridViewTextBoxColumn.HeaderText = "コミュニティID";
+            this.communityIdDataGridViewTextBoxColumn.Name = "communityIdDataGridViewTextBoxColumn";
+            this.communityIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.communityIdDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // col10DataGridViewTextBoxColumn1
+            // 
+            this.col10DataGridViewTextBoxColumn1.DataPropertyName = "Col10";
+            this.col10DataGridViewTextBoxColumn1.HeaderText = "コミュニティURL";
+            this.col10DataGridViewTextBoxColumn1.Name = "col10DataGridViewTextBoxColumn1";
+            this.col10DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col10DataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // startTimeDataGridViewTextBoxColumn
+            // 
+            this.startTimeDataGridViewTextBoxColumn.DataPropertyName = "Start_Time";
+            this.startTimeDataGridViewTextBoxColumn.HeaderText = "放送時間";
+            this.startTimeDataGridViewTextBoxColumn.Name = "startTimeDataGridViewTextBoxColumn";
+            this.startTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.startTimeDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // col12DataGridViewTextBoxColumn1
+            // 
+            this.col12DataGridViewTextBoxColumn1.DataPropertyName = "Col12";
+            this.col12DataGridViewTextBoxColumn1.HeaderText = "pubDate";
+            this.col12DataGridViewTextBoxColumn1.Name = "col12DataGridViewTextBoxColumn1";
+            this.col12DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col12DataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // col13DataGridViewTextBoxColumn1
+            // 
+            this.col13DataGridViewTextBoxColumn1.DataPropertyName = "Col13";
+            this.col13DataGridViewTextBoxColumn1.HeaderText = "コメント数";
+            this.col13DataGridViewTextBoxColumn1.Name = "col13DataGridViewTextBoxColumn1";
+            this.col13DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col13DataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // col14DataGridViewTextBoxColumn1
+            // 
+            this.col14DataGridViewTextBoxColumn1.DataPropertyName = "Col14";
+            this.col14DataGridViewTextBoxColumn1.HeaderText = "来場者数";
+            this.col14DataGridViewTextBoxColumn1.Name = "col14DataGridViewTextBoxColumn1";
+            this.col14DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col14DataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // col15DataGridViewTextBoxColumn1
+            // 
+            this.col15DataGridViewTextBoxColumn1.DataPropertyName = "Col15";
+            this.col15DataGridViewTextBoxColumn1.HeaderText = "カテゴリー";
+            this.col15DataGridViewTextBoxColumn1.Name = "col15DataGridViewTextBoxColumn1";
+            this.col15DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col15DataGridViewTextBoxColumn1.Width = 60;
+            // 
+            // col16DataGridViewTextBoxColumn
+            // 
+            this.col16DataGridViewTextBoxColumn.DataPropertyName = "Col16";
+            this.col16DataGridViewTextBoxColumn.HeaderText = "顔";
+            this.col16DataGridViewTextBoxColumn.Name = "col16DataGridViewTextBoxColumn";
+            this.col16DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col16DataGridViewTextBoxColumn.Width = 20;
+            // 
+            // col17DataGridViewTextBoxColumn1
+            // 
+            this.col17DataGridViewTextBoxColumn1.DataPropertyName = "Col17";
+            this.col17DataGridViewTextBoxColumn1.HeaderText = "凸";
+            this.col17DataGridViewTextBoxColumn1.Name = "col17DataGridViewTextBoxColumn1";
+            this.col17DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.col17DataGridViewTextBoxColumn1.Width = 20;
+            // 
+            // col18DataGridViewTextBoxColumn
+            // 
+            this.col18DataGridViewTextBoxColumn.DataPropertyName = "Col18";
+            this.col18DataGridViewTextBoxColumn.HeaderText = "ｸﾙｰｽﾞ";
+            this.col18DataGridViewTextBoxColumn.Name = "col18DataGridViewTextBoxColumn";
+            this.col18DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col18DataGridViewTextBoxColumn.Width = 45;
+            // 
+            // communityOnlyDataGridViewTextBoxColumn
+            // 
+            this.communityOnlyDataGridViewTextBoxColumn.DataPropertyName = "Community_Only";
+            this.communityOnlyDataGridViewTextBoxColumn.HeaderText = "限定";
+            this.communityOnlyDataGridViewTextBoxColumn.Name = "communityOnlyDataGridViewTextBoxColumn";
+            this.communityOnlyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.communityOnlyDataGridViewTextBoxColumn.Width = 45;
+            // 
+            // providerTypeDataGridViewTextBoxColumn
+            // 
+            this.providerTypeDataGridViewTextBoxColumn.DataPropertyName = "Provider_Type";
+            this.providerTypeDataGridViewTextBoxColumn.HeaderText = "種類";
+            this.providerTypeDataGridViewTextBoxColumn.Name = "providerTypeDataGridViewTextBoxColumn";
+            this.providerTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.providerTypeDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // col21DataGridViewTextBoxColumn
+            // 
+            this.col21DataGridViewTextBoxColumn.DataPropertyName = "Col21";
+            this.col21DataGridViewTextBoxColumn.HeaderText = "ｸﾞﾙｰﾌﾟ";
+            this.col21DataGridViewTextBoxColumn.Name = "col21DataGridViewTextBoxColumn";
+            this.col21DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col21DataGridViewTextBoxColumn.Width = 55;
+            // 
+            // col22DataGridViewTextBoxColumn
+            // 
+            this.col22DataGridViewTextBoxColumn.DataPropertyName = "Col22";
+            this.col22DataGridViewTextBoxColumn.HeaderText = "予備";
+            this.col22DataGridViewTextBoxColumn.Name = "col22DataGridViewTextBoxColumn";
+            this.col22DataGridViewTextBoxColumn.ReadOnly = true;
+            this.col22DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // Community_Thumbnail
+            // 
+            this.Community_Thumbnail.DataPropertyName = "Community_Thumbnail";
+            this.Community_Thumbnail.HeaderText = "Community_Thumbnail";
+            this.Community_Thumbnail.Name = "Community_Thumbnail";
+            this.Community_Thumbnail.ReadOnly = true;
+            this.Community_Thumbnail.Visible = false;
+            // 
+            // col24DataGridViewTextBoxColumn
+            // 
+            this.col24DataGridViewTextBoxColumn.DataPropertyName = "Col24";
+            this.col24DataGridViewTextBoxColumn.HeaderText = "お気に入り";
+            this.col24DataGridViewTextBoxColumn.Name = "col24DataGridViewTextBoxColumn";
+            this.col24DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // col25DataGridViewTextBoxColumn
+            // 
+            this.col25DataGridViewTextBoxColumn.DataPropertyName = "Col25";
+            this.col25DataGridViewTextBoxColumn.HeaderText = "メモ";
+            this.col25DataGridViewTextBoxColumn.Name = "col25DataGridViewTextBoxColumn";
+            this.col25DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ngDataGridViewTextBoxColumn1
+            // 
+            this.ngDataGridViewTextBoxColumn1.DataPropertyName = "Ng";
+            this.ngDataGridViewTextBoxColumn1.HeaderText = "Ng";
+            this.ngDataGridViewTextBoxColumn1.Name = "ngDataGridViewTextBoxColumn1";
+            this.ngDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.ngDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // providerIdDataGridViewTextBoxColumn
+            // 
+            this.providerIdDataGridViewTextBoxColumn.DataPropertyName = "Provider_Id";
+            this.providerIdDataGridViewTextBoxColumn.HeaderText = "Provider_Id";
+            this.providerIdDataGridViewTextBoxColumn.Name = "providerIdDataGridViewTextBoxColumn";
+            this.providerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.providerIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // Form1
             // 

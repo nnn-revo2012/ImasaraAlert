@@ -50,6 +50,7 @@ namespace ImasaraAlert
             this.label1.Text = _gsi.Provider_Name;
             this.label2.Text = _gsi.Community_Title;
             this.label3.Text = _gsi.Description;
+            pictureBox1.ErrorImage = Image.FromFile(Props.GetDefaultThumbnail("comm"));
             pictureBox1.ImageLocation = _gsi.Community_Thumbnail;
             _hoso_url = Props.GetLiveUrl(_gsi.LiveId);
         }

@@ -39,6 +39,10 @@ namespace ImasaraAlert.Prop
         public static readonly string NicoChannelUrl = "https://ch.nicovideo.jp/";
         public static readonly string NicoUserUrl = "https://www.nicovideo.jp/user/";
 
+        public static readonly string CommFolder = "ImageCommunity";
+        public static readonly string UserFolder = "ImageUser";
+        public static readonly string Comm404jpg = "404.jpg";
+        public static readonly string Userblankjpg = "blank.jpg";
 
         public bool IsDebug { get; set; }
 
@@ -181,6 +185,14 @@ namespace ImasaraAlert.Prop
         public static string GetUserUrl(string userid)
         {
             return NicoUserUrl + userid;
+        }
+
+        public static string GetDefaultThumbnail(string kind)
+        {
+            if (kind == "user")
+                return GetApplicationDirectory() + "\\" + UserFolder + "\\" + Userblankjpg;
+            else
+                return GetApplicationDirectory() + "\\" + CommFolder + "\\" + Comm404jpg;
         }
 
         public static string GetProviderType(string type)

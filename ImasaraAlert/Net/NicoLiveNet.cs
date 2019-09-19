@@ -73,11 +73,6 @@ namespace ImasaraAlert.Net
             public CookieContainer cookieContainer = new CookieContainer();
             public int timeout;
 
-            public WebClientEx(int timeout) : base()
-            {
-                this.timeout = timeout;
-            }
-
             protected override WebRequest GetWebRequest(Uri address)
             {
                 var wr = base.GetWebRequest(address);
@@ -100,11 +95,12 @@ namespace ImasaraAlert.Net
         {
             IsDebug = false;
 
-            var wc = new WebClientEx(60000);
+            var wc = new WebClientEx();
             _wc = wc;
 
             _wc.Encoding = Encoding.UTF8;
             _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+            _wc.timeout = 60000;
             _wc.cookieContainer = cc;
             if (IsDebug)
             {
@@ -186,15 +182,35 @@ namespace ImasaraAlert.Net
             System.Drawing.Image img = null;
             try
             {
-                using (var wc = new WebClientEx(60000))
+                using (var wc = new WebClientEx())
                 {
                     wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-                    using (var fs = await _wc.OpenReadTaskAsync(url).Timeout(wc.timeout))
+                    wc.timeout = 60000;
+                    using (var fs = await wc.OpenReadTaskAsync(url).Timeout(wc.timeout))
+                    {
                         img = System.Drawing.Image.FromStream(fs);
+                    }
                 }
             }
             catch (WebException Ex)
             {
+                if (Ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var errres = (HttpWebResponse)Ex.Response;
+                    if (errres != null)
+                    {
+                        if (errres.StatusCode == HttpStatusCode.NotFound)
+                        {
+                            using (var fs = new FileStream(Props.GetDefaultThumbnail("comm"),
+                                                           FileMode.Open,
+                                                           FileAccess.Read))
+                            {
+                                img = System.Drawing.Image.FromStream(fs);
+                            }
+                            return img;
+                        }
+                    }
+                }
                 DebugWrite.WriteWebln(nameof(CreateImageAsync), Ex);
                 return img;
             }

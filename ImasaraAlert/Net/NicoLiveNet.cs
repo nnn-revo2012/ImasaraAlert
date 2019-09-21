@@ -117,20 +117,21 @@ namespace ImasaraAlert.Net
             this.Dispose();
         }
 
-        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, DateTime datetime)
+        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, string cate, string lastid, DateTime min_time)
         {
+            var now = DateTime.Now;
+            var max_time = now.AddMinutes(5);
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;
 
             try
             {
                 var doc = new XmlDocument();
-                var tab = "common";
                 var i = 1;
                 var end_flg = false;
-                while (i < 5 && end_flg == false)
+                while (i < 10 && end_flg == false)
                 {
-                    var rssurl = string.Format(url, tab, i.ToString());
+                    var rssurl = string.Format(url, cate, i.ToString());
                     var xhtml = await _wc.DownloadStringTaskAsync(rssurl).Timeout(_wc.timeout);
                     if (string.IsNullOrEmpty(xhtml)) break;
                     doc.LoadXml(xhtml);
@@ -149,6 +150,11 @@ namespace ImasaraAlert.Net
                         gsi.Col12 = item.SelectSingleNode("pubDate", nsmgr).InnerText;
                         if (!string.IsNullOrEmpty(gsi.Col12))
                             gsi.Start_Time = DateTime.Parse(gsi.Col12);
+                        if (gsi.Start_Time > max_time)
+                        {
+                            Debug.WriteLine(gsi.LiveId + ": FutureTime " + gsi.Start_Time.ToString());
+                            gsi.Start_Time.AddMinutes(-30);
+                        }
                         gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
                         gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
                         gsi.Community_Title = item.SelectSingleNode("nicolive:community_name", nsmgr).InnerText;
@@ -156,10 +162,26 @@ namespace ImasaraAlert.Net
                         gsi.Community_Only = item.SelectSingleNode("nicolive:member_only", nsmgr).InnerText;
                         gsi.Provider_Type = item.SelectSingleNode("nicolive:type", nsmgr).InnerText;
                         gsi.Provider_Name = item.SelectSingleNode("nicolive:owner_name", nsmgr).InnerText;
-                        if (gsi.Start_Time <= datetime)
-                            end_flg = true;
+                        var cates = item.SelectNodes("category", nsmgr);
+                        if (cates.Count > 0)
+                            gsi.Col15 = cates.Item(0).InnerText;
+                        if (string.IsNullOrEmpty(lastid))
+                        {
+                            if (gsi.Start_Time < min_time)
+                            {
+                                end_flg = true;
+                                break;
+                            }
+                        }
                         else
-                            lgsi.Add(gsi);
+                        {
+                            if (gsi.LiveId == lastid || gsi.Start_Time < min_time)
+                            {
+                                end_flg = true;
+                                break;
+                            }
+                        }
+                        lgsi.Add(gsi);
                     }
                     i++;
                 }

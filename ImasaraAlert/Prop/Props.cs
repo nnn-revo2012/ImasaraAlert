@@ -44,6 +44,9 @@ namespace ImasaraAlert.Prop
         public static readonly string Comm404jpg = "404.jpg";
         public static readonly string Userblankjpg = "blank.jpg";
 
+        public static readonly string[] Cates = { "common", "try", "live", "req" };
+
+
         public bool IsDebug { get; set; }
 
         public bool IsDefaultBrowser { get; set; }

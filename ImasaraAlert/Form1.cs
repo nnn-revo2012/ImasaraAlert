@@ -37,7 +37,8 @@ namespace ImasaraAlert
 
         private System.Windows.Forms.Timer _rssTimer = null;
         private DateTime _rssTimer_dt = DateTime.MinValue;
-        private DateTime _rssTimer_lastdt = DateTime.MinValue;
+        private string[] _rssTimer_lastid = new string[Props.Cates.Count()];
+        private DateTime[] _rssTimer_lasttime = new DateTime[Props.Cates.Count()];
 
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用
@@ -144,7 +145,11 @@ namespace ImasaraAlert
             _rssTimer.Tick += new EventHandler(rssTimer_Tick);
             _rssTimer.Interval = 1000;
             _rssTimer_dt = DateTime.Now;
-            _rssTimer_lastdt = DateTime.Now.AddMinutes(-10);
+            for (var i=0; i< Props.Cates.Count(); i++)
+            {
+                _rssTimer_lastid[i] = null;
+                _rssTimer_lasttime[i] = _rssTimer_dt.AddMinutes(-10);
+            }
             _rssTimer.Enabled = true;
             Debug.WriteLine("_rssTimer Start");
         }
@@ -157,39 +162,47 @@ namespace ImasaraAlert
             {
                 _rssTimer_dt = now.AddSeconds(30);
                 Debug.WriteLine("RSS NextDate: " + _rssTimer_dt.ToString());
-                await ReadAlert();
+                await ReadAlert(now);
             }
             _rssTimer.Enabled = true;
         }
 
-        private async Task ReadAlert()
+        private async Task ReadAlert(DateTime now)
         {
             try
             {
-                Debug.WriteLine("LastDate: " + _rssTimer_lastdt.ToString());
-                var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, _rssTimer_lastdt);
-                if (lgsi.Count() > 0)
-                    _rssTimer_lastdt = lgsi.FirstOrDefault().Start_Time;
-                Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
-
-                foreach (var gsi in lgsi)
+                for (var i = 0; i < Props.Cates.Count(); i++)
                 {
-                    DispStreamInfo(gsi);
-                    var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
-                    if (f_idx > -1)
+                    Debug.WriteLine("Cate: " + Props.Cates[i]);
+                    if (!string.IsNullOrEmpty(_rssTimer_lastid[i]))
+                        Debug.WriteLine("LastId: " + _rssTimer_lastid[i].ToString());
+                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], _rssTimer_lastid[i], _rssTimer_lasttime[i]);
+                    if (lgsi.Count() > 0)
                     {
-                        this.Invoke(new Action(async () => await work2(gsi, f_idx)));
+                        _rssTimer_lastid[i] = lgsi.FirstOrDefault().LiveId;
+                        _rssTimer_lasttime[i] = lgsi.FirstOrDefault().Start_Time;
                     }
-                    //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
-                    //if (f_idx > -1) work2(gsi, f_idx);
-                    //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
-                    //if (f_idx > -1) work2(gsi, f_idx);
-                    //DEBUG
-                    //Debug.WriteLine(gsi.Community_Thumbnail);
-                    //gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
-                    //this.Invoke(new Action(() => lists_si.Add(gsi)));
-                    //await Task.Delay(1000);
-                    //DEBUG
+                    Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
+                    foreach (var gsi in lgsi)
+                    {
+                        DispStreamInfo(gsi);
+                        var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
+                        if (f_idx > -1)
+                        {
+                            this.Invoke(new Action(async () => await work2(gsi, f_idx)));
+                        }
+                        //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
+                        //if (f_idx > -1) work2(gsi, f_idx);
+                        //f_idx = lists_l.ToList().FindIndex(x => x.Id == gsi.Live_Id);
+                        //if (f_idx > -1) work2(gsi, f_idx);
+                        //DEBUG
+                        //Debug.WriteLine(gsi.Community_Thumbnail);
+                        //gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
+                        //this.Invoke(new Action(() => lists_si.Add(gsi)));
+                        //await Task.Delay(1000);
+                        //DEBUG
+                    }
+
                 }
             }
             catch (OperationCanceledException Ex)

@@ -148,13 +148,17 @@ namespace ImasaraAlert.Net
                         gsi.Title = item.SelectSingleNode("title", nsmgr).InnerText;
                         gsi.LiveId = item.SelectSingleNode("guid", nsmgr).InnerText;
                         gsi.Col12 = item.SelectSingleNode("pubDate", nsmgr).InnerText;
-                        if (!string.IsNullOrEmpty(gsi.Col12))
-                            gsi.Start_Time = DateTime.Parse(gsi.Col12);
-                        if (gsi.Start_Time > max_time)
+                        DateTime stime;
+                        if (DateTime.TryParse(gsi.Col12, out stime))
                         {
-                            Debug.WriteLine(gsi.LiveId + ": FutureTime " + gsi.Start_Time.ToString());
-                            gsi.Start_Time.AddMinutes(-30);
+                            if (stime > max_time)
+                            {
+                                Debug.WriteLine(gsi.LiveId + ": FutureTime " + stime.ToString());
+                                stime = stime.AddMinutes(-30);
+                            }
+                            gsi.Start_Time = stime;
                         }
+                        Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
                         gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
                         gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
                         gsi.Community_Title = item.SelectSingleNode("nicolive:community_name", nsmgr).InnerText;

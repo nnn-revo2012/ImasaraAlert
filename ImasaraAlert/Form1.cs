@@ -171,16 +171,17 @@ namespace ImasaraAlert
         {
             try
             {
-                for (var i = 0; i < Props.Cates.Count(); i++)
+                for (var i = 0; i < 1; i++)
                 {
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
                     if (!string.IsNullOrEmpty(_rssTimer_lastid[i]))
                         Debug.WriteLine("LastId: " + _rssTimer_lastid[i].ToString());
+                    Debug.WriteLine("LastTime: " + _rssTimer_lasttime[i].ToString());
                     var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], _rssTimer_lastid[i], _rssTimer_lasttime[i]);
                     if (lgsi.Count() > 0)
                     {
                         _rssTimer_lastid[i] = lgsi.FirstOrDefault().LiveId;
-                        _rssTimer_lasttime[i] = lgsi.FirstOrDefault().Start_Time;
+                        _rssTimer_lasttime[i] = lgsi.FirstOrDefault().Start_Time.AddMinutes(-1);
                     }
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)

@@ -50,11 +50,15 @@ namespace ImasaraAlert
 
         public Form1()
         {
+            InitializeComponent();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
             try
             {
-                InitializeComponent();
-
                 //設定データーの読み込み
                 props = new Props();
                 props.LoadData();
@@ -79,15 +83,13 @@ namespace ImasaraAlert
                 ReadAllData();
 
                 _nLiveNet = new NicoLiveNet(null);
-
-                Debug.WriteLine("Form1 END");
-
+                //アラートに接続
+                StartAlert();
             }
             catch (Exception Ex)
             {
-                AddLog("Form1: \r\n"+Ex.Message, 2);
+                AddLog("アラート接続エラー\r\n" + Ex.Message, 2);
             }
-
         }
 
         public void AddLog(string s, int num)
@@ -486,6 +488,7 @@ namespace ImasaraAlert
 
         }
 
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -734,12 +737,6 @@ namespace ImasaraAlert
         {
             lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
             dataGridView2.DataSource = lists_c;
-        }
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            //アラートに接続
-            StartAlert();
         }
     }
 

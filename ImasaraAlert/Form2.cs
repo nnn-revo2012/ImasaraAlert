@@ -25,10 +25,16 @@ namespace ImasaraAlert
         public Form2(Form1 fo)
         {
             InitializeComponent();
-
             _form = fo;
-            _props = new Props();
+        }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            _props = new Props();
+            var result = _props.LoadData();
+            SetForm();
         }
 
         //変数→フォーム
@@ -107,14 +113,6 @@ namespace ImasaraAlert
         private void button4_Click(object sender, EventArgs e)
         {
             //Webブラウザー指定
-        }
-
-
-        private void Form2_Shown(object sender, EventArgs e)
-        {
-            //フォーム表示後データー読み込み＆表示
-            var result = _props.LoadData();
-            SetForm();
         }
 
         private void SelectFolder()

@@ -31,9 +31,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rB_LU = new System.Windows.Forms.RadioButton();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.rB_LU = new System.Windows.Forms.RadioButton();
             this.rB_LD = new System.Windows.Forms.RadioButton();
             this.rB_RU = new System.Windows.Forms.RadioButton();
             this.rB_RD = new System.Windows.Forms.RadioButton();
@@ -114,6 +114,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ポップアップ設定";
             // 
+            // rB_LU
+            // 
+            this.rB_LU.AutoSize = true;
+            this.rB_LU.Location = new System.Drawing.Point(234, 18);
+            this.rB_LU.Name = "rB_LU";
+            this.rB_LU.Size = new System.Drawing.Size(47, 16);
+            this.rB_LU.TabIndex = 12;
+            this.rB_LU.TabStop = true;
+            this.rB_LU.Text = "左上";
+            this.rB_LU.UseVisualStyleBackColor = true;
+            // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
@@ -132,17 +143,6 @@
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "表示位置";
-            // 
-            // rB_LU
-            // 
-            this.rB_LU.AutoSize = true;
-            this.rB_LU.Location = new System.Drawing.Point(234, 18);
-            this.rB_LU.Name = "rB_LU";
-            this.rB_LU.Size = new System.Drawing.Size(47, 16);
-            this.rB_LU.TabIndex = 12;
-            this.rB_LU.TabStop = true;
-            this.rB_LU.Text = "左上";
-            this.rB_LU.UseVisualStyleBackColor = true;
             // 
             // rB_LD
             // 
@@ -166,7 +166,7 @@
             this.rB_RU.Text = "右上";
             this.rB_RU.UseVisualStyleBackColor = true;
             // 
-            //rB_RD
+            // rB_RD
             // 
             this.rB_RD.AutoSize = true;
             this.rB_RD.Location = new System.Drawing.Point(75, 18);
@@ -469,7 +469,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "設定";
             this.TopMost = true;
-            this.Shown += new System.EventHandler(this.Form2_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);

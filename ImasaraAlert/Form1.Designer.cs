@@ -50,28 +50,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Community_Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.放送URLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.この行を削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.最近行われた放送のURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ユーザーURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.最近行われた放送のURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.col01DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col02DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,11 +72,15 @@
             this.providerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col21DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col22DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Community_Thumbnail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col24DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col25DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.providerIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.getStreamInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.ngDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,17 +111,35 @@
             this.appdDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.memoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.放送URLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.この行を削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.最近行われた放送のURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.最近行われた放送のURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getStreamInfoBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commBindingSource)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.getStreamInfoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -316,240 +316,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(873, 367);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView1_RowContextMenuStripNeeded);
-            // 
-            // Community_Thumbnail
-            // 
-            this.Community_Thumbnail.DataPropertyName = "Community_Thumbnail";
-            this.Community_Thumbnail.HeaderText = "Community_Thumbnail";
-            this.Community_Thumbnail.Name = "Community_Thumbnail";
-            this.Community_Thumbnail.ReadOnly = true;
-            this.Community_Thumbnail.Visible = false;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(873, 373);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "コミュ・チャンネル一覧";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 12);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "コミュ・チャンネルID";
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.AutoGenerateColumns = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView2.ColumnHeadersHeight = 30;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ngDataGridViewTextBoxColumn,
-            this.comIdDataGridViewTextBoxColumn,
-            this.userIdDataGridViewTextBoxColumn,
-            this.col04DataGridViewTextBoxColumn,
-            this.comNameDataGridViewTextBoxColumn,
-            this.userNameDataGridViewTextBoxColumn,
-            this.groupDataGridViewTextBoxColumn,
-            this.lastDateDataGridViewTextBoxColumn,
-            this.col09DataGridViewTextBoxColumn,
-            this.col10DataGridViewTextBoxColumn,
-            this.col11DataGridViewTextBoxColumn,
-            this.col12DataGridViewTextBoxColumn,
-            this.col13DataGridViewTextBoxColumn,
-            this.col14DataGridViewTextBoxColumn,
-            this.col15DataGridViewTextBoxColumn,
-            this.registDateDataGridViewTextBoxColumn,
-            this.col17DataGridViewTextBoxColumn,
-            this.popDataGridViewCheckBoxColumn,
-            this.ballonDataGridViewCheckBoxColumn,
-            this.webDataGridViewCheckBoxColumn,
-            this.mailDataGridViewCheckBoxColumn,
-            this.soundDataGridViewCheckBoxColumn,
-            this.col23DataGridViewCheckBoxColumn,
-            this.appDataGridViewCheckBoxColumn,
-            this.appaDataGridViewCheckBoxColumn,
-            this.appbDataGridViewCheckBoxColumn,
-            this.appcDataGridViewCheckBoxColumn,
-            this.appdDataGridViewCheckBoxColumn,
-            this.memoDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.commBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 36);
-            this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowHeadersWidth = 25;
-            this.dataGridView2.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(873, 338);
-            this.dataGridView2.TabIndex = 6;
-            this.dataGridView2.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView2_RowContextMenuStripNeeded);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(353, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 20);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "登録";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(103, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(244, 19);
-            this.textBox1.TabIndex = 4;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "ImasaraAlert";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.放送URLを開くToolStripMenuItem,
-            this.コミュURLを開くToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.この行を削除ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 76);
-            // 
-            // 放送URLを開くToolStripMenuItem
-            // 
-            this.放送URLを開くToolStripMenuItem.Name = "放送URLを開くToolStripMenuItem";
-            this.放送URLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.放送URLを開くToolStripMenuItem.Text = "放送URLを開く";
-            this.放送URLを開くToolStripMenuItem.Click += new System.EventHandler(this.放送URLを開くToolStripMenuItem_Click);
-            // 
-            // コミュURLを開くToolStripMenuItem
-            // 
-            this.コミュURLを開くToolStripMenuItem.Name = "コミュURLを開くToolStripMenuItem";
-            this.コミュURLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.コミュURLを開くToolStripMenuItem.Text = "コミュニティURLを開く";
-            this.コミュURLを開くToolStripMenuItem.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
-            // 
-            // この行を削除ToolStripMenuItem
-            // 
-            this.この行を削除ToolStripMenuItem.Name = "この行を削除ToolStripMenuItem";
-            this.この行を削除ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.この行を削除ToolStripMenuItem.Text = "この行を削除";
-            this.この行を削除ToolStripMenuItem.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.最近行われた放送のURLを開くToolStripMenuItem,
-            this.コミュURLを開くToolStripMenuItem1,
-            this.ユーザーURLを開くToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.最近行われた放送のURLをコピーToolStripMenuItem,
-            this.コミュURLをコピーToolStripMenuItem1,
-            this.ユーザーURLをコピーToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.この行を削除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(257, 170);
-            // 
-            // 最近行われた放送のURLを開くToolStripMenuItem
-            // 
-            this.最近行われた放送のURLを開くToolStripMenuItem.Name = "最近行われた放送のURLを開くToolStripMenuItem";
-            this.最近行われた放送のURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.最近行われた放送のURLを開くToolStripMenuItem.Text = "最近行われた放送のURLを開く";
-            this.最近行われた放送のURLを開くToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLを開くToolStripMenuItem_Click);
-            // 
-            // コミュURLを開くToolStripMenuItem1
-            // 
-            this.コミュURLを開くToolStripMenuItem1.Name = "コミュURLを開くToolStripMenuItem1";
-            this.コミュURLを開くToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.コミュURLを開くToolStripMenuItem1.Text = "コミュニティURLを開く";
-            this.コミュURLを開くToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem1_Click);
-            // 
-            // ユーザーURLを開くToolStripMenuItem
-            // 
-            this.ユーザーURLを開くToolStripMenuItem.Name = "ユーザーURLを開くToolStripMenuItem";
-            this.ユーザーURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.ユーザーURLを開くToolStripMenuItem.Text = "ユーザーURLを開く";
-            this.ユーザーURLを開くToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLを開くToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(253, 6);
-            // 
-            // 最近行われた放送のURLをコピーToolStripMenuItem
-            // 
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Name = "最近行われた放送のURLをコピーToolStripMenuItem";
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Text = "最近行われた放送のURLをコピー";
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLをコピーToolStripMenuItem_Click);
-            // 
-            // コミュURLをコピーToolStripMenuItem1
-            // 
-            this.コミュURLをコピーToolStripMenuItem1.Name = "コミュURLをコピーToolStripMenuItem1";
-            this.コミュURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.コミュURLをコピーToolStripMenuItem1.Text = "コミュニティURLをコピー";
-            this.コミュURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLをコピーToolStripMenuItem1_Click);
-            // 
-            // ユーザーURLをコピーToolStripMenuItem
-            // 
-            this.ユーザーURLをコピーToolStripMenuItem.Name = "ユーザーURLをコピーToolStripMenuItem";
-            this.ユーザーURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.ユーザーURLをコピーToolStripMenuItem.Text = "ユーザーURLをコピー";
-            this.ユーザーURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLをコピーToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(253, 6);
-            // 
-            // この行を削除ToolStripMenuItem1
-            // 
-            this.この行を削除ToolStripMenuItem1.Name = "この行を削除ToolStripMenuItem1";
-            this.この行を削除ToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
-            this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
             // col01DataGridViewTextBoxColumn
             // 
@@ -733,6 +499,14 @@
             this.col22DataGridViewTextBoxColumn.ReadOnly = true;
             this.col22DataGridViewTextBoxColumn.Visible = false;
             // 
+            // Community_Thumbnail
+            // 
+            this.Community_Thumbnail.DataPropertyName = "Community_Thumbnail";
+            this.Community_Thumbnail.HeaderText = "Community_Thumbnail";
+            this.Community_Thumbnail.Name = "Community_Thumbnail";
+            this.Community_Thumbnail.ReadOnly = true;
+            this.Community_Thumbnail.Visible = false;
+            // 
             // col24DataGridViewTextBoxColumn
             // 
             this.col24DataGridViewTextBoxColumn.DataPropertyName = "Col24";
@@ -766,6 +540,98 @@
             // getStreamInfoBindingSource
             // 
             this.getStreamInfoBindingSource.DataSource = typeof(ImasaraAlert.Data.GetStreamInfo);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(873, 373);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "コミュ・チャンネル一覧";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 12);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "コミュ・チャンネルID";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoGenerateColumns = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView2.ColumnHeadersHeight = 30;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ngDataGridViewTextBoxColumn,
+            this.comIdDataGridViewTextBoxColumn,
+            this.userIdDataGridViewTextBoxColumn,
+            this.col04DataGridViewTextBoxColumn,
+            this.comNameDataGridViewTextBoxColumn,
+            this.userNameDataGridViewTextBoxColumn,
+            this.groupDataGridViewTextBoxColumn,
+            this.lastDateDataGridViewTextBoxColumn,
+            this.col09DataGridViewTextBoxColumn,
+            this.col10DataGridViewTextBoxColumn,
+            this.col11DataGridViewTextBoxColumn,
+            this.col12DataGridViewTextBoxColumn,
+            this.col13DataGridViewTextBoxColumn,
+            this.col14DataGridViewTextBoxColumn,
+            this.col15DataGridViewTextBoxColumn,
+            this.registDateDataGridViewTextBoxColumn,
+            this.col17DataGridViewTextBoxColumn,
+            this.popDataGridViewCheckBoxColumn,
+            this.ballonDataGridViewCheckBoxColumn,
+            this.webDataGridViewCheckBoxColumn,
+            this.mailDataGridViewCheckBoxColumn,
+            this.soundDataGridViewCheckBoxColumn,
+            this.col23DataGridViewCheckBoxColumn,
+            this.appDataGridViewCheckBoxColumn,
+            this.appaDataGridViewCheckBoxColumn,
+            this.appbDataGridViewCheckBoxColumn,
+            this.appcDataGridViewCheckBoxColumn,
+            this.appdDataGridViewCheckBoxColumn,
+            this.memoDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.commBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 36);
+            this.dataGridView2.Name = "dataGridView2";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 25;
+            this.dataGridView2.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.RowTemplate.Height = 25;
+            this.dataGridView2.Size = new System.Drawing.Size(873, 338);
+            this.dataGridView2.TabIndex = 6;
+            this.dataGridView2.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView2_RowContextMenuStripNeeded);
             // 
             // ngDataGridViewTextBoxColumn
             // 
@@ -999,6 +865,140 @@
             // 
             this.commBindingSource.DataSource = typeof(ImasaraAlert.Data.Comm);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(353, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 20);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "登録";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(103, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(244, 19);
+            this.textBox1.TabIndex = 4;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "ImasaraAlert";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.放送URLを開くToolStripMenuItem,
+            this.コミュURLを開くToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.この行を削除ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 76);
+            // 
+            // 放送URLを開くToolStripMenuItem
+            // 
+            this.放送URLを開くToolStripMenuItem.Name = "放送URLを開くToolStripMenuItem";
+            this.放送URLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.放送URLを開くToolStripMenuItem.Text = "放送URLを開く";
+            this.放送URLを開くToolStripMenuItem.Click += new System.EventHandler(this.放送URLを開くToolStripMenuItem_Click);
+            // 
+            // コミュURLを開くToolStripMenuItem
+            // 
+            this.コミュURLを開くToolStripMenuItem.Name = "コミュURLを開くToolStripMenuItem";
+            this.コミュURLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.コミュURLを開くToolStripMenuItem.Text = "コミュニティURLを開く";
+            this.コミュURLを開くToolStripMenuItem.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
+            // 
+            // この行を削除ToolStripMenuItem
+            // 
+            this.この行を削除ToolStripMenuItem.Name = "この行を削除ToolStripMenuItem";
+            this.この行を削除ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.この行を削除ToolStripMenuItem.Text = "この行を削除";
+            this.この行を削除ToolStripMenuItem.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.最近行われた放送のURLを開くToolStripMenuItem,
+            this.コミュURLを開くToolStripMenuItem1,
+            this.ユーザーURLを開くToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.最近行われた放送のURLをコピーToolStripMenuItem,
+            this.コミュURLをコピーToolStripMenuItem1,
+            this.ユーザーURLをコピーToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.この行を削除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(257, 170);
+            // 
+            // 最近行われた放送のURLを開くToolStripMenuItem
+            // 
+            this.最近行われた放送のURLを開くToolStripMenuItem.Name = "最近行われた放送のURLを開くToolStripMenuItem";
+            this.最近行われた放送のURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.最近行われた放送のURLを開くToolStripMenuItem.Text = "最近行われた放送のURLを開く";
+            this.最近行われた放送のURLを開くToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLを開くToolStripMenuItem_Click);
+            // 
+            // コミュURLを開くToolStripMenuItem1
+            // 
+            this.コミュURLを開くToolStripMenuItem1.Name = "コミュURLを開くToolStripMenuItem1";
+            this.コミュURLを開くToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.コミュURLを開くToolStripMenuItem1.Text = "コミュニティURLを開く";
+            this.コミュURLを開くToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem1_Click);
+            // 
+            // ユーザーURLを開くToolStripMenuItem
+            // 
+            this.ユーザーURLを開くToolStripMenuItem.Name = "ユーザーURLを開くToolStripMenuItem";
+            this.ユーザーURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.ユーザーURLを開くToolStripMenuItem.Text = "ユーザーURLを開く";
+            this.ユーザーURLを開くToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLを開くToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(253, 6);
+            // 
+            // 最近行われた放送のURLをコピーToolStripMenuItem
+            // 
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Name = "最近行われた放送のURLをコピーToolStripMenuItem";
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Text = "最近行われた放送のURLをコピー";
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLをコピーToolStripMenuItem_Click);
+            // 
+            // コミュURLをコピーToolStripMenuItem1
+            // 
+            this.コミュURLをコピーToolStripMenuItem1.Name = "コミュURLをコピーToolStripMenuItem1";
+            this.コミュURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.コミュURLをコピーToolStripMenuItem1.Text = "コミュニティURLをコピー";
+            this.コミュURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLをコピーToolStripMenuItem1_Click);
+            // 
+            // ユーザーURLをコピーToolStripMenuItem
+            // 
+            this.ユーザーURLをコピーToolStripMenuItem.Name = "ユーザーURLをコピーToolStripMenuItem";
+            this.ユーザーURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.ユーザーURLをコピーToolStripMenuItem.Text = "ユーザーURLをコピー";
+            this.ユーザーURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLをコピーToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(253, 6);
+            // 
+            // この行を削除ToolStripMenuItem1
+            // 
+            this.この行を削除ToolStripMenuItem1.Name = "この行を削除ToolStripMenuItem1";
+            this.この行を削除ToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
+            this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1012,7 +1012,6 @@
             this.Name = "Form1";
             this.Text = "ImasaraAlert";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -1020,13 +1019,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.getStreamInfoBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commBindingSource)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.getStreamInfoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

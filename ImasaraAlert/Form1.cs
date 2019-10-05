@@ -68,8 +68,8 @@ namespace ImasaraAlert
                 //最小化して起動する
                 if (props.IsMinimization)
                 {
-                    //this.WindowState = FormWindowState.Minimized;
-                    //this.ShowInTaskbar = false;
+                    this.WindowState = FormWindowState.Minimized;
+                    this.ShowInTaskbar = false;
                 }
 
                 LogFile = Props.GetLogfile(Props.GetSettingDirectory(), "imasaraalert");
@@ -234,7 +234,6 @@ namespace ImasaraAlert
             catch (Exception Ex)
             {
                 DebugWrite.Writeln(nameof(EndAlert), Ex);
-                Debug.WriteLine(Ex.Message);
             }
         }
 
@@ -548,7 +547,6 @@ namespace ImasaraAlert
             using (var fo2 = new Form2(this))
             {
                 fo2.ShowDialog();
-
             }
         }
 
@@ -558,8 +556,10 @@ namespace ImasaraAlert
             this.WindowState = FormWindowState.Normal;
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        protected override void OnResize(EventArgs e)
         {
+            base.OnResize(e);
+
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.ShowInTaskbar = false;
@@ -687,17 +687,7 @@ namespace ImasaraAlert
                 Debug.WriteLine(Ex.Message);
             }
         }
-/*
-        private void 放送URLをコピーToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void コミュURLをコピーToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-*/
         private void この行を削除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

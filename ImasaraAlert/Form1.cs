@@ -568,13 +568,6 @@ namespace ImasaraAlert
             {
                 this.ShowInTaskbar = true;
             }
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show(lists_c[0].Pop.ToString());
-
         }
 
         private void dataGridView1_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
@@ -591,7 +584,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void dataGridView2_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
@@ -608,7 +600,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void コミュURLを開くToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -627,7 +618,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void コミュURLをコピーToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -646,7 +636,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void この行を削除ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -661,7 +650,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void 放送URLを開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -680,7 +668,6 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
         }
 
         private void コミュURLを開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -699,10 +686,8 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
-
-
         }
-
+/*
         private void 放送URLをコピーToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -712,7 +697,7 @@ namespace ImasaraAlert
         {
 
         }
-
+*/
         private void この行を削除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -731,6 +716,79 @@ namespace ImasaraAlert
         {
             lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
             dataGridView2.DataSource = lists_c;
+        }
+
+        private void 最近行われた放送のURLを開くToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[13].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetLiveUrl(Comm.GetLiveID(ttt));
+                    OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    //Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void ユーザーURLを開くToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[2].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetUserUrl(ttt);
+                    OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    //Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void 最近行われた放送のURLをコピーToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[13].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetLiveUrl(Comm.GetLiveID(ttt));
+                    //OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+
+        }
+
+        private void ユーザーURLをコピーToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView2.Rows[dataGridView2.CurrentCell.RowIndex].Cells[2].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetUserUrl(ttt);
+                    //OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
         }
     }
 

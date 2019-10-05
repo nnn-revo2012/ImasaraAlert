@@ -169,25 +169,15 @@ namespace ImasaraAlert.Net
                         var cates = item.SelectNodes("category", nsmgr);
                         if (cates.Count > 0)
                             gsi.Col15 = cates.Item(0).InnerText;
-                        if (string.IsNullOrEmpty(lastid))
+                        if (gsi.Start_Time < min_time)
                         {
-                            if (gsi.Start_Time < min_time)
-                            {
-                                end_flg = true;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (gsi.LiveId == lastid || gsi.Start_Time < min_time)
-                            {
-                                end_flg = true;
-                                break;
-                            }
+                            end_flg = true;
+                            break;
                         }
                         lgsi.Add(gsi);
                     }
                     i++;
+                    await Task.Delay(1000);
                 }
             }
             catch (WebException Ex)

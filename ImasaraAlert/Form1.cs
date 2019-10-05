@@ -32,12 +32,10 @@ namespace ImasaraAlert
         //private SortableBindingList<Prog> lists_u = new SortableBindingList<Prog>();
 
         private NicoLiveNet _nLiveNet = null;         //WebClient
-        //private volatile int _rss_status = 0;
         private SoundPlayer _player = null;
 
         private System.Windows.Forms.Timer _rssTimer = null;
         private DateTime _rssTimer_dt = DateTime.MinValue;
-        private string[] _rssTimer_lastid = new string[Props.Cates.Count()];
         private DateTime[] _rssTimer_lasttime = new DateTime[Props.Cates.Count()];
 
         private readonly object lockObject = new object();  //情報表示用
@@ -121,7 +119,6 @@ namespace ImasaraAlert
             try
             {
                 //データーをファイルから読み込み
-                //DebugDataRead();
                 lists_c = new SortableBindingList<Comm>(ReadCommData<Comm>(dbfile));
                 //ists_u = new SortableBindingList<Comm>(ReadCommData<User>(dbfile));
 
@@ -149,7 +146,6 @@ namespace ImasaraAlert
             _rssTimer_dt = DateTime.Now;
             for (var i=0; i< Props.Cates.Count(); i++)
             {
-                _rssTimer_lastid[i] = null;
                 _rssTimer_lasttime[i] = _rssTimer_dt.AddMinutes(-10);
             }
             _rssTimer.Enabled = true;
@@ -162,7 +158,7 @@ namespace ImasaraAlert
             var now = DateTime.Now;
             if (now >= _rssTimer_dt)
             {
-                _rssTimer_dt = now.AddSeconds(30);
+                _rssTimer_dt = now.AddSeconds(60);
                 Debug.WriteLine("RSS NextDate: " + _rssTimer_dt.ToString());
                 await ReadAlert(now);
             }
@@ -173,24 +169,21 @@ namespace ImasaraAlert
         {
             try
             {
-                for (var i = 0; i < 1; i++)
+                for (var i = 0; i < Props.Cates.Count(); i++)
                 {
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
-                    if (!string.IsNullOrEmpty(_rssTimer_lastid[i]))
-                        Debug.WriteLine("LastId: " + _rssTimer_lastid[i].ToString());
                     Debug.WriteLine("LastTime: " + _rssTimer_lasttime[i].ToString());
-                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], _rssTimer_lastid[i], _rssTimer_lasttime[i]);
+                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], null, _rssTimer_lasttime[i]);
                     if (lgsi.Count() > 0)
                     {
-                        _rssTimer_lastid[i] = lgsi.FirstOrDefault().LiveId;
-                        _rssTimer_lasttime[i] = lgsi.FirstOrDefault().Start_Time.AddMinutes(-1);
+                        _rssTimer_lasttime[i] = now.AddMinutes(-5);
                     }
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)
                     {
                         DispStreamInfo(gsi);
                         var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
-                        if (f_idx > -1)
+                        if (f_idx > -1 && (Comm.GetLiveID(lists_c[f_idx].Col14) != gsi.LiveId))
                         {
                             this.Invoke(new Action(async () => await work2(gsi, f_idx)));
                         }
@@ -205,7 +198,7 @@ namespace ImasaraAlert
                         //await Task.Delay(1000);
                         //DEBUG
                     }
-
+                    await Task.Delay(500);
                 }
             }
             catch (OperationCanceledException Ex)
@@ -252,6 +245,7 @@ namespace ImasaraAlert
             {
                 //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
                 lists_c[f_idx].Last_Date = gsi.Start_Time;
+                lists_c[f_idx].Col14 = Comm.GetLiveNumber(gsi.LiveId);
                 gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
                 lists_si.Add(gsi);
                 var liveid = Props.GetLiveUrl(gsi.LiveId);
@@ -674,7 +668,7 @@ namespace ImasaraAlert
         {
             try
             {
-                var ttt = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[7].Value;
+                var ttt = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[6].Value;
                 if (!string.IsNullOrEmpty(ttt))
                 {
                     ttt = Props.GetLiveUrl(ttt);
@@ -723,7 +717,7 @@ namespace ImasaraAlert
         {
             try
             {
-                var ttt = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[7].Value;
+                var ttt = (string)dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[6].Value;
                 var ttt2 = lists_si.FirstOrDefault(x => x.LiveId == ttt);
                 lists_si.Remove(ttt2);
             }

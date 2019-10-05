@@ -41,7 +41,7 @@ namespace ImasaraAlert.Data
         public string Col11 { set; get; } //文字色
         public string Col12 { set; get; } //背景色
         public string Col13 { set; get; } //最近の放送者
-        public string Col14 { set; get; } //最近の放送URL
+        public string Col14 { set; get; } //最近の放送番号
         public string Col15 { set; get; } //サムネURL
         public DateTime Regist_Date { set; get; }
         public string Col17 { set; get; } //録画状態
@@ -59,6 +59,7 @@ namespace ImasaraAlert.Data
         public string Memo { set; get; }  //
 
         private static Regex RgxChNo = new Regex("/?((co|ch)[\\d]+)", RegexOptions.Compiled);
+        private static Regex RgxLiveID = new Regex("lv([\\d]+)", RegexOptions.Compiled);
 
         public Comm()
         {}
@@ -67,6 +68,18 @@ namespace ImasaraAlert.Data
         public static string GetChNo(string url)
         {
             return RgxChNo.Match(url).Groups[1].Value;
+        }
+
+        //放送IDの lv を削除
+        public static string GetLiveNumber(string id)
+        {
+            return RgxLiveID.Match(id).Groups[1].Value;
+        }
+
+        //放送IDに lv を追加
+        public static string GetLiveID(string id)
+        {
+            return "lv" + id;
         }
 
         public static string FindChNo(string url)

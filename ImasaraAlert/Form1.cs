@@ -36,7 +36,6 @@ namespace ImasaraAlert
 
         private System.Windows.Forms.Timer _rssTimer = null;
         private DateTime _rssTimer_dt = DateTime.MinValue;
-        private DateTime[] _rssTimer_lasttime = new DateTime[Props.Cates.Count()];
 
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用
@@ -144,10 +143,6 @@ namespace ImasaraAlert
             _rssTimer.Tick += new EventHandler(rssTimer_Tick);
             _rssTimer.Interval = 1000;
             _rssTimer_dt = DateTime.Now;
-            for (var i=0; i< Props.Cates.Count(); i++)
-            {
-                _rssTimer_lasttime[i] = _rssTimer_dt.AddMinutes(-10);
-            }
             _rssTimer.Enabled = true;
             Debug.WriteLine("_rssTimer Start");
         }
@@ -172,12 +167,8 @@ namespace ImasaraAlert
                 for (var i = 0; i < Props.Cates.Count(); i++)
                 {
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
-                    Debug.WriteLine("LastTime: " + _rssTimer_lasttime[i].ToString());
-                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], null, _rssTimer_lasttime[i]);
-                    if (lgsi.Count() > 0)
-                    {
-                        _rssTimer_lasttime[i] = now.AddMinutes(-5);
-                    }
+                    Debug.WriteLine("LastTime: " + now.AddMinutes(-5).ToString());
+                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], now);
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)
                     {

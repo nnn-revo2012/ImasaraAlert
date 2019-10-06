@@ -117,9 +117,9 @@ namespace ImasaraAlert.Net
             this.Dispose();
         }
 
-        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, string cate, string lastid, DateTime min_time)
+        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, string cate, DateTime now)
         {
-            var now = DateTime.Now;
+            var min_time = now.AddMinutes(-5);
             var max_time = now.AddMinutes(5);
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;

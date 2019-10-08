@@ -234,7 +234,7 @@ namespace ImasaraAlert
             try
             {
                 //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
-                lists_c[f_idx].Last_Date = gsi.Start_Time;
+                lists_c[f_idx].Last_Date = gsi.Col12.ToString("yyyy/MM/dd HH:mm:ss");
                 lists_c[f_idx].Col14 = Comm.GetLiveNumber(gsi.LiveId);
                 gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
                 lists_si.Add(gsi);
@@ -410,21 +410,15 @@ namespace ImasaraAlert
                         comm.ComName = sr.ReadLine(); //5
                         comm.UserName = sr.ReadLine();
                         comm.Group = sr.ReadLine();
-                        line = sr.ReadLine();
-                        if (!string.IsNullOrEmpty(line))
-                            comm.Last_Date = DateTime.Parse(line);
-                        line = sr.ReadLine();
-                        if (!string.IsNullOrEmpty(line))
-                            comm.Col09 = DateTime.Parse(line);
+                        comm.Last_Date = sr.ReadLine();
+                        comm.Col09 = sr.ReadLine(); //9
                         comm.Col10 = sr.ReadLine(); //10
                         comm.Col11 = sr.ReadLine();
                         comm.Col12 = sr.ReadLine();
                         comm.Col13 = sr.ReadLine();
                         comm.Col14 = sr.ReadLine();
                         comm.Col15 = sr.ReadLine();
-                        line = sr.ReadLine(); //16
-                        if (!string.IsNullOrEmpty(line))
-                            comm.Regist_Date = DateTime.Parse(line);
+                        comm.Regist_Date = sr.ReadLine(); //16
                         comm.Col17 = sr.ReadLine();
                         comm.Pop = sr.ReadLine().Equals("true");
                         comm.Ballon = sr.ReadLine().Equals("true"); //バルーン
@@ -457,7 +451,7 @@ namespace ImasaraAlert
             var comm = new Comm();
             comm.ComId = "co10000";
             comm.ComName = "ちくわちゃん";
-            comm.Regist_Date = DateTime.Now;
+            comm.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             comm.Pop = true;
             comm.App_a = true;
             lists_c.Add(comm);
@@ -465,7 +459,7 @@ namespace ImasaraAlert
             comm = new Comm();
             comm.ComId = "co3313757";
             comm.ComName = "七原くんは死にました。";
-            comm.Regist_Date = DateTime.Now;
+            comm.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             comm.Pop = true;
             comm.Sound = true;
             lists_c.Add(comm);
@@ -514,7 +508,7 @@ namespace ImasaraAlert
             //コミュを登録
             var comm = new Comm();
             comm.ComId = ttt;
-            comm.Regist_Date = DateTime.Now;
+            comm.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             lists_c.Add(comm);
 
         }

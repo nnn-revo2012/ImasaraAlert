@@ -142,22 +142,22 @@ namespace ImasaraAlert.Net
                     nsmgr.AddNamespace("nicolive", root.GetNamespaceOfPrefix("nicolive"));
                     nsmgr.AddNamespace("dc", root.GetNamespaceOfPrefix("dc"));
                     var items = doc.SelectNodes("rss/channel/item", nsmgr);
+                    DateTime stime;
                     foreach (XmlNode item in items)
                     {
                         var gsi = new GetStreamInfo();
                         gsi.Title = item.SelectSingleNode("title", nsmgr).InnerText;
                         gsi.LiveId = item.SelectSingleNode("guid", nsmgr).InnerText;
-                        gsi.Col12 = item.SelectSingleNode("pubDate", nsmgr).InnerText;
-                        DateTime stime;
-                        if (DateTime.TryParse(gsi.Col12, out stime))
+                        if (DateTime.TryParse(item.SelectSingleNode("pubDate", nsmgr).InnerText, out stime))
                         {
                             if (stime > max_time)
                             {
                                 Debug.WriteLine(gsi.LiveId + ": FutureTime " + stime.ToString());
                                 stime = stime.AddMinutes(-30);
                             }
-                            gsi.Start_Time = stime;
                         }
+                        gsi.Col12 = stime;
+                        gsi.Start_Time = stime.ToString();
                         Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
                         gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
                         gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
@@ -169,7 +169,7 @@ namespace ImasaraAlert.Net
                         var cates = item.SelectNodes("category", nsmgr);
                         if (cates.Count > 0)
                             gsi.Col15 = cates.Item(0).InnerText;
-                        if (gsi.Start_Time < min_time)
+                        if (stime < min_time)
                         {
                             end_flg = true;
                             break;

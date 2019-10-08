@@ -81,6 +81,25 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.commBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.放送URLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.この行を削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.最近行われた放送のURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.最近行われた放送のURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ngDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -110,25 +129,6 @@
             this.appcDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.appdDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.memoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.放送URLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.この行を削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.最近行われた放送のURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ユーザーURLを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.最近行われた放送のURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.コミュURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -633,6 +633,144 @@
             this.dataGridView2.TabIndex = 6;
             this.dataGridView2.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView2_RowContextMenuStripNeeded);
             // 
+            // commBindingSource
+            // 
+            this.commBindingSource.DataSource = typeof(ImasaraAlert.Data.Comm);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(353, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 20);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "登録";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(103, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(244, 19);
+            this.textBox1.TabIndex = 4;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "ImasaraAlert";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.放送URLを開くToolStripMenuItem,
+            this.コミュURLを開くToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.この行を削除ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 76);
+            // 
+            // 放送URLを開くToolStripMenuItem
+            // 
+            this.放送URLを開くToolStripMenuItem.Name = "放送URLを開くToolStripMenuItem";
+            this.放送URLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.放送URLを開くToolStripMenuItem.Text = "放送URLを開く";
+            this.放送URLを開くToolStripMenuItem.Click += new System.EventHandler(this.放送URLを開くToolStripMenuItem_Click);
+            // 
+            // コミュURLを開くToolStripMenuItem
+            // 
+            this.コミュURLを開くToolStripMenuItem.Name = "コミュURLを開くToolStripMenuItem";
+            this.コミュURLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.コミュURLを開くToolStripMenuItem.Text = "コミュニティURLを開く";
+            this.コミュURLを開くToolStripMenuItem.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
+            // 
+            // この行を削除ToolStripMenuItem
+            // 
+            this.この行を削除ToolStripMenuItem.Name = "この行を削除ToolStripMenuItem";
+            this.この行を削除ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.この行を削除ToolStripMenuItem.Text = "この行を削除";
+            this.この行を削除ToolStripMenuItem.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.最近行われた放送のURLを開くToolStripMenuItem,
+            this.コミュURLを開くToolStripMenuItem1,
+            this.ユーザーURLを開くToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.最近行われた放送のURLをコピーToolStripMenuItem,
+            this.コミュURLをコピーToolStripMenuItem1,
+            this.ユーザーURLをコピーToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.この行を削除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(257, 170);
+            // 
+            // 最近行われた放送のURLを開くToolStripMenuItem
+            // 
+            this.最近行われた放送のURLを開くToolStripMenuItem.Name = "最近行われた放送のURLを開くToolStripMenuItem";
+            this.最近行われた放送のURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.最近行われた放送のURLを開くToolStripMenuItem.Text = "最近行われた放送のURLを開く";
+            this.最近行われた放送のURLを開くToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLを開くToolStripMenuItem_Click);
+            // 
+            // コミュURLを開くToolStripMenuItem1
+            // 
+            this.コミュURLを開くToolStripMenuItem1.Name = "コミュURLを開くToolStripMenuItem1";
+            this.コミュURLを開くToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.コミュURLを開くToolStripMenuItem1.Text = "コミュニティURLを開く";
+            this.コミュURLを開くToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem1_Click);
+            // 
+            // ユーザーURLを開くToolStripMenuItem
+            // 
+            this.ユーザーURLを開くToolStripMenuItem.Name = "ユーザーURLを開くToolStripMenuItem";
+            this.ユーザーURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.ユーザーURLを開くToolStripMenuItem.Text = "ユーザーURLを開く";
+            this.ユーザーURLを開くToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLを開くToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(253, 6);
+            // 
+            // 最近行われた放送のURLをコピーToolStripMenuItem
+            // 
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Name = "最近行われた放送のURLをコピーToolStripMenuItem";
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Text = "最近行われた放送のURLをコピー";
+            this.最近行われた放送のURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLをコピーToolStripMenuItem_Click);
+            // 
+            // コミュURLをコピーToolStripMenuItem1
+            // 
+            this.コミュURLをコピーToolStripMenuItem1.Name = "コミュURLをコピーToolStripMenuItem1";
+            this.コミュURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.コミュURLをコピーToolStripMenuItem1.Text = "コミュニティURLをコピー";
+            this.コミュURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLをコピーToolStripMenuItem1_Click);
+            // 
+            // ユーザーURLをコピーToolStripMenuItem
+            // 
+            this.ユーザーURLをコピーToolStripMenuItem.Name = "ユーザーURLをコピーToolStripMenuItem";
+            this.ユーザーURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.ユーザーURLをコピーToolStripMenuItem.Text = "ユーザーURLをコピー";
+            this.ユーザーURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLをコピーToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(253, 6);
+            // 
+            // この行を削除ToolStripMenuItem1
+            // 
+            this.この行を削除ToolStripMenuItem1.Name = "この行を削除ToolStripMenuItem1";
+            this.この行を削除ToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
+            this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
+            // 
             // ngDataGridViewTextBoxColumn
             // 
             this.ngDataGridViewTextBoxColumn.DataPropertyName = "Ng";
@@ -856,148 +994,8 @@
             // memoDataGridViewTextBoxColumn
             // 
             this.memoDataGridViewTextBoxColumn.DataPropertyName = "Memo";
-            this.memoDataGridViewTextBoxColumn.FillWeight = 7.6F;
             this.memoDataGridViewTextBoxColumn.HeaderText = "ﾒﾓ";
             this.memoDataGridViewTextBoxColumn.Name = "memoDataGridViewTextBoxColumn";
-            this.memoDataGridViewTextBoxColumn.Width = 10;
-            // 
-            // commBindingSource
-            // 
-            this.commBindingSource.DataSource = typeof(ImasaraAlert.Data.Comm);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(353, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 20);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "登録";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(103, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(244, 19);
-            this.textBox1.TabIndex = 4;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "ImasaraAlert";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.放送URLを開くToolStripMenuItem,
-            this.コミュURLを開くToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.この行を削除ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 76);
-            // 
-            // 放送URLを開くToolStripMenuItem
-            // 
-            this.放送URLを開くToolStripMenuItem.Name = "放送URLを開くToolStripMenuItem";
-            this.放送URLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.放送URLを開くToolStripMenuItem.Text = "放送URLを開く";
-            this.放送URLを開くToolStripMenuItem.Click += new System.EventHandler(this.放送URLを開くToolStripMenuItem_Click);
-            // 
-            // コミュURLを開くToolStripMenuItem
-            // 
-            this.コミュURLを開くToolStripMenuItem.Name = "コミュURLを開くToolStripMenuItem";
-            this.コミュURLを開くToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.コミュURLを開くToolStripMenuItem.Text = "コミュニティURLを開く";
-            this.コミュURLを開くToolStripMenuItem.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
-            // 
-            // この行を削除ToolStripMenuItem
-            // 
-            this.この行を削除ToolStripMenuItem.Name = "この行を削除ToolStripMenuItem";
-            this.この行を削除ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.この行を削除ToolStripMenuItem.Text = "この行を削除";
-            this.この行を削除ToolStripMenuItem.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.最近行われた放送のURLを開くToolStripMenuItem,
-            this.コミュURLを開くToolStripMenuItem1,
-            this.ユーザーURLを開くToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.最近行われた放送のURLをコピーToolStripMenuItem,
-            this.コミュURLをコピーToolStripMenuItem1,
-            this.ユーザーURLをコピーToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.この行を削除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(257, 170);
-            // 
-            // 最近行われた放送のURLを開くToolStripMenuItem
-            // 
-            this.最近行われた放送のURLを開くToolStripMenuItem.Name = "最近行われた放送のURLを開くToolStripMenuItem";
-            this.最近行われた放送のURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.最近行われた放送のURLを開くToolStripMenuItem.Text = "最近行われた放送のURLを開く";
-            this.最近行われた放送のURLを開くToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLを開くToolStripMenuItem_Click);
-            // 
-            // コミュURLを開くToolStripMenuItem1
-            // 
-            this.コミュURLを開くToolStripMenuItem1.Name = "コミュURLを開くToolStripMenuItem1";
-            this.コミュURLを開くToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.コミュURLを開くToolStripMenuItem1.Text = "コミュニティURLを開く";
-            this.コミュURLを開くToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLを開くToolStripMenuItem1_Click);
-            // 
-            // ユーザーURLを開くToolStripMenuItem
-            // 
-            this.ユーザーURLを開くToolStripMenuItem.Name = "ユーザーURLを開くToolStripMenuItem";
-            this.ユーザーURLを開くToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.ユーザーURLを開くToolStripMenuItem.Text = "ユーザーURLを開く";
-            this.ユーザーURLを開くToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLを開くToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(253, 6);
-            // 
-            // 最近行われた放送のURLをコピーToolStripMenuItem
-            // 
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Name = "最近行われた放送のURLをコピーToolStripMenuItem";
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Text = "最近行われた放送のURLをコピー";
-            this.最近行われた放送のURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のURLをコピーToolStripMenuItem_Click);
-            // 
-            // コミュURLをコピーToolStripMenuItem1
-            // 
-            this.コミュURLをコピーToolStripMenuItem1.Name = "コミュURLをコピーToolStripMenuItem1";
-            this.コミュURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.コミュURLをコピーToolStripMenuItem1.Text = "コミュニティURLをコピー";
-            this.コミュURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.コミュURLをコピーToolStripMenuItem1_Click);
-            // 
-            // ユーザーURLをコピーToolStripMenuItem
-            // 
-            this.ユーザーURLをコピーToolStripMenuItem.Name = "ユーザーURLをコピーToolStripMenuItem";
-            this.ユーザーURLをコピーToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.ユーザーURLをコピーToolStripMenuItem.Text = "ユーザーURLをコピー";
-            this.ユーザーURLをコピーToolStripMenuItem.Click += new System.EventHandler(this.ユーザーURLをコピーToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(253, 6);
-            // 
-            // この行を削除ToolStripMenuItem1
-            // 
-            this.この行を削除ToolStripMenuItem1.Name = "この行を削除ToolStripMenuItem1";
-            this.この行を削除ToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
-            this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -1093,6 +1091,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col25DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn providerIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のURLを開くToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ユーザーURLを開くToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のURLをコピーToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ユーザーURLをコピーToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ngDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn comIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn userIdDataGridViewTextBoxColumn;
@@ -1122,10 +1124,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn appcDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn appdDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn memoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のURLを開くToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ユーザーURLを開くToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のURLをコピーToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ユーザーURLをコピーToolStripMenuItem;
     }
 }
 

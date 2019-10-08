@@ -14,7 +14,7 @@ namespace ImasaraAlert.Data
 
     public class Comm : INotifyPropertyChanged
     {
-        private DateTime last_date = DateTime.MinValue; 
+        private string last_date = string.Empty; 
 
         public event PropertyChangedEventHandler PropertyChanged;
         private static readonly PropertyChangedEventArgs Last_DatePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Last_Date));
@@ -25,7 +25,7 @@ namespace ImasaraAlert.Data
         public string ComName { set; get; }
         public string UserName { set; get; } //ユーザー名
         public string Group { set; get; }    //06グループ
-        public DateTime Last_Date
+        public string Last_Date
         {
             get { return this.last_date; }
             set
@@ -34,16 +34,15 @@ namespace ImasaraAlert.Data
                 this.last_date = value;
                 this.PropertyChanged?.Invoke(this, Last_DatePropertyChangedEventArgs);
             }
-
         }
-        public DateTime Col09 { set; get; } //最近のDateTime
+        public string Col09 { set; get; } //最近のDateTime
         public string Col10 { set; get; } //最近の放送タイトル
         public string Col11 { set; get; } //文字色
         public string Col12 { set; get; } //背景色
         public string Col13 { set; get; } //最近の放送者
         public string Col14 { set; get; } //最近の放送番号
         public string Col15 { set; get; } //サムネURL
-        public DateTime Regist_Date { set; get; }
+        public string Regist_Date { set; get; }
         public string Col17 { set; get; } //録画状態
         public bool Pop { set; get; }     //*
         public bool Ballon { set; get; }  //*

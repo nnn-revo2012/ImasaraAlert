@@ -38,6 +38,11 @@ namespace ImasaraAlert
 
             _form = fo;
             _gsi = gsi;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
             this._timer = new Timer();
             this._timer.Tick += new EventHandler(timer_Tick);
@@ -45,13 +50,14 @@ namespace ImasaraAlert
             _timer_count = 0;
             _timer.Interval = 100;
             this._timer.Start();
-        
-            this.linkLabel1.Text = _gsi.Title;
+
+            var title = _gsi.Title + " - " + _gsi.Col12.ToString("yyyy/MM/dd(ddd) HH:mm") + "開始";
+            this.linkLabel1.Text = title;
             this.label1.Text = _gsi.Provider_Name;
             this.label2.Text = _gsi.Community_Title;
             this.label3.Text = _gsi.Description;
             pictureBox1.ErrorImage = Image.FromFile(Props.GetDefaultThumbnail("comm"));
-            pictureBox1.ImageLocation = _gsi.Community_Thumbnail;
+            pictureBox1.Image = _gsi.Col02;
             _hoso_url = Props.GetLiveUrl(_gsi.LiveId);
         }
 
@@ -103,7 +109,7 @@ namespace ImasaraAlert
                     base.Opacity -= 0.05;
                     if (base.Opacity < 0.1)
                     {
-                        Close();
+                        this.Close();
                     }
                 }
             }
@@ -144,7 +150,7 @@ namespace ImasaraAlert
         {
             this._timer.Stop();
             Task.Delay(100).Wait();
-            using (this._timer);
+            this._timer.Dispose();
             ResetPopiNum();
         }
     }

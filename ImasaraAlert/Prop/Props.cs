@@ -23,8 +23,7 @@ namespace ImasaraAlert.Prop
     public class Props
     {
         //定数設定
-        public static readonly string Version = "0.1.0.0";
-        public static readonly string UserAgent = "Mozilla/5.0 (ImasaraAlert; " + Props.Version + ")";
+        public static readonly string UserAgent = "Mozilla/5.0 (" +Ver.GetAssemblyName() + "; " + Ver.Version + ")";
         //public static readonly string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
         public static readonly string NicoDomain = "https://nicovideo.jp/";
 

@@ -48,6 +48,7 @@ namespace ImasaraAlert
         public Form1()
         {
             InitializeComponent();
+            this.Text = Ver.GetFullVersion();
         }
 
         protected override void OnLoad(EventArgs e)

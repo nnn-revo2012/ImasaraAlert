@@ -256,6 +256,8 @@ namespace ImasaraAlert.Net
                 gsi.Provider_Type = providertype;
 
                 var html = await _wc.DownloadStringTaskAsync(Props.NicoLiveUrl + liveid).Timeout(_wc.timeout);
+                providertype = Regex.Match(html, "\"content_type\":\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                gsi.Provider_Type = providertype;
                 if (html.IndexOf("window.NicoGoogleTagManagerDataLayer = [];") > 0)
                 {
                     //コミュ限定・有料放送

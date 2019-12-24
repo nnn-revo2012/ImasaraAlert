@@ -22,22 +22,6 @@ using ImasaraAlert.Data;
 namespace ImasaraAlert.Net
 {
 
-    public class GetAlertInfo
-    {
-        public string Status;
-        public string Error;
-
-        public string Addr { set; get; }
-        public string Port { set; get; }
-        public string Thread { set; get; }
-
-        public GetAlertInfo()
-        {
-            this.Status = null;
-            this.Error = null;
-        }
-    }
-
     static class TimeoutExtention
     {
         public static async Task Timeout(this Task task, int timeout)
@@ -91,7 +75,7 @@ namespace ImasaraAlert.Net
         //Debug
         public bool IsDebug { get; set; }
 
-        public NicoLiveNet(CookieContainer cc)
+        public NicoLiveNet()
         {
             IsDebug = false;
 
@@ -101,11 +85,10 @@ namespace ImasaraAlert.Net
             _wc.Encoding = Encoding.UTF8;
             _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
             _wc.timeout = 60000;
-            _wc.cookieContainer = cc;
             if (IsDebug)
             {
-                foreach (Cookie ck in cc.GetCookies(new Uri(Props.NicoDomain)))
-                    Debug.WriteLine(ck.Name.ToString() + ": " + ck.Value.ToString());
+                //foreach (Cookie ck in cc.GetCookies(new Uri(Props.NicoDomain)))
+                //    Debug.WriteLine(ck.Name.ToString() + ": " + ck.Value.ToString());
                 for (int i = 0; i < _wc.Headers.Count; i++)
                     Debug.WriteLine(_wc.Headers.GetKey(i).ToString() + ": " + _wc.Headers.Get(i));
             }
@@ -117,7 +100,19 @@ namespace ImasaraAlert.Net
             this.Dispose();
         }
 
-        public async Task<List<GetStreamInfo>> ReadRssAsync(string url, string cate, DateTime now)
+        //UnixTime(msec)文字列をDateTimeに変換
+        private static DateTime GetUnixMsecToDateTime(string unixmsec)
+        {
+            DateTime UNIX_EPOCH = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            long unix;
+            string ttt = unixmsec;
+            if (unixmsec.Length > 3)
+                ttt = unixmsec.Substring(0, unixmsec.Length - 3);
+            long.TryParse(ttt, out unix);
+            return UNIX_EPOCH.AddSeconds(unix).ToLocalTime();
+        }
+
+        public async Task<List<GetStreamInfo>> ReadCateApiAsync(string url, string cate, DateTime now)
         {
             var min_time = now.AddMinutes(-5);
             var max_time = now.AddMinutes(5);
@@ -126,53 +121,50 @@ namespace ImasaraAlert.Net
 
             try
             {
-                var doc = new XmlDocument();
-                var i = 1;
+                var i = 0;
                 var end_flg = false;
-                while (i < 10 && end_flg == false)
+                while (i < 9 && end_flg == false)
                 {
-                    var rssurl = string.Format(url, cate, i.ToString());
-                    var xhtml = await _wc.DownloadStringTaskAsync(rssurl).Timeout(_wc.timeout);
+                    var cateurl = string.Format(url, cate, i.ToString());
+                    var xhtml = await _wc.DownloadStringTaskAsync(cateurl).Timeout(_wc.timeout);
                     if (string.IsNullOrEmpty(xhtml)) break;
-                    doc.LoadXml(xhtml);
-                    var nt = doc.NameTable;
-                    var nsmgr = new XmlNamespaceManager(nt);
-                    var root = doc.SelectSingleNode("rss");
-                    nsmgr.AddNamespace("media", root.GetNamespaceOfPrefix("media"));
-                    nsmgr.AddNamespace("nicolive", root.GetNamespaceOfPrefix("nicolive"));
-                    nsmgr.AddNamespace("dc", root.GetNamespaceOfPrefix("dc"));
-                    var items = doc.SelectNodes("rss/channel/item", nsmgr);
-                    DateTime stime;
-                    foreach (XmlNode item in items)
+
+                    var data = JObject.Parse(xhtml);
+                    var tttt = data["meta"]["status"].ToString();
+                    if (data["meta"]["status"].ToString() != "200" ||
+                        data["data"].Count() < 1)
                     {
+                            end_flg = true; break;
+                    }
+                    DateTime stime;
+                    foreach (var item in data["data"])
+                    {
+                        if (item["liveCycle"].ToString() != "ON_AIR")
+                            continue;
                         var gsi = new GetStreamInfo();
-                        gsi.Title = item.SelectSingleNode("title", nsmgr).InnerText;
-                        gsi.LiveId = item.SelectSingleNode("guid", nsmgr).InnerText;
-                        if (DateTime.TryParse(item.SelectSingleNode("pubDate", nsmgr).InnerText, out stime))
+                        gsi.Title = item["title"].ToString();
+                        gsi.LiveId = item["id"].ToString();
+                        stime = GetUnixMsecToDateTime(item["beginAt"].ToString());
+                        if (stime > max_time)
                         {
-                            if (stime > max_time)
-                            {
-                                Debug.WriteLine(gsi.LiveId + ": FutureTime " + stime.ToString());
-                                stime = stime.AddMinutes(-30);
-                            }
+                            Debug.WriteLine(gsi.LiveId + ": FutureTime " + stime.ToString());
+                            stime = stime.AddMinutes(-30);
                         }
                         gsi.Col12 = stime;
                         gsi.Start_Time = stime.ToString();
                         Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
-                        gsi.Description = item.SelectSingleNode("description", nsmgr).InnerText;
-                        gsi.Community_Thumbnail = item.SelectSingleNode("media:thumbnail", nsmgr).Attributes["url"].InnerText;
-                        gsi.Community_Title = item.SelectSingleNode("nicolive:community_name", nsmgr).InnerText;
-                        gsi.Community_Id = item.SelectSingleNode("nicolive:community_id", nsmgr).InnerText;
-                        gsi.Community_Only = item.SelectSingleNode("nicolive:member_only", nsmgr).InnerText;
-                        gsi.Provider_Type = item.SelectSingleNode("nicolive:type", nsmgr).InnerText;
-                        gsi.Provider_Name = item.SelectSingleNode("nicolive:owner_name", nsmgr).InnerText;
-                        var cates = item.SelectNodes("category", nsmgr);
-                        if (cates.Count > 0)
-                            gsi.Col15 = cates.Item(0).InnerText;
+                        gsi.Description = "";
+                        gsi.Community_Thumbnail = item["socialGroup"]["thumbnailUrl"].ToString();
+                        gsi.Community_Title = item["socialGroup"]["name"].ToString();
+                        gsi.Community_Id = item["socialGroup"]["id"].ToString();
+                        gsi.Community_Only = item["isFollowerOnly"].ToString();
+                        gsi.Provider_Type = item["providerType"].ToString();
+                        gsi.Provider_Name = item["programProvider"]["name"].ToString();
+                        gsi.Provider_Id = item["programProvider"]["id"].ToString();
+                        gsi.Col15 = cate;
                         if (stime < min_time)
                         {
-                            end_flg = true;
-                            break;
+                            end_flg = true; break;
                         }
                         lgsi.Add(gsi);
                     }
@@ -182,12 +174,12 @@ namespace ImasaraAlert.Net
             }
             catch (WebException Ex)
             {
-                DebugWrite.WriteWebln(nameof(ReadRssAsync), Ex);
+                DebugWrite.WriteWebln(nameof(ReadCateApiAsync), Ex);
                 return lgsi;
             }
             catch (Exception Ex) //その他のエラー
             {
-                DebugWrite.Writeln(nameof(ReadRssAsync), Ex);
+                DebugWrite.Writeln(nameof(ReadCateApiAsync), Ex);
                 return lgsi;
             }
             return lgsi;

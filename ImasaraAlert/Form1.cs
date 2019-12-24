@@ -34,8 +34,8 @@ namespace ImasaraAlert
         private NicoLiveNet _nLiveNet = null;         //WebClient
         private SoundPlayer _player = null;
 
-        private System.Windows.Forms.Timer _rssTimer = null;
-        private DateTime _rssTimer_dt = DateTime.MinValue;
+        private System.Windows.Forms.Timer _readTimer = null;
+        private DateTime _readTimer_dt = DateTime.MinValue;
 
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用
@@ -80,7 +80,7 @@ namespace ImasaraAlert
                 //データー読み込み
                 ReadAllData();
 
-                _nLiveNet = new NicoLiveNet(null);
+                _nLiveNet = new NicoLiveNet();
                 //アラートに接続
                 StartAlert();
             }
@@ -138,27 +138,27 @@ namespace ImasaraAlert
 
         private void StartAlert()
         {
-            AddLog("RSS読み込み開始", 1);
+            AddLog("データー読み込み開始", 1);
             //タイマーセット
-            _rssTimer = new Timer();
-            _rssTimer.Tick += new EventHandler(rssTimer_Tick);
-            _rssTimer.Interval = 1000;
-            _rssTimer_dt = DateTime.Now;
-            _rssTimer.Enabled = true;
-            Debug.WriteLine("_rssTimer Start");
+            _readTimer = new Timer();
+            _readTimer.Tick += new EventHandler(rssTimer_Tick);
+            _readTimer.Interval = 1000;
+            _readTimer_dt = DateTime.Now;
+            _readTimer.Enabled = true;
+            Debug.WriteLine("_readTimer Start");
         }
 
         private async void rssTimer_Tick(object sender, EventArgs e)
         {
-            _rssTimer.Enabled = false;
+            _readTimer.Enabled = false;
             var now = DateTime.Now;
-            if (now >= _rssTimer_dt)
+            if (now >= _readTimer_dt)
             {
-                _rssTimer_dt = now.AddSeconds(60);
-                Debug.WriteLine("RSS NextDate: " + _rssTimer_dt.ToString());
+                _readTimer_dt = now.AddSeconds(60);
+                Debug.WriteLine("Read NextDate: " + _readTimer_dt.ToString());
                 await ReadAlert(now);
             }
-            _rssTimer.Enabled = true;
+            _readTimer.Enabled = true;
         }
 
         private async Task ReadAlert(DateTime now)
@@ -169,7 +169,8 @@ namespace ImasaraAlert
                 {
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
                     Debug.WriteLine("LastTime: " + now.AddMinutes(-5).ToString());
-                    var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], now);
+                    //var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], now);
+                    var lgsi = await _nLiveNet.ReadCateApiAsync(Props.NicoCateApi, Props.Cates[i], now);
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)
                     {
@@ -220,8 +221,8 @@ namespace ImasaraAlert
         {
             try
             {
-                _rssTimer?.Dispose();
-                _rssTimer = null;
+                _readTimer?.Dispose();
+                _readTimer = null;
             }
             catch (Exception Ex)
             {

@@ -85,6 +85,8 @@ namespace ImasaraAlert.Net
             _wc.Encoding = Encoding.UTF8;
             _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
             _wc.timeout = 60000;
+            _wc.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
+
             if (IsDebug)
             {
                 //foreach (Cookie ck in cc.GetCookies(new Uri(Props.NicoDomain)))
@@ -114,8 +116,8 @@ namespace ImasaraAlert.Net
 
         public async Task<List<GetStreamInfo>> ReadCateApiAsync(string url, string cate, DateTime now)
         {
-            var min_time = now.AddMinutes(-5);
-            var max_time = now.AddMinutes(5);
+            var min_time = now.AddMinutes(-8);
+            //var max_time = now.AddMinutes(5);
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;
 
@@ -136,7 +138,6 @@ namespace ImasaraAlert.Net
                     {
                             end_flg = true; break;
                     }
-                    DateTime stime;
                     foreach (var item in data["data"])
                     {
                         if (item["liveCycle"].ToString() != "ON_AIR")
@@ -144,14 +145,8 @@ namespace ImasaraAlert.Net
                         var gsi = new GetStreamInfo();
                         gsi.Title = item["title"].ToString();
                         gsi.LiveId = item["id"].ToString();
-                        stime = GetUnixMsecToDateTime(item["beginAt"].ToString());
-                        if (stime > max_time)
-                        {
-                            Debug.WriteLine(gsi.LiveId + ": FutureTime " + stime.ToString());
-                            stime = stime.AddMinutes(-30);
-                        }
-                        gsi.Col12 = stime;
-                        gsi.Start_Time = stime.ToString();
+                        gsi.Col12 = GetUnixMsecToDateTime(item["beginAt"].ToString());
+                        gsi.Start_Time = gsi.Col12.ToString();
                         Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
                         gsi.Description = "";
                         gsi.Community_Thumbnail = item["socialGroup"]["thumbnailUrl"].ToString();
@@ -162,7 +157,7 @@ namespace ImasaraAlert.Net
                         gsi.Provider_Name = item["programProvider"]["name"].ToString();
                         gsi.Provider_Id = item["programProvider"]["id"].ToString();
                         gsi.Col15 = cate;
-                        if (stime < min_time)
+                        if (gsi.Col12 < min_time)
                         {
                             end_flg = true; break;
                         }

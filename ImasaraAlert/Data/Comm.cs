@@ -63,6 +63,17 @@ namespace ImasaraAlert.Data
         public Comm()
         {}
 
+        public void Clear()
+        {
+            this.Ng = ComId = UserId = Col04 = ComName = UserName = "";
+            this.Group = this.Last_Date = this.Regist_Date = this.Memo = "";
+            this.Col09 = this.Col10 = this.Col13 = this.Col14 = this.Col15 = this.Col17 =  "";
+            this.Col11 = "windowtext";
+            this.Col12 = "LightCyan";
+            this.Pop = this.Ballon = this.Web = this.Mail = this.Sound = false;
+            this.Col23 = this.App = this.App_a = this.App_b = this.App_c = this.App_d = false;
+        }
+
         //Urlの最後のスラッシュ以降の文字列を取得
         public static string GetChNo(string url)
         {

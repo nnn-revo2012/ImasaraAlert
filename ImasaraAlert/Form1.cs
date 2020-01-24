@@ -509,6 +509,7 @@ namespace ImasaraAlert
 
             //コミュを登録
             var comm = new Comm();
+            comm.Clear();
             comm.ComId = ttt;
             comm.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             lists_c.Add(comm);

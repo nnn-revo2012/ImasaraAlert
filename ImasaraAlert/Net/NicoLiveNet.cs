@@ -83,8 +83,9 @@ namespace ImasaraAlert.Net
             _wc = wc;
 
             _wc.Encoding = Encoding.UTF8;
+            _wc.Proxy = null;
             _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-            _wc.timeout = 60000;
+            _wc.timeout = 30000;
             _wc.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
 
             if (IsDebug)
@@ -189,7 +190,8 @@ namespace ImasaraAlert.Net
                 using (var wc = new WebClientEx())
                 {
                     wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-                    wc.timeout = 60000;
+                    wc.Proxy = null;
+                    wc.timeout = 30000;
                     using (var fs = await wc.OpenReadTaskAsync(url).Timeout(wc.timeout))
                     {
                         img = System.Drawing.Image.FromStream(fs);

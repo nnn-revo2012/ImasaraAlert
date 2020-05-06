@@ -156,7 +156,8 @@ namespace ImasaraAlert.Net
                         gsi.Community_Only = item["isFollowerOnly"].ToString();
                         gsi.Provider_Type = item["providerType"].ToString();
                         gsi.Provider_Name = item["programProvider"]["name"].ToString();
-                        if (gsi.Provider_Type == "community")
+                        gsi.Provider_Id = "";
+                        if (item["providerType"].ToString() == "community")
                             gsi.Provider_Id = item["programProvider"]["id"].ToString();
                         gsi.Col15 = cate;
                         if (gsi.Col12 < min_time)

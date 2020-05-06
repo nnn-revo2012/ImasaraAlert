@@ -39,11 +39,12 @@ namespace ImasaraAlert
 
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用
+        private string dbfilecomm;
+        private string dbfileuser;
+
         private string LogFile;
         private string LogFile2;
 
-        private string dbfile = "comm.json";
-        private string convfile = @"D:\home\bin\namaroku\favoritecom.ini";
 
         public Form1()
         {
@@ -73,9 +74,8 @@ namespace ImasaraAlert
                 }
 
                 LogFile = Props.GetLogfile(Props.GetSettingDirectory(), "imasaraalert");
-                //dbfile = Path.Combine(Props.GetSettingDirectory(), dbfile);
-                //DEBUG
-                dbfile = Path.Combine(Props.GetApplicationDirectory(), dbfile);
+                dbfilecomm = Path.Combine(Props.GetApplicationDirectory(), Props.CommDb);
+                dbfileuser = Path.Combine(Props.GetApplicationDirectory(), Props.UserDb);
 
                 //データー読み込み
                 ReadAllData();
@@ -119,8 +119,8 @@ namespace ImasaraAlert
             try
             {
                 //データーをファイルから読み込み
-                lists_c = new SortableBindingList<Comm>(ReadCommData<Comm>(dbfile));
-                //ists_u = new SortableBindingList<Comm>(ReadCommData<User>(dbfile));
+                lists_c = new SortableBindingList<Comm>(ReadCommData<Comm>(dbfilecomm));
+                //ists_u = new SortableBindingList<Comm>(ReadCommData<User>(dbfileuser));
 
                 //BindingList<T>型データをDataGridViewに格納
                 dataGridView2.DataSource = lists_c;
@@ -305,8 +305,8 @@ namespace ImasaraAlert
 
         private void DispStreamInfo(GetStreamInfo gsi)
         {
-            var ttt = string.Format(DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]") + "  放送ID：{0}  コミュニティID：{1}  ユーザー：{2}",
-                gsi.LiveId, gsi.Community_Id, gsi.Provider_Name);
+            var ttt = string.Format(DateTime.Now.ToString("[yyyy/MM/dd HH:mm:ss]") + "  放送ID：{0}  コミュニティID：{1}  ユーザーID：{2}",
+                gsi.LiveId, gsi.Community_Id, gsi.Provider_Id);
             AddLog(ttt, 1);
         }
 
@@ -477,9 +477,9 @@ namespace ImasaraAlert
 
                 //MessageBox.Show("データーを保存します。");
                 if (lists_c.Count > 0)
-                    SaveCommData(dbfile, (IList<Comm>)lists_c);
+                    SaveCommData(dbfilecomm, (IList<Comm>)lists_c);
                 //if (lists_u.Count > 0)
-                //    SaveCommData(dbfile, (IList<User>)lists_u);
+                //    SaveCommData(dbfileuser, (IList<User>)lists_u);
 
                 _nLiveNet?.Dispose();
             }
@@ -692,8 +692,29 @@ namespace ImasaraAlert
 
         private void namarokuのファイルを読み込むToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lists_c = new SortableBindingList<Comm>(ConvertCommData(convfile));
-            dataGridView2.DataSource = lists_c;
+            try
+            {
+                using (var openFileDialog1 = new System.Windows.Forms.OpenFileDialog())
+                {
+                    openFileDialog1.FileName = Props.FavoriteCom;
+                    openFileDialog1.InitialDirectory = @"C:\";
+                    openFileDialog1.Filter = "favoritecom.ini|favoritecom.ini|すべてのファイル(*.*)|*.*";
+                    openFileDialog1.FilterIndex = 1;
+                    openFileDialog1.Title = "namarokuの "+ Props.FavoriteCom +" を選択してください";
+                    //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+                    openFileDialog1.RestoreDirectory = true;
+
+                    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                    {
+                        lists_c = new SortableBindingList<Comm>(ConvertCommData(openFileDialog1.FileName));
+                        dataGridView2.DataSource = lists_c;
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void 最近行われた放送のURLを開くToolStripMenuItem_Click(object sender, EventArgs e)

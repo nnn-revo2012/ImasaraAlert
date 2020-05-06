@@ -46,6 +46,10 @@ namespace ImasaraAlert.Prop
 
         public static readonly string[] Cates = { "req", "live", "try", "common" };
 
+        public static readonly string CommDb = "comm.json";
+        public static readonly string UserDb = "user.json";
+        public static readonly string FavoriteCom = "favoritecom.ini";
+        public static readonly string FavoriteUser = "favoriteuser.ini";
 
         public bool IsDebug { get; set; }
 

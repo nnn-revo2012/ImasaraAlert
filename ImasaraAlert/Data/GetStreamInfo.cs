@@ -48,7 +48,7 @@ namespace ImasaraAlert.Data
         public string Community_Only
         {
             set { community_only = value; }
-            get { return (community_only == "true") ? "限定" : ""; }
+            get { return (community_only == "True") ? "限定" : ""; }
         }
         public string Provider_Type
         {

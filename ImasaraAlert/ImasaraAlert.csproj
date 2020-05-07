@@ -102,6 +102,7 @@
     <Compile Include="Prop\Props.cs" />
     <Compile Include="List\SortableBindingList.cs" />
     <Compile Include="Prop\Version.cs" />
+    <Compile Include="Data\User.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,9 +124,24 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Comm.datasource" />
+    <None Include="Properties\DataSources\DebugWrite.datasource" />
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\Form2.datasource" />
     <None Include="Properties\DataSources\GetStreamInfo.datasource" />
     <None Include="Properties\DataSources\ImasaraAlert.Data.Comm1.datasource" />
     <None Include="Properties\DataSources\ImasaraAlert.Data.GetStreamInfo.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Data.IAlertData.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Data.User.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.List.SortableBindingList`1[].datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Net.NicoLiveNet.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Net.TimeoutExtention.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Proc.OpenProcess.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Prop.Props.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Prop.Ver.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\ImasaraAlert.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Popup.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

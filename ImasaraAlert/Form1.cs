@@ -28,8 +28,8 @@ namespace ImasaraAlert
 
         private SortableBindingList<GetStreamInfo> lists_si = new SortableBindingList<GetStreamInfo>();
         private SortableBindingList<Comm> lists_c = new SortableBindingList<Comm>();
-        //private SortableBindingList<User> lists_u = new SortableBindingList<User>();
-        //private SortableBindingList<Prog> lists_u = new SortableBindingList<Prog>();
+        private SortableBindingList<User> lists_u = new SortableBindingList<User>();
+        //private SortableBindingList<Prog> lists_p = new SortableBindingList<Prog>();
 
         private NicoLiveNet _nLiveNet = null;         //WebClient
         private SoundPlayer _player = null;
@@ -120,10 +120,11 @@ namespace ImasaraAlert
             {
                 //データーをファイルから読み込み
                 lists_c = new SortableBindingList<Comm>(ReadCommData<Comm>(dbfilecomm));
-                //ists_u = new SortableBindingList<Comm>(ReadCommData<User>(dbfileuser));
+                lists_u = new SortableBindingList<User>(ReadCommData<User>(dbfileuser));
 
                 //BindingList<T>型データをDataGridViewに格納
                 dataGridView2.DataSource = lists_c;
+                dataGridView3.DataSource = lists_u;
 
                 //BindingList<T>型データをDataGridViewに格納
                 dataGridView1.DataSource = lists_si;
@@ -388,11 +389,11 @@ namespace ImasaraAlert
             return result;
         }
 
-        //favaritecomm.iniを変換する
-        private List<Comm> ConvertCommData(string r_file)
+        //favaritecom.ini / favariteuser.iniを変換する
+        private List<T> ConvertData<T>(string r_file) where T : IAlertData, new()
         {
             var enc = new System.Text.UTF8Encoding(false);
-            var lists = new List<Comm>();
+            var lists = new List<T>();
 
             try
             {
@@ -404,37 +405,37 @@ namespace ImasaraAlert
                     {
                         line = sr.ReadLine();
                         if (line == "namarokuEndLine") break;
-                        var comm = new Comm();
-                        comm.Ng = line;
-                        comm.ComId = sr.ReadLine();
-                        comm.UserId = sr.ReadLine();
-                        comm.Col04 = sr.ReadLine();
-                        comm.ComName = sr.ReadLine(); //5
-                        comm.UserName = sr.ReadLine();
-                        comm.Group = sr.ReadLine();
-                        comm.Last_Date = sr.ReadLine();
-                        comm.Col09 = sr.ReadLine(); //9
-                        comm.Col10 = sr.ReadLine(); //10
-                        comm.Col11 = sr.ReadLine();
-                        comm.Col12 = sr.ReadLine();
-                        comm.Col13 = sr.ReadLine();
-                        comm.Col14 = sr.ReadLine();
-                        comm.Col15 = sr.ReadLine();
-                        comm.Regist_Date = sr.ReadLine(); //16
-                        comm.Col17 = sr.ReadLine();
-                        comm.Pop = sr.ReadLine().Equals("true");
-                        comm.Ballon = sr.ReadLine().Equals("true"); //バルーン
-                        comm.Web = sr.ReadLine().Equals("true");
-                        comm.Mail = sr.ReadLine().Equals("true"); //メール
-                        comm.Sound = sr.ReadLine().Equals("true"); //22
-                        comm.Col23 = sr.ReadLine().Equals("true"); //23
-                        comm.App = sr.ReadLine().Equals("true");
-                        comm.App_a = sr.ReadLine().Equals("true");
-                        comm.App_b = sr.ReadLine().Equals("true");
-                        comm.App_c = sr.ReadLine().Equals("true");
-                        comm.App_d = sr.ReadLine().Equals("true");
-                        comm.Memo = sr.ReadLine(); //メモ
-                        lists.Add(comm);
+                        var data = new T();
+                        data.Ng = line;
+                        data.ComId = sr.ReadLine();
+                        data.UserId = sr.ReadLine();
+                        data.Col04 = sr.ReadLine();
+                        data.ComName = sr.ReadLine(); //5
+                        data.UserName = sr.ReadLine();
+                        data.Group = sr.ReadLine();
+                        data.Last_Date = sr.ReadLine();
+                        data.Col09 = sr.ReadLine(); //9
+                        data.Col10 = sr.ReadLine(); //10
+                        data.Col11 = sr.ReadLine();
+                        data.Col12 = sr.ReadLine();
+                        data.Col13 = sr.ReadLine();
+                        data.Col14 = sr.ReadLine();
+                        data.Col15 = sr.ReadLine();
+                        data.Regist_Date = sr.ReadLine(); //16
+                        data.Col17 = sr.ReadLine();
+                        data.Pop = sr.ReadLine().Equals("true");
+                        data.Ballon = sr.ReadLine().Equals("true"); //バルーン
+                        data.Web = sr.ReadLine().Equals("true");
+                        data.Mail = sr.ReadLine().Equals("true"); //メール
+                        data.Sound = sr.ReadLine().Equals("true"); //22
+                        data.Col23 = sr.ReadLine().Equals("true"); //23
+                        data.App = sr.ReadLine().Equals("true");
+                        data.App_a = sr.ReadLine().Equals("true");
+                        data.App_b = sr.ReadLine().Equals("true");
+                        data.App_c = sr.ReadLine().Equals("true");
+                        data.App_d = sr.ReadLine().Equals("true");
+                        data.Memo = sr.ReadLine(); //メモ
+                        lists.Add(data);
                     }
                 }
             }
@@ -478,8 +479,8 @@ namespace ImasaraAlert
                 //MessageBox.Show("データーを保存します。");
                 if (lists_c.Count > 0)
                     SaveCommData(dbfilecomm, (IList<Comm>)lists_c);
-                //if (lists_u.Count > 0)
-                //    SaveCommData(dbfileuser, (IList<User>)lists_u);
+                if (lists_u.Count > 0)
+                    SaveCommData(dbfileuser, (IList<User>)lists_u);
 
                 _nLiveNet?.Dispose();
             }
@@ -690,33 +691,6 @@ namespace ImasaraAlert
             }
         }
 
-        private void namarokuのファイルを読み込むToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var openFileDialog1 = new System.Windows.Forms.OpenFileDialog())
-                {
-                    openFileDialog1.FileName = Props.FavoriteCom;
-                    openFileDialog1.InitialDirectory = @"C:\";
-                    openFileDialog1.Filter = "favoritecom.ini|favoritecom.ini|すべてのファイル(*.*)|*.*";
-                    openFileDialog1.FilterIndex = 1;
-                    openFileDialog1.Title = "namarokuの "+ Props.FavoriteCom +" を選択してください";
-                    //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
-                    openFileDialog1.RestoreDirectory = true;
-
-                    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-                    {
-                        lists_c = new SortableBindingList<Comm>(ConvertCommData(openFileDialog1.FileName));
-                        dataGridView2.DataSource = lists_c;
-                    }
-                }
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show(Ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void 最近行われた放送のURLを開くToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -788,6 +762,62 @@ namespace ImasaraAlert
             {
                 Debug.WriteLine(Ex.Message);
             }
+        }
+
+        private void コミュ一覧favoritecominiを読み込むToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var openFileDialog1 = new System.Windows.Forms.OpenFileDialog())
+                {
+                    openFileDialog1.FileName = Props.FavoriteCom;
+                    openFileDialog1.InitialDirectory = @"C:\";
+                    openFileDialog1.Filter = "favoritecom.ini|favoritecom.ini|すべてのファイル(*.*)|*.*";
+                    openFileDialog1.FilterIndex = 1;
+                    openFileDialog1.Title = "namarokuの " + Props.FavoriteCom + " を選択してください";
+                    //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+                    openFileDialog1.RestoreDirectory = true;
+
+                    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                    {
+                        lists_c = new SortableBindingList<Comm>(ConvertData<Comm>(openFileDialog1.FileName));
+                        dataGridView2.DataSource = lists_c;
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var openFileDialog1 = new System.Windows.Forms.OpenFileDialog())
+                {
+                    openFileDialog1.FileName = Props.FavoriteUser;
+                    openFileDialog1.InitialDirectory = @"C:\";
+                    openFileDialog1.Filter = "favoriteuser.ini|favoriteuser.ini|すべてのファイル(*.*)|*.*";
+                    openFileDialog1.FilterIndex = 1;
+                    openFileDialog1.Title = "namarokuの " + Props.FavoriteUser + " を選択してください";
+                    //ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
+                    openFileDialog1.RestoreDirectory = true;
+
+                    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                    {
+                        lists_u = new SortableBindingList<User>(ConvertData<User>(openFileDialog1.FileName));
+                        dataGridView3.DataSource = lists_u;
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 

@@ -12,12 +12,13 @@ using System.IO;
 namespace ImasaraAlert.Data
 {
 
-    public class Comm : INotifyPropertyChanged, IAlertData
+    public class User : INotifyPropertyChanged, IAlertData
     {
-        private string last_date = string.Empty; 
+        private string last_date = string.Empty;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private static readonly PropertyChangedEventArgs Last_DatePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Last_Date));
+
         public string Ng { set; get; }      //00
         public string ComId { set; get; }
         public string UserId { set; get; }   //ユーザーID
@@ -60,41 +61,18 @@ namespace ImasaraAlert.Data
         private static Regex RgxChNo = new Regex("/?((co|ch)[\\d]+)", RegexOptions.Compiled);
         private static Regex RgxLiveID = new Regex("lv([\\d]+)", RegexOptions.Compiled);
 
-        public Comm()
-        {}
+        public User()
+        { }
 
         public void Clear()
         {
             this.Ng = ComId = UserId = Col04 = ComName = UserName = "";
             this.Group = this.Last_Date = this.Regist_Date = this.Memo = "";
-            this.Col09 = this.Col10 = this.Col13 = this.Col14 = this.Col15 = this.Col17 =  "";
+            this.Col09 = this.Col10 = this.Col13 = this.Col14 = this.Col15 = this.Col17 = "";
             this.Col11 = "windowtext";
             this.Col12 = "LightCyan";
             this.Pop = this.Ballon = this.Web = this.Mail = this.Sound = false;
             this.Col23 = this.App = this.App_a = this.App_b = this.App_c = this.App_d = false;
-        }
-
-        //Urlの最後のスラッシュ以降の文字列を取得
-        public static string GetChNo(string url)
-        {
-            return RgxChNo.Match(url).Groups[1].Value;
-        }
-
-        //放送IDの lv を削除
-        public static string GetLiveNumber(string id)
-        {
-            return RgxLiveID.Match(id).Groups[1].Value;
-        }
-
-        //放送IDに lv を追加
-        public static string GetLiveID(string id)
-        {
-            return "lv" + id;
-        }
-
-        public static string FindChNo(string url)
-        {
-            return RgxChNo.Match(url).Groups[1].Value;
         }
 
     }

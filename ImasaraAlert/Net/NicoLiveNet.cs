@@ -133,32 +133,31 @@ namespace ImasaraAlert.Net
                     if (string.IsNullOrEmpty(xhtml)) break;
 
                     var data = JObject.Parse(xhtml);
-                    var tttt = data["meta"]["status"].ToString();
-                    if (data["meta"]["status"].ToString() != "200" ||
+                    if ((string )data["meta"]["status"] != "200" ||
                         data["data"].Count() < 1)
                     {
                             end_flg = true; break;
                     }
                     foreach (var item in data["data"])
                     {
-                        if (item["liveCycle"].ToString() != "ON_AIR")
+                        if ((string )item["liveCycle"] != "ON_AIR")
                             continue;
                         var gsi = new GetStreamInfo();
-                        gsi.Title = item["title"].ToString();
-                        gsi.LiveId = item["id"].ToString();
+                        gsi.Title = (string )item["title"];
+                        gsi.LiveId = (string )item["id"];
                         gsi.Col12 = GetUnixMsecToDateTime(item["beginAt"].ToString());
                         gsi.Start_Time = gsi.Col12.ToString();
                         Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
                         gsi.Description = "";
-                        gsi.Community_Thumbnail = item["socialGroup"]["thumbnailUrl"].ToString();
-                        gsi.Community_Title = item["socialGroup"]["name"].ToString();
-                        gsi.Community_Id = item["socialGroup"]["id"].ToString();
-                        gsi.Community_Only = item["isFollowerOnly"].ToString();
-                        gsi.Provider_Type = item["providerType"].ToString();
-                        gsi.Provider_Name = item["programProvider"]["name"].ToString();
+                        gsi.Community_Thumbnail = (string )item["socialGroup"]["thumbnailUrl"];
+                        gsi.Community_Title = (string )item["socialGroup"]["name"];
+                        gsi.Community_Id = (string )item["socialGroup"]["id"];
+                        gsi.Community_Only = item["isFollowerOnly"].ToString().ToLower();
+                        gsi.Provider_Type = (string )item["providerType"];
+                        gsi.Provider_Name = (string )item["programProvider"]["name"];
                         gsi.Provider_Id = "";
-                        if (item["providerType"].ToString() == "community")
-                            gsi.Provider_Id = item["programProvider"]["id"].ToString();
+                        if ((string )item["providerType"] == "community")
+                            gsi.Provider_Id = (string )item["programProvider"]["id"];
                         gsi.Col15 = cate;
                         if (gsi.Col12 < min_time)
                         {

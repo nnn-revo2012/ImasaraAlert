@@ -111,7 +111,7 @@ namespace ImasaraAlert
         }
 
         //コミュ登録
-        private void button1_Click_1(object sender, EventArgs e)
+        private async void button1_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox1.Text)) return;
 
@@ -119,22 +119,33 @@ namespace ImasaraAlert
             if (string.IsNullOrEmpty(ttt))
             {
                 AddLog("正しいコミュを登録してください。", 3);
-                return; ;
+                return;
             }
             if (lists_c.Count(x => x.ComId == ttt) > 0)
             {
                 AddLog("そのコミュは登録済です。", 3);
-                return; ;
+                return;
             }
             //コミュの存在チェック、コミュ名をゲット
+            string ttt2;
+            if (ttt.IndexOf("co") > -1)
+                ttt2 = await _nLiveNet.GetCommNameAsync(ttt);
+            else
+                ttt2 = await _nLiveNet.GetChNameAsync(ttt);
+            if (string.IsNullOrEmpty(ttt2))
+            {
+                AddLog("そのコミュは存在しません。", 3);
+                return;
+            }
 
             //コミュを登録
             var comm = new Comm();
             comm.Clear();
             comm.ComId = ttt;
+            comm.ComName = ttt2;
             comm.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             lists_c.Add(comm);
-
+            textBox1.Text = "";
         }
 
         private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
@@ -446,8 +457,35 @@ namespace ImasaraAlert
                 SaveCommData(dbfilecomm, (IList<Comm>)lists_c);
             if (lists_u.Count > 0)
                 SaveCommData(dbfileuser, (IList<User>)lists_u);
-            MessageBox.Show("データーを保存しました。");
+            //MessageBox.Show("データーを保存しました。");
 
+        }
+
+        //ユーザー登録
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox2.Text)) return;
+
+            var ttt = User.GetUserNo(textBox2.Text);
+            if (string.IsNullOrEmpty(ttt))
+            {
+                AddLog("正しいユーザーを登録してください。", 3);
+                return;
+            }
+            if (lists_u.Count(x => x.UserId == ttt) > 0)
+            {
+                AddLog("そのユーザーは登録済です。", 3);
+                return;
+            }
+            //ユーザーの存在チェック、ユーザー名をゲット
+
+            //ユーザーを登録
+            var user = new User();
+            user.Clear();
+            user.UserId = ttt;
+            user.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            lists_u.Add(user);
+            textBox2.Text = "";
         }
     }
 

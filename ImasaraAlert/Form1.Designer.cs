@@ -42,8 +42,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.設定フォルダーを開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定フォルダーを開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.namarokuのファイルを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.コミュ一覧favoritecominiを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,6 +167,9 @@
             this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -214,17 +217,17 @@
             this.設定フォルダーを開くToolStripMenuItem1.Text = "設定フォルダーを開く(&O)";
             this.設定フォルダーを開くToolStripMenuItem1.Click += new System.EventHandler(this.設定フォルダーを開くToolStripMenuItem1_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
             this.toolStripMenuItem1.Text = "お気に入りを保存(&S)";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
             // 
             // namarokuのファイルを読み込むToolStripMenuItem
             // 
@@ -949,6 +952,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.textBox2);
             this.tabPage3.Controls.Add(this.dataGridView3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -1357,6 +1363,32 @@
             this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
             this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "ユーザーID";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(318, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 20);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "登録";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(68, 8);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(244, 19);
+            this.textBox2.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1383,6 +1415,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commBindingSource)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -1522,6 +1555,9 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn appdDataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn memoDataGridViewTextBoxColumn1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

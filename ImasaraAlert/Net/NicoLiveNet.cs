@@ -229,6 +229,58 @@ namespace ImasaraAlert.Net
             return img;
         }
 
+        public async Task<string> GetCommNameAsync(string commid)
+        {
+            string result = null;
+            if (string.IsNullOrEmpty(commid)) return result;
+
+            try
+            {
+                //データー取得
+                var html = await _wc.DownloadStringTaskAsync(Props.NicoCommUrl + commid).Timeout(_wc.timeout);
+                //< meta property = "og:title" content = "プログラムを作ってみるコミュニティ-ニコニコミュニティ" >
+                result = Regex.Match(html, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                result = Regex.Replace(result, "(.*)-ニコニコミュニティ$", "$1");
+            }
+            catch (WebException Ex)
+            {
+                DebugWrite.WriteWebln(nameof(GetCommNameAsync), Ex);
+                return result;
+            }
+            catch (Exception Ex) //その他のエラー
+            {
+                DebugWrite.Writeln(nameof(GetCommNameAsync), Ex);
+                return result;
+            }
+            return result;
+        }
+
+        public async Task<string> GetChNameAsync(string chid)
+        {
+            string result = null;
+            if (string.IsNullOrEmpty(chid)) return result;
+
+            try
+            {
+                //データー取得
+                var html = await _wc.DownloadStringTaskAsync(Props.NicoChannelUrl + chid).Timeout(_wc.timeout);
+                //< meta property = "og:title" content = "旅部(旅部) - ニコニコチャンネル:バラエティ" >
+                result = Regex.Match(html, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                result = Regex.Replace(result, "(.*) - ニコニコチャンネル:(.*)$", "$1");
+            }
+            catch (WebException Ex)
+            {
+                DebugWrite.WriteWebln(nameof(GetChNameAsync), Ex);
+                return result;
+            }
+            catch (Exception Ex) //その他のエラー
+            {
+                DebugWrite.Writeln(nameof(GetChNameAsync), Ex);
+                return result;
+            }
+            return result;
+        }
+
         public async Task<GetStreamInfo> GetStreamInfo2Async(string liveid, string userid)
         {
 

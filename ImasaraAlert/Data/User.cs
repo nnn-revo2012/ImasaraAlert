@@ -58,8 +58,7 @@ namespace ImasaraAlert.Data
         public bool App_d { set; get; }   //
         public string Memo { set; get; }  //
 
-        private static Regex RgxChNo = new Regex("/?((co|ch)[\\d]+)", RegexOptions.Compiled);
-        private static Regex RgxLiveID = new Regex("lv([\\d]+)", RegexOptions.Compiled);
+        private static Regex RgxUserNo = new Regex("/?([\\d]+)", RegexOptions.Compiled);
 
         public User()
         { }
@@ -73,6 +72,12 @@ namespace ImasaraAlert.Data
             this.Col12 = "LightCyan";
             this.Pop = this.Ballon = this.Web = this.Mail = this.Sound = false;
             this.Col23 = this.App = this.App_a = this.App_b = this.App_c = this.App_d = false;
+        }
+
+        //Urlの最後のスラッシュ以降の文字列を取得
+        public static string GetUserNo(string url)
+        {
+            return RgxUserNo.Match(url).Groups[1].Value;
         }
 
     }

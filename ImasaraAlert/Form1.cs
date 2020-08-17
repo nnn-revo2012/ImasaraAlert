@@ -128,10 +128,13 @@ namespace ImasaraAlert
             }
             //コミュの存在チェック、コミュ名をゲット
             string ttt2;
-            if (ttt.IndexOf("co") > -1)
-                ttt2 = await _nLiveNet.GetCommNameAsync(ttt);
-            else
-                ttt2 = await _nLiveNet.GetChNameAsync(ttt);
+            using (var nnn = new NicoLiveNet())
+            {
+                if (ttt.IndexOf("co") > -1)
+                    ttt2 = await nnn.GetCommNameAsync(ttt);
+                else
+                    ttt2 = await nnn.GetChNameAsync(ttt);
+            }
             if (string.IsNullOrEmpty(ttt2))
             {
                 AddLog("そのコミュは存在しません。", 3);

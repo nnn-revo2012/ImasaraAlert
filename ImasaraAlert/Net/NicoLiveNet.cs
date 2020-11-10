@@ -252,12 +252,16 @@ namespace ImasaraAlert.Net
                     {
                         if (errres.StatusCode == HttpStatusCode.Forbidden) //403
                         {
-                            Debug.WriteLine("Error 403");
                             //データー取得
                             //< meta property = "og:title" content = "プログラムを作ってみるコミュニティ-ニコニコミュニティ" >
-                            result = Regex.Match(html, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
-                            result = Regex.Replace(result, "(.*)-ニコニコミュニティ$", "$1");
-                            return result;
+                            using (var ds = errres.GetResponseStream())
+                            using (var sr = new StreamReader(ds))
+                            {
+                                var rs = sr.ReadToEnd();
+                                result = Regex.Match(rs, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                                result = Regex.Replace(result, "(.*)-ニコニコミュニティ$", "$1");
+                                return result;
+                            }
                         }
                     }
                 }
@@ -288,21 +292,6 @@ namespace ImasaraAlert.Net
             }
             catch (WebException Ex)
             {
-                if (Ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    var errres = (HttpWebResponse)Ex.Response;
-                    if (errres != null)
-                    {
-                        if (errres.StatusCode == HttpStatusCode.Forbidden) //403
-                        {
-                            //データー取得
-                            //< meta property = "og:title" content = "旅部(旅部) - ニコニコチャンネル:バラエティ" >
-                            result = Regex.Match(html, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
-                            result = Regex.Replace(result, "(.*) - ニコニコチャンネル:(.*)$", "$1");
-                            return result;
-                        }
-                    }
-                }
                 DebugWrite.WriteWebln(nameof(GetChNameAsync), Ex);
                 return result;
             }

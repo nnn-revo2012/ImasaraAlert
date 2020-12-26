@@ -325,6 +325,59 @@ namespace ImasaraAlert
         }
 
 
+        //データーをfavaritecom.ini / favariteuser.ini型式で出力する
+        private bool ExportData<T>(string w_file, IList<T> lists) where T : IAlertData, new()
+        {
+            var enc = new System.Text.UTF8Encoding(false);
+            var result = false;
+
+            try
+            {
+                using (var sw = new StreamWriter(w_file, false, enc))
+                {
+                    sw.WriteLine("120");
+                    foreach (T li in lists)
+                    {
+                        sw.WriteLine(li.Ng);
+                        sw.WriteLine(li.ComId);
+                        sw.WriteLine(li.UserId);
+                        sw.WriteLine(li.Col04);
+                        sw.WriteLine(li.ComName); //5
+                        sw.WriteLine(li.UserName);
+                        sw.WriteLine(li.Group);
+                        sw.WriteLine(li.Last_Date);
+                        sw.WriteLine(li.Col09); //9
+                        sw.WriteLine(li.Col10); //10
+                        sw.WriteLine(li.Col11);
+                        sw.WriteLine(li.Col12);
+                        sw.WriteLine(li.Col13);
+                        sw.WriteLine(li.Col14);
+                        sw.WriteLine(li.Col15);
+                        sw.WriteLine(li.Regist_Date); //16
+                        sw.WriteLine(li.Col17);
+                        sw.WriteLine(li.Pop.ToString().ToLower());
+                        sw.WriteLine(li.Ballon.ToString().ToLower()); //バルーン
+                        sw.WriteLine(li.Web.ToString().ToLower());
+                        sw.WriteLine(li.Mail.ToString().ToLower()); //メール
+                        sw.WriteLine(li.Sound.ToString().ToLower()); //22
+                        sw.WriteLine(li.Col23.ToString().ToLower()); //23
+                        sw.WriteLine(li.App.ToString().ToLower());
+                        sw.WriteLine(li.App_a.ToString().ToLower());
+                        sw.WriteLine(li.App_b.ToString().ToLower());
+                        sw.WriteLine(li.App_c.ToString().ToLower());
+                        sw.WriteLine(li.App_d.ToString().ToLower());
+                        sw.WriteLine(li.Memo); //メモ
+                    }
+                    sw.WriteLine("namarokuEndLine");
+                }
+            }
+            catch (Exception Ex)
+            {
+                DebugWrite.Writeln(nameof(ExportData), Ex);
+            }
+
+            return result;
+        }
 
         //favaritecom.ini / favariteuser.iniを変換する
         private List<T> ConvertData<T>(string r_file) where T : IAlertData, new()

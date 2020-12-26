@@ -120,6 +120,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.ngDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -167,9 +170,7 @@
             this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.namaroku型式でファイルを出力XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -204,6 +205,7 @@
             this.toolStripMenuItem1,
             this.toolStripSeparator1,
             this.namarokuのファイルを読み込むToolStripMenuItem,
+            this.namaroku型式でファイルを出力XToolStripMenuItem,
             this.toolStripSeparator6,
             this.終了XToolStripMenuItem});
             this.設定フォルダーを開くToolStripMenuItem.Name = "設定フォルダーを開くToolStripMenuItem";
@@ -213,21 +215,21 @@
             // 設定フォルダーを開くToolStripMenuItem1
             // 
             this.設定フォルダーを開くToolStripMenuItem1.Name = "設定フォルダーを開くToolStripMenuItem1";
-            this.設定フォルダーを開くToolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
+            this.設定フォルダーを開くToolStripMenuItem1.Size = new System.Drawing.Size(243, 22);
             this.設定フォルダーを開くToolStripMenuItem1.Text = "設定フォルダーを開く(&O)";
             this.設定フォルダーを開くToolStripMenuItem1.Click += new System.EventHandler(this.設定フォルダーを開くToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(243, 22);
             this.toolStripMenuItem1.Text = "お気に入りを保存(&S)";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(240, 6);
             // 
             // namarokuのファイルを読み込むToolStripMenuItem
             // 
@@ -235,7 +237,7 @@
             this.コミュ一覧favoritecominiを読み込むToolStripMenuItem,
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem});
             this.namarokuのファイルを読み込むToolStripMenuItem.Name = "namarokuのファイルを読み込むToolStripMenuItem";
-            this.namarokuのファイルを読み込むToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.namarokuのファイルを読み込むToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.namarokuのファイルを読み込むToolStripMenuItem.Text = "namarokuのファイルを読み込む";
             // 
             // コミュ一覧favoritecominiを読み込むToolStripMenuItem
@@ -255,12 +257,12 @@
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(240, 6);
             // 
             // 終了XToolStripMenuItem
             // 
             this.終了XToolStripMenuItem.Name = "終了XToolStripMenuItem";
-            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.終了XToolStripMenuItem.Text = "終了(&X)";
             this.終了XToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
             // 
@@ -964,6 +966,32 @@
             this.tabPage3.Text = "ユーザー一覧";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "ユーザーID";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(318, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(69, 20);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "登録";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(68, 8);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(244, 19);
+            this.textBox2.TabIndex = 8;
+            // 
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
@@ -1363,31 +1391,12 @@
             this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
             this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
-            // label2
+            // namaroku型式でファイルを出力XToolStripMenuItem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 12);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "ユーザーID";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(318, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 20);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "登録";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(68, 8);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(244, 19);
-            this.textBox2.TabIndex = 8;
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Name = "namaroku型式でファイルを出力XToolStripMenuItem";
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Text = "namaroku型式でファイルを出力(&X)";
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Click += new System.EventHandler(this.namaroku型式でファイルを出力XToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1558,6 +1567,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ToolStripMenuItem namaroku型式でファイルを出力XToolStripMenuItem;
     }
 }
 

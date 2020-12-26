@@ -490,6 +490,32 @@ namespace ImasaraAlert
             lists_u.Add(user);
             textBox2.Text = "";
         }
+
+        private void namaroku型式でファイルを出力XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var openFolderDialog1 = new System.Windows.Forms.FolderBrowserDialog())
+                {
+                    openFolderDialog1.Description = "フォルダを指定してください。";
+                    openFolderDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+                    openFolderDialog1.SelectedPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    openFolderDialog1.ShowNewFolderButton = true;
+
+                    if (openFolderDialog1.ShowDialog(this) == DialogResult.OK)
+                    {
+                        ExportData<Comm>(Path.Combine(openFolderDialog1.SelectedPath, Props.FavoriteCom), lists_c);
+                        ExportData<User>(Path.Combine(openFolderDialog1.SelectedPath, Props.FavoriteUser), lists_u);
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
     }
 
 }

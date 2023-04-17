@@ -44,5 +44,17 @@
     <Setting Name="Sound_File" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sound\se_soc01.wav</Value>
     </Setting>
+    <Setting Name="AppA_Arg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AppB_Arg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AppC_Arg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AppD_Arg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -10,15 +10,15 @@
 
 # 開発環境
 
-- Windows 7以降  
-- Visual Studio Express 2015  
-- .NET 4.6.1  
+- Windows 10  
+- Visual Studio Express 2019  
+- .NET 4.8  
 
 # パッケージ
 
 以下のパッケージをインストールしてください。  
 
-- Json.net 11.0.2  
+- Json.net 13.0.3  
 https://www.nuget.org/packages/Newtonsoft.Json/  
 
 

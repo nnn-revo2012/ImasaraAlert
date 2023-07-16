@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
+using System.Net;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -58,6 +59,8 @@ namespace ImasaraAlert
 
             try
             {
+                ServicePointManager.SecurityProtocol = 
+                    SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                 //設定データーの読み込み
                 props = new Props();
                 props.LoadData();

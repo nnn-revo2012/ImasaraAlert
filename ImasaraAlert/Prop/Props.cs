@@ -24,12 +24,8 @@ namespace ImasaraAlert.Prop
     {
         //定数設定
         public static readonly string UserAgent = "Mozilla/5.0 (" +Ver.GetAssemblyName() + "; " + Ver.Version + ")";
-        //public static readonly string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
         public static readonly string NicoDomain = "https://nicovideo.jp/";
 
-        //public static string NicoGetStreamInfo = "http://live.nicovideo.jp/api/getstreaminfo/";
-        //public static string NicoGetAlertInfo = "http://live.nicovideo.jp/api/getalertinfo";
-        //public static readonly string NicoRssUrl = "http://live.nicovideo.jp/recent/rss?tab={0}&p={1}";
         public static readonly string NicoCateApi = "https://live.nicovideo.jp/front/api/pages/recent/v1/programs?tab={0}&offset={1}&sortOrder=recentDesc";
         public static readonly string NicoUserInfo = "https://seiga.nicovideo.jp/api/user/info?id=";
         public static readonly string NicoCasApi = "https://api.cas.nicovideo.jp/v1/services/live/programs/";

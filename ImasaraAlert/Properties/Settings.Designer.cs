@@ -238,5 +238,17 @@ namespace ImasaraAlert.Properties {
                 this["AppD_Arg"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("360")]
+        public int FirstReadCatTime {
+            get {
+                return ((int)(this["FirstReadCatTime"]));
+            }
+            set {
+                this["FirstReadCatTime"] = value;
+            }
+        }
     }
 }

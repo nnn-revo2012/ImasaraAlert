@@ -81,6 +81,7 @@ namespace ImasaraAlert
             _readTimer.Interval = 1000;
             _readTimer_dt = DateTime.Now;
             _readTimer.Enabled = true;
+            IsFirstReadCat = true;
             Debug.WriteLine("_readTimer Start");
         }
 
@@ -88,16 +89,25 @@ namespace ImasaraAlert
         {
             _readTimer.Enabled = false;
             var now = DateTime.Now;
+            int mintime = 8;
+            if (IsFirstReadCat)
+            {
+                mintime = props.FirstReadCatTime;
+                if (mintime > 360 || mintime <= 0)
+                    mintime = 360;
+            }
             if (now >= _readTimer_dt)
             {
                 _readTimer_dt = now.AddSeconds(60);
                 Debug.WriteLine("Read NextDate: " + _readTimer_dt.ToString());
-                await ReadAlert(now);
+                await ReadAlert(now, mintime);
+                if (IsFirstReadCat)
+                    IsFirstReadCat = false;
             }
             _readTimer.Enabled = true;
         }
 
-        private async Task ReadAlert(DateTime now)
+        private async Task ReadAlert(DateTime now, int mintime)
         {
             try
             {
@@ -106,7 +116,7 @@ namespace ImasaraAlert
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
                     Debug.WriteLine("LastTime: " + now.AddMinutes(-5).ToString());
                     //var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], now);
-                    var lgsi = await _nLiveNet.ReadCateApiAsync(Props.NicoCateApi, Props.Cates[i], now);
+                    var lgsi = await _nLiveNet.ReadCateApiAsync(Props.NicoCateApi, Props.Cates[i], now, mintime);
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)
                     {

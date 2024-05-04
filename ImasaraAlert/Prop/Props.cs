@@ -63,6 +63,7 @@ namespace ImasaraAlert.Prop
         public string Sound_Path { get; set; }
         public bool IsDefaultSound { get; set; }
         public string Sound_File { get; set; }
+        public int FirstReadCatTime { get; set; }
 
         public bool LoadData()
         {
@@ -83,6 +84,7 @@ namespace ImasaraAlert.Prop
                 this.Sound_Path = Properties.Settings.Default.Sound_Path;
                 this.IsDefaultSound = Properties.Settings.Default.IsDefaultSound;
                 this.Sound_File = Properties.Settings.Default.Sound_File;
+                this.FirstReadCatTime = Properties.Settings.Default.FirstReadCatTime;
             }
             catch (Exception Ex)
             {
@@ -111,6 +113,7 @@ namespace ImasaraAlert.Prop
                 Properties.Settings.Default.Sound_Path = this.Sound_Path;
                 Properties.Settings.Default.IsDefaultSound = this.IsDefaultSound;
                 Properties.Settings.Default.Sound_File = this.Sound_File;
+                Properties.Settings.Default.FirstReadCatTime = this.FirstReadCatTime;
                 //Properties.Settings.Default. = this.;
                 Properties.Settings.Default.Save();
 

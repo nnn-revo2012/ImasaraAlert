@@ -37,6 +37,7 @@ namespace ImasaraAlert
 
         private System.Windows.Forms.Timer _readTimer = null;
         private DateTime _readTimer_dt = DateTime.MinValue;
+        private bool IsFirstReadCat = true;
 
         private readonly object lockObject = new object();  //情報表示用
         //private readonly object lockObject2 = new object(); //実行ファイルのログ用

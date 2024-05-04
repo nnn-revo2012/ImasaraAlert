@@ -115,9 +115,9 @@ namespace ImasaraAlert.Net
             return UNIX_EPOCH.AddSeconds(unix).ToLocalTime();
         }
 
-        public async Task<IList<GetStreamInfo>> ReadCateApiAsync(string url, string cate, DateTime now)
+        public async Task<IList<GetStreamInfo>> ReadCateApiAsync(string url, string cate, DateTime now, int mintime)
         {
-            var min_time = now.AddMinutes(-8);
+            var min_time = now.AddMinutes(-(double)mintime);
             //var max_time = now.AddMinutes(5);
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;

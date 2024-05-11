@@ -32,7 +32,7 @@ namespace ImasaraAlert
         private SortableBindingList<User> lists_u = new SortableBindingList<User>();
         //private SortableBindingList<Prog> lists_p = new SortableBindingList<Prog>();
 
-        private NicoLiveNet _nLiveNet = null;         //WebClient
+        private NicoLiveNet _nln = null;
         private SoundPlayer _player = null;
 
         private System.Windows.Forms.Timer _readTimer = null;
@@ -45,7 +45,6 @@ namespace ImasaraAlert
         private string dbfileuser;
 
         private string LogFile;
-        private string LogFile2;
 
 
         public Form1()
@@ -84,8 +83,8 @@ namespace ImasaraAlert
                 //データー読み込み
                 ReadAllData();
 
-                _nLiveNet = new NicoLiveNet();
                 //アラートに接続
+                _nln = new NicoLiveNet();
                 StartAlert();
             }
             catch (Exception Ex)
@@ -106,7 +105,6 @@ namespace ImasaraAlert
                 if (lists_u.Count > 0)
                     SaveCommData(dbfileuser, (IList<User>)lists_u);
 
-                _nLiveNet?.Dispose();
             }
             catch (Exception Ex)
             {
@@ -132,13 +130,10 @@ namespace ImasaraAlert
             }
             //コミュの存在チェック、コミュ名をゲット
             string ttt2;
-            using (var nnn = new NicoLiveNet())
-            {
-                if (ttt.IndexOf("co") > -1)
-                    ttt2 = await nnn.GetCommNameAsync(ttt);
-                else
-                    ttt2 = await nnn.GetChNameAsync(ttt);
-            }
+            if (ttt.IndexOf("co") > -1)
+                ttt2 = await _nln.GetCommNameAsync(ttt);
+            else
+                ttt2 = await _nln.GetChNameAsync(ttt);
             if (string.IsNullOrEmpty(ttt2))
             {
                 AddLog("そのコミュは存在しません。", 3);

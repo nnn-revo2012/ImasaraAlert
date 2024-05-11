@@ -116,7 +116,7 @@ namespace ImasaraAlert
                     Debug.WriteLine("Cate: " + Props.Cates[i]);
                     Debug.WriteLine("LastTime: " + now.AddMinutes(-5).ToString());
                     //var lgsi = await _nLiveNet.ReadRssAsync(Props.NicoRssUrl, Props.Cates[i], now);
-                    var lgsi = await _nLiveNet.ReadCateApiAsync(Props.NicoCateApi, Props.Cates[i], now, mintime);
+                    var lgsi = await _nln.ReadCateApiAsync(Props.NicoCateApi, Props.Cates[i], now, mintime);
                     Debug.WriteLine("lgsi: " + lgsi.Count().ToString());
                     foreach (var gsi in lgsi)
                     {
@@ -184,7 +184,7 @@ namespace ImasaraAlert
                 //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
                 lists_c[f_idx].Last_Date = gsi.Col12.ToString("yyyy/MM/dd HH:mm:ss");
                 lists_c[f_idx].Col14 = Comm.GetLiveNumber(gsi.LiveId);
-                gsi.Col02 = await _nLiveNet.CreateImageAsync(gsi.Community_Thumbnail);
+                gsi.Col02 = await _nln.CreateImageAsync(gsi.Community_Thumbnail);
                 lists_si.Add(gsi);
                 var liveid = Props.GetLiveUrl(gsi.LiveId);
                 if (lists_c[f_idx].Pop) PopupProc(gsi);

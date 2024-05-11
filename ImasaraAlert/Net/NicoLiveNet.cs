@@ -40,12 +40,8 @@ namespace ImasaraAlert.Net
         }
     }
 
-    public class NicoLiveNet : IDisposable
+    public class NicoLiveNet
     {
-
-        private bool disposedValue = false; // 重複する呼び出しを検知するには
-
-        private WebClientEx _wc = null;
 
         private static Regex RgxComm = new Regex("<a +href=\"([^\"]*)\"[^>]*>\\s*<span +itemprop=\"name\">([^<]*)</span>\\s*</a>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static Regex RgxUser = new Regex("<a +href=\"([^\"]*)\"[^>]*>\\s*<span +itemprop=\"member\">([^<]*)</span>\\s*</a>", RegexOptions.Compiled | RegexOptions.Singleline);
@@ -78,29 +74,29 @@ namespace ImasaraAlert.Net
         public NicoLiveNet()
         {
             IsDebug = false;
-
-            var wc = new WebClientEx();
-            _wc = wc;
-
-            _wc.Encoding = Encoding.UTF8;
-            _wc.Proxy = null;
-            _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-            _wc.timeout = 30000;
-            _wc.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
-
-            if (IsDebug)
-            {
-                //foreach (Cookie ck in cc.GetCookies(new Uri(Props.NicoDomain)))
-                //    Debug.WriteLine(ck.Name.ToString() + ": " + ck.Value.ToString());
-                for (int i = 0; i < _wc.Headers.Count; i++)
-                    Debug.WriteLine(_wc.Headers.GetKey(i).ToString() + ": " + _wc.Headers.Get(i));
-            }
-
         }
 
-        ~NicoLiveNet()
+        private IList<KeyValuePair<string, string>> GetCookieList(WebClientEx wc)
         {
-            this.Dispose();
+            var result = new Dictionary<string, string>();
+            var cc = wc.cookieContainer;
+
+            foreach (Cookie ck in cc.GetCookies(new Uri(Props.NicoDomain)))
+                result.Add(ck.Name.ToString(), ck.Value.ToString());
+
+            return result.ToList();
+        }
+
+        private CookieContainer GetCookieContainer(WebClientEx wc)
+        {
+            return wc.cookieContainer;
+        }
+
+        private void SetCookieContainer(WebClientEx wc, CookieContainer cookie)
+        {
+            if (cookie != null)
+                wc.cookieContainer = cookie;
+            return;
         }
 
         //UnixTime(msec)文字列をDateTimeに変換
@@ -122,10 +118,17 @@ namespace ImasaraAlert.Net
             var lgsi = new List<GetStreamInfo>();
             if (string.IsNullOrEmpty(url)) return lgsi;
 
+            var _wc = new WebClientEx();
             try
             {
                 var i = 0;
                 var end_flg = false;
+
+                _wc.Encoding = Encoding.UTF8;
+                _wc.Proxy = null;
+                _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                _wc.timeout = 30000;
+                _wc.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
                 while (i < 9 && end_flg == false)
                 {
                     var cateurl = string.Format(url, cate, i.ToString());
@@ -172,12 +175,14 @@ namespace ImasaraAlert.Net
             catch (WebException Ex)
             {
                 DebugWrite.WriteWebln(nameof(ReadCateApiAsync), Ex);
-                return lgsi;
             }
             catch (Exception Ex) //その他のエラー
             {
                 DebugWrite.Writeln(nameof(ReadCateApiAsync), Ex);
-                return lgsi;
+            }
+            finally
+            {
+                _wc?.Dispose();
             }
             return lgsi;
         }
@@ -187,12 +192,12 @@ namespace ImasaraAlert.Net
             System.Drawing.Image img = null;
             try
             {
-                using (var wc = new WebClientEx())
+                using (var _wc = new WebClientEx())
                 {
-                    wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
-                    wc.Proxy = null;
-                    wc.timeout = 30000;
-                    using (var fs = await wc.OpenReadTaskAsync(url).Timeout(wc.timeout))
+                    _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                    _wc.Proxy = null;
+                    _wc.timeout = 30000;
+                    using (var fs = await _wc.OpenReadTaskAsync(url).Timeout(_wc.timeout))
                     {
                         img = System.Drawing.Image.FromStream(fs);
                     }
@@ -213,19 +218,15 @@ namespace ImasaraAlert.Net
                             {
                                 img = System.Drawing.Image.FromStream(fs);
                             }
-                            return img;
                         }
                     }
                 }
                 DebugWrite.WriteWebln(nameof(CreateImageAsync), Ex);
-                return img;
             }
             catch (Exception Ex) //その他のエラー
             {
                 DebugWrite.Writeln(nameof(CreateImageAsync), Ex);
-                return img;
             }
-
             return img;
         }
 
@@ -235,9 +236,15 @@ namespace ImasaraAlert.Net
             if (string.IsNullOrEmpty(commid)) return result;
 
             string html = null;
+            var _wc = new WebClientEx();
             try
             {
-                //データー取得
+                _wc.Encoding = Encoding.UTF8;
+                _wc.Proxy = null;
+                _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                _wc.timeout = 30000;
+
+               //データー取得
                 html = await _wc.DownloadStringTaskAsync(Props.NicoCommUrl + commid).Timeout(_wc.timeout);
                 //< meta property = "og:title" content = "プログラムを作ってみるコミュニティ-ニコニコミュニティ" >
                 result = Regex.Match(html, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
@@ -266,12 +273,14 @@ namespace ImasaraAlert.Net
                     }
                 }
                 DebugWrite.WriteWebln(nameof(GetCommNameAsync), Ex);
-                return result;
             }
             catch (Exception Ex) //その他のエラー
             {
                 DebugWrite.Writeln(nameof(GetCommNameAsync), Ex);
-                return result;
+            }
+            finally
+            {
+                _wc?.Dispose();
             }
             return result;
         }
@@ -282,8 +291,14 @@ namespace ImasaraAlert.Net
             if (string.IsNullOrEmpty(chid)) return result;
 
             string html = null;
+            var _wc = new WebClientEx();
             try
             {
+                _wc.Encoding = Encoding.UTF8;
+                _wc.Proxy = null;
+                _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                _wc.timeout = 30000;
+
                 //データー取得
                 html = await _wc.DownloadStringTaskAsync(Props.NicoChannelUrl + chid).Timeout(_wc.timeout);
                 //< meta property = "og:title" content = "旅部(旅部) - ニコニコチャンネル:バラエティ" >
@@ -293,12 +308,14 @@ namespace ImasaraAlert.Net
             catch (WebException Ex)
             {
                 DebugWrite.WriteWebln(nameof(GetChNameAsync), Ex);
-                return result;
             }
             catch (Exception Ex) //その他のエラー
             {
                 DebugWrite.Writeln(nameof(GetChNameAsync), Ex);
-                return result;
+            }
+            finally
+            {
+                _wc?.Dispose();
             }
             return result;
         }
@@ -310,8 +327,14 @@ namespace ImasaraAlert.Net
             gsi.Status = "fail";
             gsi.Error = "not_permitted";
 
+            var _wc = new WebClientEx();
             try
             {
+                _wc.Encoding = Encoding.UTF8;
+                _wc.Proxy = null;
+                _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                _wc.timeout = 30000;
+
                 //データー取得
                 gsi.LiveId = liveid;
                 gsi.Provider_Id = userid;
@@ -401,43 +424,18 @@ namespace ImasaraAlert.Net
             {
                 DebugWrite.WriteWebln(nameof(GetStreamInfo2Async), Ex);
                 gsi.Error = Ex.Status.ToString();
-                return gsi;
             }
             catch (Exception Ex) //その他のエラー
             {
                 DebugWrite.Writeln(nameof(GetStreamInfo2Async), Ex);
                 gsi.Error = Ex.Message;
-                return gsi;
+            }
+            finally
+            {
+                _wc?.Dispose();
             }
 
             return gsi;
-        }
-
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: マネージ状態を破棄します (マネージ オブジェクト)。
-                    _wc?.Dispose();
-                }
-
-                // TODO: アンマネージ リソース (アンマネージ オブジェクト) を解放し、下のファイナライザーをオーバーライドします。
-                // TODO: 大きなフィールドを null に設定します。
-
-                disposedValue = true;
-            }
-        }
-
-        // このコードは、破棄可能なパターンを正しく実装できるように追加されました。
-        public void Dispose()
-        {
-            // このコードを変更しないでください。クリーンアップ コードを上の Dispose(bool disposing) に記述します。
-            Dispose(true);
-            // TODO: 上のファイナライザーがオーバーライドされる場合は、次の行のコメントを解除してください。
-            //GC.SuppressFinalize(this);
         }
 
     }

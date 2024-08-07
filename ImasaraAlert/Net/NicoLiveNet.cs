@@ -320,6 +320,60 @@ namespace ImasaraAlert.Net
             return result;
         }
 
+        public async Task<string> GetUserNameAsync(string userid)
+        {
+            string result = null;
+            if (string.IsNullOrEmpty(userid)) return result;
+
+            string html = null;
+            var _wc = new WebClientEx();
+            try
+            {
+                _wc.Encoding = Encoding.UTF8;
+                _wc.Proxy = null;
+                _wc.Headers.Add(HttpRequestHeader.UserAgent, Props.UserAgent);
+                _wc.timeout = 30000;
+
+                //データー取得
+                html = await _wc.DownloadStringTaskAsync(Props.NicoUserUrl + userid).Timeout(_wc.timeout);
+                //<meta property="profile:username" content="召されたはいぱーまほちゃん">    <meta name="twitter:card" content="summary" />
+                result = Regex.Match(html, "\"profile:username\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+            }
+            catch (WebException Ex)
+            {
+                if (Ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    var errres = (HttpWebResponse)Ex.Response;
+                    if (errres != null)
+                    {
+                        if (errres.StatusCode == HttpStatusCode.Forbidden) //403
+                        {
+                            //データー取得
+                            //<meta property="og:title" content="召されたはいぱーまほちゃん - ニコニコ" />
+                            using (var ds = errres.GetResponseStream())
+                            using (var sr = new StreamReader(ds))
+                            {
+                                var rs = sr.ReadToEnd();
+                                result = Regex.Match(rs, "\"og:title\" *content *= *\"([^\"]*)\"", RegexOptions.Compiled).Groups[1].Value;
+                                result = Regex.Replace(result, "(.*) - ニコニコ$", "$1");
+                                return result;
+                            }
+                        }
+                    }
+                }
+                DebugWrite.WriteWebln(nameof(GetUserNameAsync), Ex);
+            }
+            catch (Exception Ex) //その他のエラー
+            {
+                DebugWrite.Writeln(nameof(GetUserNameAsync), Ex);
+            }
+            finally
+            {
+                _wc?.Dispose();
+            }
+            return result;
+        }
+
         public async Task<GetStreamInfo> GetStreamInfo2Async(string liveid, string userid)
         {
 

@@ -464,7 +464,7 @@ namespace ImasaraAlert
         }
 
         //ユーザー登録
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox2.Text)) return;
 
@@ -480,11 +480,18 @@ namespace ImasaraAlert
                 return;
             }
             //ユーザーの存在チェック、ユーザー名をゲット
-
+            string ttt2;
+            ttt2 = await _nln.GetUserNameAsync(ttt);
+            if (string.IsNullOrEmpty(ttt2))
+            {
+                AddLog("そのユーザーは存在しません。", 3);
+                return;
+            }
             //ユーザーを登録
             var user = new User();
             user.Clear();
             user.UserId = ttt;
+            user.UserName = ttt2;
             user.Regist_Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             lists_u.Add(user);
             textBox2.Text = "";

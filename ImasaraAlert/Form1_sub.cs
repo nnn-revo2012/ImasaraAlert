@@ -121,10 +121,15 @@ namespace ImasaraAlert
                     foreach (var gsi in lgsi)
                     {
                         DispStreamInfo(gsi);
-                        var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
-                        if (f_idx > -1 && (Comm.GetLiveID(lists_c[f_idx].Col14) != gsi.LiveId))
+                        //var f_idx = lists_c.ToList().FindIndex(x => x.ComId == gsi.Community_Id);
+                        //if (f_idx > -1 && (Comm.GetLiveID(lists_c[f_idx].Col14) != gsi.LiveId))
+                        //{
+                        //    this.Invoke(new Action(async () => await work2(gsi, f_idx)));
+                        //}
+                        var f_idx = lists_u.ToList().FindIndex(x => x.UserId == gsi.Provider_Id);
+                        if (f_idx > -1 && (User.GetLiveID(lists_u[f_idx].Col14) != gsi.LiveId))
                         {
-                            this.Invoke(new Action(async () => await work2(gsi, f_idx)));
+                            this.Invoke(new Action(async () => await work3(gsi, f_idx)));
                         }
                         //f_idx = lists_u.ToList().FindIndex(x => x.Id == gsi.Provider_Id);
                         //if (f_idx > -1) work2(gsi, f_idx);
@@ -201,6 +206,29 @@ namespace ImasaraAlert
             }
         }
 
+        private async Task work3(GetStreamInfo gsi, int f_idx)
+        {
+            try
+            {
+                //var gsi2 = await _nLiveNet.GetStreamInfo2Async(gsi.LiveId, gsi.Provider_Id);
+                lists_u[f_idx].Last_Date = gsi.Col12.ToString("yyyy/MM/dd HH:mm:ss");
+                lists_u[f_idx].Col14 = User.GetLiveNumber(gsi.LiveId);
+                gsi.Col02 = await _nln.CreateImageAsync(gsi.Community_Thumbnail);
+                lists_si.Add(gsi);
+                var liveid = Props.GetLiveUrl(gsi.LiveId);
+                if (lists_u[f_idx].Pop) PopupProc(gsi);
+                if (lists_u[f_idx].Web) OpenProcess.OpenWeb(liveid, props.BrowserPath, props.IsDefaultBrowser);
+                if (lists_u[f_idx].Sound) SoundProc();
+                if (lists_u[f_idx].App_a) OpenProcess.OpenProgram(liveid, props.AppA_Path);
+                if (lists_u[f_idx].App_b) OpenProcess.OpenProgram(liveid, props.AppB_Path);
+                if (lists_u[f_idx].App_c) OpenProcess.OpenProgram(liveid, props.AppC_Path);
+                if (lists_u[f_idx].App_d) OpenProcess.OpenProgram(liveid, props.AppD_Path);
+            }
+            catch (Exception Ex)
+            {
+                AddLog("work3: " + Ex.Message, 2);
+            }
+        }
         private void PopupProc(GetStreamInfo gsi)
         {
             var fpop = new Popup(this, gsi);

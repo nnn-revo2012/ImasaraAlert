@@ -18,7 +18,6 @@ namespace ImasaraAlert.Data
 
         public event PropertyChangedEventHandler PropertyChanged;
         private static readonly PropertyChangedEventArgs Last_DatePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(Last_Date));
-
         public string Ng { set; get; }      //00
         public string ComId { set; get; }
         public string UserId { set; get; }   //ユーザーID
@@ -59,6 +58,7 @@ namespace ImasaraAlert.Data
         public string Memo { set; get; }  //
 
         private static Regex RgxUserNo = new Regex("/?([\\d]+)", RegexOptions.Compiled);
+        private static Regex RgxLiveID = new Regex("lv([\\d]+)", RegexOptions.Compiled);
 
         public User()
         { }
@@ -76,6 +76,23 @@ namespace ImasaraAlert.Data
 
         //Urlの最後のスラッシュ以降の文字列を取得
         public static string GetUserNo(string url)
+        {
+            return RgxUserNo.Match(url).Groups[1].Value;
+        }
+
+        //放送IDの lv を削除
+        public static string GetLiveNumber(string id)
+        {
+            return RgxLiveID.Match(id).Groups[1].Value;
+        }
+
+        //放送IDに lv を追加
+        public static string GetLiveID(string id)
+        {
+            return "lv" + id;
+        }
+
+        public static string FindUserNo(string url)
         {
             return RgxUserNo.Match(url).Groups[1].Value;
         }

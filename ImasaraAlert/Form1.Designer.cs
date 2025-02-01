@@ -47,6 +47,7 @@
             this.namarokuのファイルを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.コミュ一覧favoritecominiを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.namaroku型式でファイルを出力XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.終了XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ツールTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,7 +171,14 @@
             this.ユーザーURLをコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.この行を削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.namaroku型式でファイルを出力XToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.最近行われた放送のToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.最近行われた放送のURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ユーザーURLをコピーToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.このToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -185,6 +193,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -253,6 +262,13 @@
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem.Text = "ユーザー一覧(favoriteuser.ini)を読み込む";
             this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem.Click += new System.EventHandler(this.ユーザー一覧favoriteuseriniを読み込むToolStripMenuItem_Click);
+            // 
+            // namaroku型式でファイルを出力XToolStripMenuItem
+            // 
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Name = "namaroku型式でファイルを出力XToolStripMenuItem";
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Text = "namaroku型式でファイルを出力(&X)";
+            this.namaroku型式でファイルを出力XToolStripMenuItem.Click += new System.EventHandler(this.namaroku型式でファイルを出力XToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -1059,6 +1075,7 @@
             this.dataGridView3.RowTemplate.Height = 25;
             this.dataGridView3.Size = new System.Drawing.Size(873, 341);
             this.dataGridView3.TabIndex = 7;
+            this.dataGridView3.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridView3_RowContextMenuStripNeeded);
             // 
             // ngDataGridViewTextBoxColumn2
             // 
@@ -1391,12 +1408,63 @@
             this.この行を削除ToolStripMenuItem1.Text = "この行を削除";
             this.この行を削除ToolStripMenuItem1.Click += new System.EventHandler(this.この行を削除ToolStripMenuItem1_Click);
             // 
-            // namaroku型式でファイルを出力XToolStripMenuItem
+            // contextMenuStrip3
             // 
-            this.namaroku型式でファイルを出力XToolStripMenuItem.Name = "namaroku型式でファイルを出力XToolStripMenuItem";
-            this.namaroku型式でファイルを出力XToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.namaroku型式でファイルを出力XToolStripMenuItem.Text = "namaroku型式でファイルを出力(&X)";
-            this.namaroku型式でファイルを出力XToolStripMenuItem.Click += new System.EventHandler(this.namaroku型式でファイルを出力XToolStripMenuItem_Click);
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.最近行われた放送のToolStripMenuItem,
+            this.ユーザーToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.最近行われた放送のURLをコピーToolStripMenuItem1,
+            this.ユーザーURLをコピーToolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.このToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(230, 126);
+            // 
+            // 最近行われた放送のToolStripMenuItem
+            // 
+            this.最近行われた放送のToolStripMenuItem.Name = "最近行われた放送のToolStripMenuItem";
+            this.最近行われた放送のToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.最近行われた放送のToolStripMenuItem.Text = "最近行われた放送のURLを開く";
+            this.最近行われた放送のToolStripMenuItem.Click += new System.EventHandler(this.最近行われた放送のToolStripMenuItem_Click);
+            // 
+            // ユーザーToolStripMenuItem
+            // 
+            this.ユーザーToolStripMenuItem.Name = "ユーザーToolStripMenuItem";
+            this.ユーザーToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.ユーザーToolStripMenuItem.Text = "ユーザーURLを開く";
+            this.ユーザーToolStripMenuItem.Click += new System.EventHandler(this.ユーザーToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(226, 6);
+            // 
+            // 最近行われた放送のURLをコピーToolStripMenuItem1
+            // 
+            this.最近行われた放送のURLをコピーToolStripMenuItem1.Name = "最近行われた放送のURLをコピーToolStripMenuItem1";
+            this.最近行われた放送のURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
+            this.最近行われた放送のURLをコピーToolStripMenuItem1.Text = "最近行われた放送のURLをコピー";
+            this.最近行われた放送のURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.最近行われた放送のURLをコピーToolStripMenuItem1_Click);
+            // 
+            // ユーザーURLをコピーToolStripMenuItem1
+            // 
+            this.ユーザーURLをコピーToolStripMenuItem1.Name = "ユーザーURLをコピーToolStripMenuItem1";
+            this.ユーザーURLをコピーToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
+            this.ユーザーURLをコピーToolStripMenuItem1.Text = "ユーザーURLをコピー";
+            this.ユーザーURLをコピーToolStripMenuItem1.Click += new System.EventHandler(this.ユーザーURLをコピーToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(226, 6);
+            // 
+            // このToolStripMenuItem
+            // 
+            this.このToolStripMenuItem.Name = "このToolStripMenuItem";
+            this.このToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.このToolStripMenuItem.Text = "この行を削除";
+            this.このToolStripMenuItem.Click += new System.EventHandler(this.このToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1429,6 +1497,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1568,6 +1637,14 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ToolStripMenuItem namaroku型式でファイルを出力XToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ユーザーToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem 最近行われた放送のURLをコピーToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ユーザーURLをコピーToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem このToolStripMenuItem;
     }
 }
 

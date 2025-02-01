@@ -522,6 +522,108 @@ namespace ImasaraAlert
 
 
         }
+
+        private void 最近行われた放送のToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[13].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetLiveUrl(User.GetLiveID(ttt));
+                    OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    //Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void ユーザーToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[2].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetUserUrl(ttt);
+                    OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    //Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void 最近行われた放送のURLをコピーToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[13].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetLiveUrl(User.GetLiveID(ttt));
+                    //OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void ユーザーURLをコピーToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[2].Value;
+                if (!string.IsNullOrEmpty(ttt))
+                {
+                    ttt = Props.GetUserUrl(ttt);
+                    //OpenProcess.OpenWeb(ttt, props.BrowserPath, props.IsDefaultBrowser);
+                    Clipboard.SetText(ttt);
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void このToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var ttt = (string)dataGridView3.Rows[dataGridView3.CurrentCell.RowIndex].Cells[2].Value;
+                var ttt2 = lists_u.FirstOrDefault(x => x.UserId == ttt);
+                lists_u.Remove(ttt2);
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
+
+        private void dataGridView3_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
+        {
+            try
+            {
+                DataGridView dgv = (DataGridView)sender;
+
+                dgv.ClearSelection();
+                dgv.Rows[e.RowIndex].Selected = true;
+                e.ContextMenuStrip = this.contextMenuStrip3;
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine(Ex.Message);
+            }
+        }
     }
 
 }

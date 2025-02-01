@@ -373,7 +373,7 @@ namespace ImasaraAlert
             {
                 using (var sw = new StreamWriter(w_file, false, enc))
                 {
-                    sw.WriteLine("120");
+                    sw.WriteLine("130");
                     foreach (T li in lists)
                     {
                         sw.WriteLine(li.Ng);
@@ -389,7 +389,7 @@ namespace ImasaraAlert
                         sw.WriteLine(li.Col11);
                         sw.WriteLine(li.Col12);
                         sw.WriteLine(li.Col13);
-                        sw.WriteLine(li.Col14);
+                        sw.WriteLine("lv" + li.Col14 + "e");
                         sw.WriteLine(li.Col15);
                         sw.WriteLine(li.Regist_Date); //16
                         sw.WriteLine(li.Col17);
@@ -404,6 +404,13 @@ namespace ImasaraAlert
                         sw.WriteLine(li.App_b.ToString().ToLower());
                         sw.WriteLine(li.App_c.ToString().ToLower());
                         sw.WriteLine(li.App_d.ToString().ToLower());
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
+                        sw.WriteLine("");
                         sw.WriteLine(li.Memo); //メモ
                     }
                     sw.WriteLine("namarokuEndLine");

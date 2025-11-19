@@ -4,8 +4,8 @@ namespace ImasaraAlert.Prop
 {
     public class Ver
     {
-        public static readonly string Version = "0.1.0.20";
-        public static readonly string VerDate = "(2025/02/02)";
+        public static readonly string Version = "0.1.0.21";
+        public static readonly string VerDate = "(2025/11/19)";
 
         public static string GetFullVersion()
         {

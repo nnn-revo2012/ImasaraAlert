@@ -136,10 +136,14 @@ namespace ImasaraAlert.Net
                     if (string.IsNullOrEmpty(xhtml)) break;
 
                     var data = JObject.Parse(xhtml);
-                    if ((string )data["meta"]["status"] != "200" ||
-                        data["data"].Count() < 1)
+                    if ((int)data["meta"]["statusCode"] != 200)
                     {
-                            end_flg = true; break;
+                        Debug.WriteLine("statusCode Error: " + data["meta"]["statusCode"].ToString());
+                        end_flg = true; break;
+                    }
+                    else if (data["data"].Count() < 1)
+                    {
+                        end_flg = true; break;
                     }
                     foreach (var item in data["data"])
                     {

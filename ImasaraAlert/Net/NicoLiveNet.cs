@@ -156,15 +156,25 @@ namespace ImasaraAlert.Net
                         gsi.Start_Time = gsi.Col12.ToString();
                         Debug.WriteLine(gsi.LiveId + ": " + gsi.Start_Time.ToString());
                         gsi.Description = "";
-                        gsi.Community_Thumbnail = (string )item["socialGroup"]["thumbnailUrl"];
-                        gsi.Community_Title = (string )item["socialGroup"]["name"];
-                        gsi.Community_Id = (string )item["socialGroup"]["id"];
-                        gsi.Community_Only = item["isFollowerOnly"].ToString().ToLower();
-                        gsi.Provider_Type = (string )item["providerType"];
-                        gsi.Provider_Name = (string )item["programProvider"]["name"];
                         gsi.Provider_Id = "";
-                        if ((string )item["providerType"] == "community")
-                            gsi.Provider_Id = (string )item["programProvider"]["id"];
+                        if ((string)item["providerType"] == "community")
+                        {
+                            gsi.Community_Thumbnail = (string)item["programProvider"]["iconSmall"];
+                            gsi.Community_Title = "削除されたコミュニティ";
+                            gsi.Community_Id = "co0";
+                            gsi.Provider_Id = (string)item["programProvider"]["id"];
+                            gsi.Provider_Name = (string)item["programProvider"]["name"];
+                        }
+                        else
+                        {
+                            gsi.Community_Thumbnail = (string)item["socialGroup"]["thumbnailUrl"];
+                            gsi.Community_Title = (string)item["socialGroup"]["name"];
+                            gsi.Community_Id = (string)item["socialGroup"]["id"];
+                            gsi.Provider_Id = (string)item["socialGroup"]["id"];
+                            gsi.Provider_Name = (string)item["programProvider"]["name"];
+                        }
+                        gsi.Provider_Type = (string)item["providerType"];
+                        gsi.Community_Only = item["isFollowerOnly"].ToString().ToLower();
                         gsi.Col15 = cate;
                         if (gsi.Col12 < min_time)
                         {
